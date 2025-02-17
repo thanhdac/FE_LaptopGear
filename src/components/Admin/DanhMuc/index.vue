@@ -180,7 +180,7 @@
                                     <tbody>
                                         <template v-for="(value, index) in list_tinh_huyen" :key="index">
                                             <tr class="align-middle text-center">
-                                                <td>{{ index + 1 }}</td>
+                                                <th>{{ index + 1 }}</th>
                                                 <td>{{ value.ten_tinh_thanh }}</td>
                                                 <td>
                                                     <button 

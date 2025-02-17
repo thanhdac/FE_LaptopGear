@@ -31,14 +31,14 @@
                                 <td class="text-center">{{ value.so_dien_thoai }}</td>
                                 <td class="text-center">{{ value.ngay_sinh }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-success me-1" v-if="value.is_block == 0">Hoạt
+                                    <button class="btn btn-success me-1 w-100" v-if="value.is_block == 0">Hoạt
                                         Động</button>
-                                    <button class="btn btn-danger me-1" v-else>Tạm Tắt</button>
+                                    <button class="btn btn-danger me-1 w-100" v-else>Tạm Tắt</button>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-warning me-1" v-if="value.is_active == 0" style="color: white;">Chưa Kích
+                                    <button class="btn btn-warning me-1 w-100" v-if="value.is_active == 0" style="color: white;">Chưa Kích
                                         Hoạt</button>
-                                    <button class="btn btn-primary me-1" v-else >Đã Kích Hoạt</button>
+                                    <button class="btn btn-primary me-1 w-100" v-else >Đã Kích Hoạt</button>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-primary me-1"
