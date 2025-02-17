@@ -85,7 +85,7 @@
                                                         <select class="form-control"
                                                             v-model="create_danh_muc.tinh_trang">
                                                             <option value="0">Tạm tắt</option>
-                                                            <option value="1">Hiện thị</option>
+                                                            <option value="1">Hiển thị</option>
                                                         </select>
                                                     </div>
                                                 </form>
@@ -120,7 +120,7 @@
                                     <tbody>
                                         <template v-for="(value, index) in list_danh_muc" :key="index">
                                             <tr class="align-middle text-center">
-                                                <td>{{ index + 1 }}</td>
+                                                <th>{{ index + 1 }}</th>
                                                 <td>{{ value.ten_danh_muc }}</td>
                                                 <td>{{ value.slug_danh_muc }}</td>
                                                 <td>
@@ -130,16 +130,16 @@
                                                     {{ value.id_danh_muc_cha }}
                                                 </td>
                                                 <td>
-                                                    <button v-on:click="doiTrangThai(value)"
-                                                        v-if="value.tinh_trang == 0" class="btn btn-success me-1">Tạm
+                                                    <button 
+                                                        v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white">Tạm
                                                         Tắt </button>
-                                                    <button v-on:click="doiTrangThai(value)" v-else
-                                                        class="btn btn-warning">Hiển Thị </button>
+                                                    <button  v-else
+                                                        class="btn btn-success " style="color: white;">Hiển Thị </button>
                                                 </td>
                                                 <td>
                                                     <button v-on:click="Object.assign(update_danh_muc, value)"
                                                         class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
-                                                        data-bs-target="#updateModal">
+                                                        data-bs-target="#updateModal" style="color: white;">
                                                         <i class="fas fa-edit"></i> Sửa
                                                     </button>
                                                     <button v-on:click="Object.assign(delete_danh_muc, value)"
@@ -170,7 +170,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-light">
-                                        <tr class="align-middle text-center">
+                                        <tr class="align-middle text-center" >
                                             <th>ID</th>
                                             <th>Tên Tỉnh/Thành phố</th>
                                             <th>Trạng thái</th>
@@ -183,16 +183,16 @@
                                                 <td>{{ index + 1 }}</td>
                                                 <td>{{ value.ten_tinh_thanh }}</td>
                                                 <td>
-                                                    <button v-on:click="doiTrangThaiTinhThanh(value)"
-                                                        v-if="value.tinh_trang == 0" class="btn btn-success me-1">Tạm
+                                                    <button 
+                                                        v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white;" >Tạm
                                                         Tắt </button>
-                                                    <button v-on:click="doiTrangThaiTinhThanh(value)" v-else
-                                                        class="btn btn-warning">Hiển Thị </button>
+                                                    <button  v-else
+                                                        class="btn btn-success" style="color: white;">Hiển Thị </button>
                                                 </td>
                                                 <td>
                                                     <button v-on:click="Object.assign(update_tinh_huyen, value)"
                                                         data-bs-toggle="modal" data-bs-target="#updateTinhThanhModal"
-                                                        class="btn btn-warning btn-sm me-2">
+                                                        class="btn btn-warning btn-sm me-2" style="color: white;">
                                                         <i class="fas fa-edit"></i> Sửa
                                                     </button>
                                                     <button v-on:click="Object.assign(delete_tinh_huyen, value)"
@@ -201,7 +201,7 @@
                                                         <i class="fas fa-trash"></i> Xóa
                                                     </button>
                                                     <button class="btn btn-info btn-sm" v-on:click="xemQuanHuyen(value)"
-                                                        data-bs-toggle="modal" data-bs-target="#xemQuanHuyenModal"> <i
+                                                        data-bs-toggle="modal" data-bs-target="#xemQuanHuyenModal" style="color: white;"> <i
                                                             class="fas fa-eye"></i> Xem Quận/Huyện
                                                     </button>
                                                 </td>
@@ -543,23 +543,6 @@ export default {
                     });
                 })
         },
-        doiTrangThai(value) {
-            axios
-                .post("http://127.0.0.1:8000/api/admin/danh-muc/change-status", value)
-                .then((res) => {
-                    if (res.data.status) {
-                        this.LoadDataDanhMuc();
-                        this.$toast.success(res.data.message);
-                    }
-                })
-                .catch((res) => {
-                    const list = Object.values(res.response.data.errors);
-                    list.forEach((v, i) => {
-                        this.$toast.error(v[0]);
-                    });
-                })
-        },
-
         LoadDataTinhHuyen() {
             axios
                 .get('http://localhost:8000/api/admin/tinh-thanh/data')
@@ -618,22 +601,6 @@ export default {
                     });
                 })
         },
-        doiTrangThaiTinhThanh(value) {
-            axios
-                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/change-status", value)
-                .then((res) => {
-                    if (res.data.status) {
-                        this.LoadDataTinhHuyen();
-                        this.$toast.success(res.data.message);
-                    }
-                })
-                .catch((res) => {
-                    const list = Object.values(res.response.data.errors);
-                    list.forEach((v, i) => {
-                        this.$toast.error(v[0]);
-                    });
-                })
-        }
     },
 
 };

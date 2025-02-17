@@ -67,7 +67,7 @@
                                             <button v-if="value.is_active == 1" class="btn btn-success w-100">
                                                 Đã Kích Hoạt
                                             </button>
-                                            <button v-else class="btn btn-warning w-100">
+                                            <button v-else class="btn btn-warning w-100" style="color: white;">
                                                 Chưa Kích Hoạt
                                             </button>
                                         </td>

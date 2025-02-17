@@ -32,7 +32,7 @@
                                     <td class="align-middle">{{ value.dia_chi }}</td>
                                     <td class="align-middle text-center">{{ value.ngay_sinh }}</td>
                                     <td class="align-middle text-center">
-                                        <button v-if="value.tinh_trang == 1" class="btn btn-info w-100">
+                                        <button v-if="value.tinh_trang == 1" class="btn btn-info w-100" style="color: white;">
                                             Hoạt động
                                         </button>
                                         <button v-else class="btn btn-secondary w-100">

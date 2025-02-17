@@ -44,11 +44,11 @@
                             <td>12345</td>
                             <td>Nguyễn Văn A</td>
                             <td>500.000đ</td>
-                            <td>2024-02-14</td>
+                            <td>2025-02-14</td>
                             <td><span class="badge bg-warning">Chờ xác nhận</span></td>
                             <td>
                                 <button class="btn btn-info btn-sm me-2" data-bs-toggle='modal'
-                                    data-bs-target='#chiTietModal'>
+                                    data-bs-target='#chiTietModal' style="color: white;">
                                     <i class="fas fa-eye"></i> Chi tiết
                                 </button>
                                 <button class="btn btn-success btn-sm me-2">

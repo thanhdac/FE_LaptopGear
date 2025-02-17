@@ -26,7 +26,7 @@
                         <tbody>
                             <template v-for="(value, index) in list_ma_giam_gia" :key="index">
                                 <tr>
-                                    <th class="align-middle">{{ index + 1 }}</th>
+                                    <th class="align-middle text-center" >{{ index + 1 }}</th>
                                     <td class="align-middle">{{ value.ma_code }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_ket_thuc }}</td>
@@ -49,7 +49,7 @@
                                     <td class="align-middle text-end">{{ formatVND(value.so_tien_toi_da) }}</td>
                                     <td class="align-middle text-end">{{ formatVND(value.don_hang_toi_thieu) }}</td>
                                     <td class="align-middle text-center">
-                                        <button v-if="value.tinh_trang == 1" class="btn btn-info">Hiển thị</button>
+                                        <button v-if="value.tinh_trang == 1" class="btn btn-info"  style="color: white;">Hiển thị</button>
                                         <button v-else class="btn btn-secondary">Tạm
                                             tắt</button>
                                     </td>

@@ -20,7 +20,7 @@
                                 <button class="btn btn-outline-secondary" type="button" @click="searchQuyen">Tìm
                                     Kiếm</button>
                             </div>
-                        </div>
+                        </div>  
                         <div class="modal fade" id="themMoiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">

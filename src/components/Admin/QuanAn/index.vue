@@ -134,7 +134,7 @@
                             </thead>
                             <tbody>
                                 <tr class="align-middle text-nowrap" v-for="(value, index) in list_quan" :key="index">
-                                    <td>{{ index + 1 }}</td>
+                                    <th class="text-center">{{ index + 1 }}</th>
                                     <td>{{ value.ten_quan_an }}</td>
                                     <td>{{ value.email }}</td>
                                     <td>{{ value.so_dien_thoai }}</td>
@@ -144,17 +144,17 @@
                                     <td>
                                         <button class="btn btn-success w-100" v-if="value.tinh_trang == 1">Hoạt
                                             động</button>
-                                        <button class="btn btn-warning w-100" v-else>Tạm dừng</button>
+                                        <button class="btn btn-warning w-100" v-else style="color: white;">Tạm dừng</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-info w-100" v-if="value.is_active == 1">Đã Kích
+                                        <button class="btn btn-info w-100" v-if="value.is_active == 1" style="color: white;">Đã Kích
                                             hoạt</button>
                                         <button class="btn btn-secondary w-100" v-else>Chưa kích hoạt</button>
                                     </td>
                                     <td class="text-center">
                                         <button v-on:click="Object.assign(quan_an_edit, value)"
                                             class="btn btn-info me-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateModal">Cập nhật</button>
+                                            data-bs-target="#updateModal" style="color: white;">Cập nhật</button>
                                         <button v-on:click="Object.assign(quan_an_delete, value)" class="btn btn-danger"
                                             data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                     </td>
