@@ -23,28 +23,26 @@
                                             <div class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </div>
-                                            <input type="email" class="form-control border-end-0">
+                                            <input v-model="user.email" type="email" class="form-control border-end-0">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Password</label>
                                         <div class="input-group">
-                                            <div class="input-group-text bg-transparent"><i
-                                                    class="fa-solid fa-lock"></i></div>
-                                            <input type="password" class="form-control border-end-0">
+                                            <div class="input-group-text bg-transparent"><i class="fa-solid fa-lock"></i></div>
+                                            <input v-model="user.password" type="password" class="form-control border-end-0">
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <router-link to="/shipper/don-dat-hang">
-                                            <button type="button" class="btn btn-primary w-100"><i
-                                                    class="fa-solid fa-lock-open"></i>Đăng
-                                                Nhập</button>
-                                        </router-link>
+                                        <button type="button" class="btn btn-primary w-100" v-on:click="Login()">
+                                            <i class="fa-solid fa-lock-open"></i> Đăng Nhập
+                                        </button>
                                     </div>
                                     <div class="col-12">
                                         <router-link to="/shipper/dang-ky">
-                                            <button type="button" class="btn btn-danger w-100"><i
-                                                    class='bx bx-user'></i>Đăng Ký</button>
+                                            <button type="button" class="btn btn-danger w-100">
+                                                <i class='bx bx-user'></i> Đăng Ký
+                                            </button>
                                         </router-link>
                                     </div>
                                 </div>
@@ -57,14 +55,38 @@
     </div>
 </div>
 </template>
+
 <script>
+import axios from 'axios';
 export default {
     data() {
-        return {}
+        return {
+            user : {
+                email: '',
+                password: ''
+            }   
+        }
     },
     methods: {
-
+        Login() {
+            axios
+                .post("http://127.0.0.1:8000/api/shipper/dang-nhap", this.user)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        }
     },
 }
 </script>
+
 <style></style>

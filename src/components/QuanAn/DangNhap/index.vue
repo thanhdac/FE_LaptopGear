@@ -15,19 +15,19 @@
                                 <hr>
                             </div>
                             <div class="form-body">
-                                <form class="row g-3">
+                                <div class="row g-3">
                                     <div class="row">
                                         <div class="row g-3">
                                             <div class="col-lg-12">
                                                 <label for="inputEmailAddress" class="form-label">Email</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input type="email" class="form-control" placeholder="Nhập Email">
+                                                    <input v-model="user.email" type="email" class="form-control" placeholder="Nhập Email">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <label for="inputEmailAddress" class="form-label">Password</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input type="password" class="form-control"
+                                                    <input v-model="user.password" type="password" class="form-control"
                                                         placeholder="Nhập Mật Khẩu">
                                                 </div>
                                             </div>
@@ -35,7 +35,7 @@
                                         <div class="col-lg-12 mt-4">
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button type="button" class="btn btn-primary radius-30 w-100">Đăng
+                                                    <button v-on:click="Login()" type="button" class="btn btn-primary radius-30 w-100">Đăng
                                                         Nhập</button>
                                                 </div>
                                             </div>
@@ -48,7 +48,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -58,15 +58,34 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
+            user : {
+                email: '',
+                password: ''
+            }   
         }
     },
-    mounted() {
-    },
     methods: {
-
+        Login() {
+            axios
+                .post("http://127.0.0.1:8000/api/quan-an/dang-nhap", this.user)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        }
     },
 }
 </script>

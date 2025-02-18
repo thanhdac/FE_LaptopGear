@@ -10,14 +10,14 @@
                                 <h4 class="mt-3 font-weight-bold">ĐĂNG NHẬP ADMIN</h4>
                             </div>
                             <div class="form-body">
-                                <form class="row g-3">
+                                <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label">Email</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </span>
-                                            <input type="email" class="form-control border-start-0" placeholder="Email">
+                                            <input v-model="user.email" type="email" class="form-control border-start-0" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -26,18 +26,18 @@
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-lock"></i>
                                             </span>
-                                            <input type="password" class="form-control border-start-0" placeholder="Mật khẩu">
+                                            <input v-model="user.password" type="password" class="form-control border-start-0" placeholder="Mật khẩu">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button v-on:click="Login()" class="btn btn-primary">
                                                 <i class="fa-solid fa-right-to-bracket me-2"></i>
                                                 Đăng Nhập
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,34 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    
+    data() {
+        return {
+            user : {
+                email: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        Login() {
+            axios
+                .post("http://127.0.0.1:8000/api/admin/dang-nhap", this.user)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        }
+    }
 }
 </script>
