@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-12 mb-2">
                         <label>Mật Khẩu</label>
-                        <input type="password" class="form-control" v-model="create_khach_hang.ngay_sinh">
+                        <input type="password" class="form-control" v-model="create_khach_hang.password">
                     </div>
                     <div class="col-md-12 mb-2">
                         <label>Nhập lại mật khẩu</label>
