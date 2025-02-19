@@ -65,6 +65,7 @@ export default {
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
+                        localStorage.setItem('nhan_vien_login', res.data.token);
                     } else {
                         this.$toast.error(res.data.message);
                     }
