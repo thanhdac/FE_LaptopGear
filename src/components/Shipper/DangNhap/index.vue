@@ -23,14 +23,14 @@
                                             <div class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </div>
-                                            <input v-model="user.email" type="email" class="form-control border-end-0">
+                                            <input v-model="user.email" @keyup.enter="Login()" type="email" class="form-control border-end-0">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Password</label>
                                         <div class="input-group">
                                             <div class="input-group-text bg-transparent"><i class="fa-solid fa-lock"></i></div>
-                                            <input v-model="user.password" type="password" class="form-control border-end-0">
+                                            <input v-model="user.password" @keyup.enter="Login()" type="password" class="form-control border-end-0">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -74,6 +74,7 @@ export default {
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
+                        localStorage.setItem('shipper_login', res.data.token);
                     } else {
                         this.$toast.error(res.data.message);
                     }

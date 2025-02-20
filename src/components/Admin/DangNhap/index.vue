@@ -17,7 +17,7 @@
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </span>
-                                            <input v-model="user.email" type="email" class="form-control border-start-0" placeholder="Email">
+                                            <input v-model="user.email" @keyup.enter="Login()" type="email" class="form-control border-start-0" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -26,7 +26,7 @@
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-lock"></i>
                                             </span>
-                                            <input v-model="user.password" type="password" class="form-control border-start-0" placeholder="Mật khẩu">
+                                            <input v-model="user.password" @keyup.enter="Login()" type="password" class="form-control border-start-0" placeholder="Mật khẩu">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -64,8 +64,9 @@ export default {
                 .post("http://127.0.0.1:8000/api/admin/dang-nhap", this.user)
                 .then((res) => {
                     if (res.data.status) {
-                        this.$toast.success(res.data.message);
                         localStorage.setItem('nhan_vien_login', res.data.token);
+                        this.$toast.success(res.data.message);
+                        this.$router.push('/admin/quan-an');
                     } else {
                         this.$toast.error(res.data.message);
                     }

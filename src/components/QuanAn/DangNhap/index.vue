@@ -21,13 +21,13 @@
                                             <div class="col-lg-12">
                                                 <label for="inputEmailAddress" class="form-label">Email</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input v-model="user.email" type="email" class="form-control" placeholder="Nhập Email">
+                                                    <input v-model="user.email" @keyup.enter="Login()" type="email" class="form-control" placeholder="Nhập Email">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <label for="inputEmailAddress" class="form-label">Password</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input v-model="user.password" type="password" class="form-control"
+                                                    <input v-model="user.password" @keyup.enter="Login()" type="password" class="form-control"
                                                         placeholder="Nhập Mật Khẩu">
                                                 </div>
                                             </div>
@@ -74,6 +74,7 @@ export default {
                 .post("http://127.0.0.1:8000/api/quan-an/dang-nhap", this.user)
                 .then((res) => {
                     if (res.data.status) {
+                        localStorage.setItem('quan_an_login', res.data.token);
                         this.$toast.success(res.data.message);
                     } else {
                         this.$toast.error(res.data.message);

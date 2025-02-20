@@ -1,40 +1,42 @@
 <template>
-    <div class="container mt-5">
-        <div class="row w-100">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                <div class="card shadow p-4">
-                    <h1 class="text-center mb-3">🍔 Chào Mừng Đến Với FoodZone</h1>
-                    <p class="text-center text-muted">Đăng nhập để thưởng thức những món ăn ngon!</p>
-
-                    <div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">📧 Email:</label>
-                            <input v-model="user.email" id="email" type="email" class="form-control" placeholder="Nhập email của bạn">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold">Đăng Nhập</h3>
+                            <p class="text-muted small">Chào mừng đến với FoodZone</p>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">🔒 Mật Khẩu:</label>
-                            <input v-model="user.password" id="password" type="password" class="form-control"
-                                placeholder="Nhập mật khẩu của bạn">
-                        </div>
+                        <form @submit.prevent="Login">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input v-model="user.email" type="email" class="form-control" id="email"
+                                    placeholder="Nhập email">
+                            </div>
 
-                        <div class="d-grid">
-                            <button v-on:click="Login()" class="btn btn-primary w-100">
-                                🚀 Đăng Nhập
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input v-model="user.password" type="password" class="form-control" id="password"
+                                    placeholder="Nhập mật khẩu">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 mb-3">
+                                Đăng Nhập
                             </button>
-                        </div>
-                    </div>
 
-                    <div class="text-center mt-3">
-                        <a href="#" class="text-decoration-none">🔑 Quên mật khẩu?</a> |
-                        <router-link to="/khach-hang/dang-ky">
-                            <a href="#" class="text-decoration-none">📝 Tạo tài khoản mới</a>
-                        </router-link>
+                            <div class="text-center">
+                                <a href="#" class="text-decoration-none small me-2">Quên mật khẩu?</a>
+                                <span class="text-muted">|</span>
+                                <router-link to="/khach-hang/dang-ky" class="text-decoration-none small ms-2">
+                                    Đăng ký tài khoản
+                                </router-link>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4"></div>
         </div>
     </div>
 </template>
@@ -44,10 +46,10 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            user : {
+            user: {
                 email: '',
                 password: ''
-            }   
+            }
         }
     },
     methods: {
@@ -57,6 +59,7 @@ export default {
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
+                        localStorage.setItem('khach_hang_login', res.data.token);
                     } else {
                         this.$toast.error(res.data.message);
                     }
