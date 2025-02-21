@@ -64,6 +64,10 @@ const routes = [
     component: () => import("../components/KhachHang/DangKi/index.vue"),
     meta: { layout: "blank" },
   },
+  {
+    path: "/khach-hang/profile",
+    component: () => import("../components/KhachHang/Profile/index.vue"),
+  },
 
   // Quán Ăn
   {
