@@ -26,7 +26,7 @@
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="https://dzfullstack.com/assets/images/logo-img.png" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
-						<p class="user-name mb-0">DZFullStack</p>
+						<p class="user-name mb-0">Nguyễn Quốc Long</p>
 						<p class="designattion mb-0">Khách Hàng</p>
 					</div>
 				</a>

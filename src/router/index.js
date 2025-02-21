@@ -67,6 +67,14 @@ const routes = [
   {
     path: "/khach-hang/profile",
     component: () => import("../components/KhachHang/Profile/index.vue"),
+    meta: { layout: "client" },
+
+  },
+  {
+    path: "/khach-hang/Test",
+    component: () => import("../components/KhachHang/Test/index.vue"),
+    meta: { layout: "client" },
+
   },
 
   // Quán Ăn
