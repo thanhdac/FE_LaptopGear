@@ -26,7 +26,7 @@
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="https://dzfullstack.com/assets/images/logo-img.png" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
-						<p class="user-name mb-0">Nguyễn Quốc Long</p>
+						<p class="user-name mb-0">{{ ho_ten }}</p>
 						<p class="designattion mb-0">Khách Hàng</p>
 					</div>
 				</a>
@@ -34,11 +34,6 @@
 					<li>
 						<router-link to="/khach-hang/profile">
 							<a class="dropdown-item" href="/khach-hang/profile"><i class="bx bx-user"></i><span>Profile</span></a>
-						</router-link>
-					</li>
-					<li>
-						<router-link to="/khach-hang/lich-su-dat">
-							<a class="dropdown-item" href="/khach-hang/lich-su-dat"><i class="bx bx-user"></i><span>Lịch Sử Đặt</span></a>
 						</router-link>
 					</li>
 					<li>
@@ -55,7 +50,11 @@
 </template>
 <script>
 export default {
-
+	data() {
+		return {
+			ho_ten: localStorage.getItem('ho_ten_khach_hang')
+		}
+	},
 }
 </script>
 <style></style>

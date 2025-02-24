@@ -3,7 +3,8 @@
 		<nav class="navbar navbar-expand">
 			<div class="topbar-logo-header">
 				<div class="">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Qs5Fh70n2MpVMZYjJy5R3DuZusdWCzAckA&s" class="logo-icon" alt="logo icon">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Qs5Fh70n2MpVMZYjJy5R3DuZusdWCzAckA&s"
+						class="logo-icon" alt="logo icon">
 				</div>
 				<div class="">
 					<h4 class="logo-text text-danger">FoodZone</h4>
@@ -362,14 +363,15 @@
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="https://dzfullstack.com/assets/images/logo-img.png" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
-						<p class="user-name mb-0">DZFullStack</p>
+						<p class="user-name mb-0">{{ ho_ten }}</p>
 						<p class="designattion mb-0">Shipper</p>
 					</div>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end">
 					<li>
 						<router-link to="/shipper/profile">
-							<a class="dropdown-item" href="/shipper/profile"><i class="bx bx-user"></i><span>Profile</span></a>
+							<a class="dropdown-item" href="/shipper/profile"><i
+									class="bx bx-user"></i><span>Profile</span></a>
 						</router-link>
 					</li>
 					<li><a class="dropdown-item" href="javascript:;"><i
@@ -382,7 +384,11 @@
 </template>
 <script>
 export default {
-
+	data() {
+		return {
+			ho_ten: localStorage.getItem('ho_ten_shipper')
+		}
+	},
 }
 </script>
 <style></style>

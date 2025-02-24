@@ -28,11 +28,10 @@
                                     <div class="col-lg-4">
                                         <div class="card border-0 shadow-sm h-100">
                                             <div class="card-body text-center p-4">
-                                                <img src="https://scs.duytan.edu.vn/upload/images/13-1-2021-7-24-29-57.JPG" 
-                                                     alt="Avatar"
-                                                     class="rounded-circle mb-3 shadow-sm"
-                                                     width="120" height="120">
-                                                <h5 class="mb-1">Nguyễn Quốc Long</h5>
+                                                <img src="https://scs.duytan.edu.vn/upload/images/13-1-2021-7-24-29-57.JPG"
+                                                    alt="Avatar" class="rounded-circle mb-3 shadow-sm" width="120"
+                                                    height="120">
+                                                <h5 class="mb-1">{{ user.ho_va_ten }}</h5>
                                                 <p class="text-muted mb-3">Khách hàng thân thiết</p>
                                                 <div class="row g-3">
                                                     <div class="col-6">
@@ -60,28 +59,34 @@
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Họ và tên</label>
-                                                            <input v-model="user.ho_va_ten" type="text" class="form-control" placeholder="Nhập họ và tên">
+                                                            <input v-model="user.ho_va_ten" type="text"
+                                                                class="form-control" placeholder="Nhập họ và tên">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Email</label>
-                                                            <input v-model="user.email" type="email" class="form-control" placeholder="example@email.com">
+                                                            <input v-model="user.email" type="email"
+                                                                class="form-control" placeholder="example@email.com">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Số điện thoại</label>
-                                                            <input v-model="user.so_dien_thoai" type="tel" class="form-control" placeholder="0123 456 789">
+                                                            <input v-model="user.so_dien_thoai" type="tel"
+                                                                class="form-control" placeholder="0123 456 789">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Ngày sinh</label>
-                                                            <input v-model="user.ngay_sinh" type="date" class="form-control">
+                                                            <input v-model="user.ngay_sinh" type="date"
+                                                                class="form-control">
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Ảnh đại diện</label>
-                                                            <input type="text" class="form-control" placeholder="Nhập vào link đường ảnh giao diện - ta sẽ upload file sau">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Nhập vào link đường ảnh giao diện - ta sẽ upload file sau">
                                                         </div>
                                                     </div>
                                                     <div class="text-end mt-4">
                                                         <button type="button" class="btn btn-light me-2">Huỷ</button>
-                                                        <button type="submit" class="btn btn-primary px-4">Lưu thay đổi</button>
+                                                        <button type="submit" class="btn btn-primary px-4">Lưu thay
+                                                            đổi</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -93,29 +98,36 @@
                             <div class="tab-pane fade" id="address">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h5 class="mb-0">Địa chỉ giao hàng</h5>
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#addDiaChiModal">
                                         <i class="fa-solid fa-plus me-2"></i>Thêm địa chỉ
                                     </button>
                                 </div>
-                                <div class="card border-0 shadow-sm mb-3">
-                                    <div class="card-body p-4">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="mb-1">Nguyễn Quốc Long</h6>
-                                                <p class="mb-1">0123456789</p>
-                                                <p class="mb-0 text-muted">202 Võ Nguyên Giáp</p>
-                                            </div>
-                                            <div >
-                                                <button class="btn btn-outline-primary btn-2xl me-2">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-                                                <button class="btn btn-outline-danger btn-2xl">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
+                                <template v-for="(value, index) in list_dia_chi" :key="index">
+                                    <div class="card border-0 shadow-sm mb-3">
+                                        <div class="card-body p-4">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">{{ value.ho_ten_nguoi_nhan }}</h6>
+                                                    <p class="mb-1">{{ value.so_dien_thoai_nhan }}</p>
+                                                    <p class="mb-0 text-muted">{{ value.dia_chi_nhan_hang }}</p>
+                                                </div>
+                                                <div>
+                                                    <button v-on:click="Object.assign(update_dia_chi, value)"
+                                                        class="btn btn-outline-primary btn-2xl me-2"
+                                                        data-bs-toggle="modal" data-bs-target="#updateDiaChiModal">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-2xl"
+                                                        v-on:click="Object.assign(delete_dia_chi, value)"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteDiaChiModal">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </template>
                             </div>
 
                             <div class="tab-pane fade" id="password">
@@ -127,17 +139,22 @@
                                                 <form>
                                                     <div class="mb-3">
                                                         <label class="form-label fw-semibold">Mật khẩu hiện tại</label>
-                                                        <input type="password" class="form-control" placeholder="Nhập mật khẩu hiện tại">
+                                                        <input type="password" class="form-control"
+                                                            placeholder="Nhập mật khẩu hiện tại">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label fw-semibold">Mật khẩu mới</label>
-                                                        <input type="password" class="form-control" placeholder="Nhập mật khẩu mới">
+                                                        <input type="password" class="form-control"
+                                                            placeholder="Nhập mật khẩu mới">
                                                     </div>
                                                     <div class="mb-4">
-                                                        <label class="form-label fw-semibold">Xác nhận mật khẩu mới</label>
-                                                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới">
+                                                        <label class="form-label fw-semibold">Xác nhận mật khẩu
+                                                            mới</label>
+                                                        <input type="password" class="form-control"
+                                                            placeholder="Nhập lại mật khẩu mới">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary px-4">Cập nhật mật khẩu</button>
+                                                    <button type="submit" class="btn btn-primary px-4">Cập nhật mật
+                                                        khẩu</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -146,6 +163,96 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Mới Địa Chỉ-->
+    <div class="modal fade" id="addDiaChiModal" tabindex="-1" aria-labelledby="addDiaChiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addDiaChiModalLabel">Thêm Mới Địa Chỉ</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label class="">Tên người nhận</label>
+                        <input v-model="create_dia_chi.ho_ten_nguoi_nhan" type="text" class="form-control"
+                            placeholder="Nhập tên người nhận">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Số điện thoại</label>
+                        <input v-model="create_dia_chi.so_dien_thoai_nhan" type="text" class="form-control"
+                            placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Địa chỉ</label>
+                        <input v-model="create_dia_chi.dia_chi_nhan_hang" type="text" class="form-control"
+                            placeholder="Nhập địa chỉ">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="themDiaChi()">Thêm
+                        Mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cập Nhật Địa Chỉ-->
+    <div class="modal fade" id="updateDiaChiModal" tabindex="-1" aria-labelledby="updateDiaChiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addDiaChiModalLabel"> Cập Nhật Địa Chỉ</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label class="">Tên người nhận</label>
+                        <input v-model="update_dia_chi.ho_ten_nguoi_nhan" type="text" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Số điện thoại</label>
+                        <input v-model="update_dia_chi.so_dien_thoai_nhan" type="number" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Địa chỉ</label>
+                        <input v-model="update_dia_chi.dia_chi_nhan_hang" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="updateDiaChi()">Xác
+                        Nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xóa Địa Chỉ-->
+    <div class="modal fade" id="deleteDiaChiModal" tabindex="-1" aria-labelledby="deleteDiaChiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addDiaChiModalLabel"> Cập Nhật Địa Chỉ</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                        Bạn có chắc chắn muốn xóa địa chỉ <b>{{ delete_dia_chi.dia_chi_nhan_hang }}</b> này không?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="xoaDiaChi()">Xác
+                        Nhận</button>
                 </div>
             </div>
         </div>
@@ -159,11 +266,24 @@ export default {
     name: 'Profile',
     data() {
         return {
-            user    :   {}
+            user: {},
+            list_dia_chi: [],
+            create_dia_chi: {
+                ho_ten_nguoi_nhan: '',
+                so_dien_thoai_nhan: '',
+                dia_chi_nhan_hang: ''
+            },
+            update_dia_chi: {
+                ho_ten_nguoi_nhan: '',
+                so_dien_thoai_nhan: '',
+                dia_chi_nhan_hang: ''
+            },
+            delete_dia_chi: {}
         }
     },
     mounted() {
         this.layThongTinLogin();
+        this.loadDataDiaChi();
     },
     methods: {
         layThongTinLogin() {
@@ -181,10 +301,76 @@ export default {
                         toaster.error(res.data.message);
                     }
                 });
+        },
+
+        loadDataDiaChi() {
+            axios
+                .get("http://127.0.0.1:8000/api/khach-hang/dia-chi/data")
+                .then((res) => {
+                    this.list_dia_chi = res.data.data;
+                });
+        },
+        themDiaChi() {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/create", this.create_dia_chi)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.loadDataDiaChi();
+                        this.create_dia_chi = {
+                            ho_ten_nguoi_nhan: '',
+                            so_dien_thoai_nhan: '',
+                            dia_chi_nhan_hang: ''
+                        }
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        updateDiaChi() {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/update", this.update_dia_chi)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.loadDataDiaChi();
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        xoaDiaChi() {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/delete", this.delete_dia_chi)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.loadDataDiaChi();
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         }
     },
 }
 </script>
 
-<style>
-</style>
+<style></style>

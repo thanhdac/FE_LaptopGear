@@ -17,7 +17,7 @@
                                     </div>
                                     <div class="mt-3">
                                         <h4>{{ user.ho_va_ten }}</h4>
-                                        <p class="text-secondary mb-1">Quản trị viên</p>
+                                        <p class="text-secondary mb-1">Shipper</p>
                                         <p class="text-muted font-size-sm">
                                             <i class="fa-solid fa-circle text-success me-1"></i>
                                             Đang hoạt động
@@ -99,7 +99,7 @@
                                             <h6 class="mb-0">Địa chỉ</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="user.dia_chi" type="text" class="form-control">
+                                            <input v-model="user.dia_chi_thuong_tru" type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import axios from 'axios';
 
@@ -167,9 +166,9 @@ export default {
     },
     methods: {
         layThongTinLogin() {
-            var token = localStorage.getItem("nhan_vien_login");
+            var token = localStorage.getItem("shipper_login");
             axios
-                .get("http://127.0.0.1:8000/api/admin/profile", {
+                .get("http://127.0.0.1:8000/api/shipper/profile", {
                     headers: {
                         Authorization: "Bearer " + token,
                     },
@@ -185,9 +184,4 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-.list-group-item {
-    padding: 0.75rem 1.25rem;
-}
-</style>
+<style></style>

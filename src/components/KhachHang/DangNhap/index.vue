@@ -60,6 +60,7 @@ export default {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
                         localStorage.setItem('khach_hang_login', res.data.token);
+                        this.$router.push('/khach-hang/profile');
                     } else {
                         this.$toast.error(res.data.message);
                     }

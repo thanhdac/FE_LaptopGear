@@ -363,7 +363,7 @@
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="https://dzfullstack.com/assets/images/logo-img.png" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
-						<p class="user-name mb-0">Nhà Hàng Bé Biển</p>
+						<p class="user-name mb-0">{{ ten_quan_an }}</p>
 						<p class="designattion mb-0">Quán ăn</p>
 					</div>
 				</a>
@@ -383,7 +383,11 @@
 </template>
 <script>
 export default {
-
+	data() {
+		return {
+			ten_quan_an	: localStorage.getItem('ten_quan_an')
+		}
+	},
 }
 </script>
 <style></style>

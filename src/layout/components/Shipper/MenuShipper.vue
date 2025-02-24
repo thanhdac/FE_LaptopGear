@@ -32,32 +32,12 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<router-link to="/shipper/don-dat-hang">
-						<a class="nav-link" href="/shipper/don-dat-hang">
+					<router-link to="/shipper/test">
+						<a class="nav-link" href="/shipper/test">
 							<div class="parent-icon">
 								<i class="fa-regular fa-rectangle-list"></i>
 							</div>
-							<div class="menu-title">Đơn Đặt Hàng</div>
-						</a>
-					</router-link>
-				</li>
-				<li class="nav-item">
-					<router-link to="/shipper/lich-su-giao-hang">
-						<a class="nav-link" href="/shipper/lich-su-giao-hang">
-							<div class="parent-icon">
-								<i class="fa-solid fa-clock-rotate-left"></i>
-							</div>
-							<div class="menu-title">Lịch Sử Giao Hàng</div>
-						</a>
-					</router-link>
-				</li>
-				<li class="nav-item">
-					<router-link to="/shipper/thong-ke">
-						<a class="nav-link" href="/shipper/thong-ke">
-							<div class="parent-icon">
-								<i class="fa-solid fa-square-poll-vertical"></i>
-							</div>
-							<div class="menu-title">Thống Kê</div>
+							<div class="menu-title">Test</div>
 						</a>
 					</router-link>
 				</li>

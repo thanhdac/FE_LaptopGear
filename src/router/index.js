@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router"; // cài vue-router: npm install vue-router@next --save
 import checkNhanVienLogin from "./checkNhanVienLogin";
 import checkKhachHang from "./checkKhachHang";
+import checkQuanAn from "./checkQuanAn";
+import checkShipper from "./checkShipper";
 const routes = [
   // Admin
   {
@@ -89,6 +91,17 @@ const routes = [
     meta: { layout: "blank" },
   },
 
+  {
+    path: "/quan-an/test",
+    component: () => import("../components/QuanAn/Test/index.vue"),
+    meta: { layout: "quan_an" },
+  },
+  {
+    path: "/quan-an/profile",
+    component: () => import("../components/QuanAn/Profile/index.vue"),
+    meta: { layout: "quan_an" },
+    beforeEnter: checkQuanAn,
+  },
   // Shipper
   {
     path: "/shipper/dang-ky",
@@ -99,6 +112,17 @@ const routes = [
     path: "/shipper/dang-nhap",
     component: () => import("../components/Shipper/DangNhap/index.vue"),
     meta: { layout: "blank" },
+  },
+  {
+    path: "/shipper/test",
+    component: () => import("../components/Shipper/Test/index.vue"),
+    meta: { layout: "shipper" },
+  },
+  {
+    path: "/shipper/profile",
+    component: () => import("../components/Shipper/Profile/index.vue"),
+    meta: { layout: "shipper" },
+    beforeEnter: checkShipper,
   },
 ];
 

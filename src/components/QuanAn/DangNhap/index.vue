@@ -76,6 +76,7 @@ export default {
                     if (res.data.status) {
                         localStorage.setItem('quan_an_login', res.data.token);
                         this.$toast.success(res.data.message);
+                        this.$router.push('/quan-an/profile');
                     } else {
                         this.$toast.error(res.data.message);
                     }

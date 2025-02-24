@@ -75,6 +75,7 @@ export default {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
                         localStorage.setItem('shipper_login', res.data.token);
+                        this.$router.push('/shipper/profile');
                     } else {
                         this.$toast.error(res.data.message);
                     }
