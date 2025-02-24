@@ -37,13 +37,13 @@
                                                 <div class="row g-3">
                                                     <div class="col-6">
                                                         <div class="p-3 bg-light rounded-3">
-                                                            <h6 class="mb-1">12</h6>
+                                                            <h6 class="mb-1 text-primary">12</h6>
                                                             <small class="text-muted">Đơn hàng</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="p-3 bg-light rounded-3">
-                                                            <h6 class="mb-1">5</h6>
+                                                            <h6 class="mb-1 text-primary">5</h6>
                                                             <small class="text-muted">Đánh giá</small>
                                                         </div>
                                                     </div>
@@ -60,23 +60,23 @@
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Họ và tên</label>
-                                                            <input type="text" class="form-control" placeholder="Nhập họ và tên">
+                                                            <input v-model="user.ho_va_ten" type="text" class="form-control" placeholder="Nhập họ và tên">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Email</label>
-                                                            <input type="email" class="form-control" placeholder="example@email.com">
+                                                            <input v-model="user.email" type="email" class="form-control" placeholder="example@email.com">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Số điện thoại</label>
-                                                            <input type="tel" class="form-control" placeholder="0123 456 789">
+                                                            <input v-model="user.so_dien_thoai" type="tel" class="form-control" placeholder="0123 456 789">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Ngày sinh</label>
-                                                            <input type="date" class="form-control">
+                                                            <input v-model="user.ngay_sinh" type="date" class="form-control">
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Ảnh đại diện</label>
-                                                            <input type="file" class="form-control" accept="image/*">
+                                                            <input type="text" class="form-control" placeholder="Nhập vào link đường ảnh giao diện - ta sẽ upload file sau">
                                                         </div>
                                                     </div>
                                                     <div class="text-end mt-4">
@@ -153,8 +153,36 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-    name: 'Profile'
+    name: 'Profile',
+    data() {
+        return {
+            user    :   {}
+        }
+    },
+    mounted() {
+        this.layThongTinLogin();
+    },
+    methods: {
+        layThongTinLogin() {
+            var token = localStorage.getItem("khach_hang_login");
+            axios
+                .get("http://127.0.0.1:8000/api/khach-hang/profile", {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.user = res.data.data;
+                    } else {
+                        toaster.error(res.data.message);
+                    }
+                });
+        }
+    },
 }
 </script>
 

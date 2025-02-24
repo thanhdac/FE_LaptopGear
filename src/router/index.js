@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"; // cài vue-router: npm install vue-router@next --save
 import checkNhanVienLogin from "./checkNhanVienLogin";
-
+import checkKhachHang from "./checkKhachHang";
 const routes = [
   // Admin
   {
@@ -68,7 +68,7 @@ const routes = [
     path: "/khach-hang/profile",
     component: () => import("../components/KhachHang/Profile/index.vue"),
     meta: { layout: "client" },
-
+    beforeEnter: checkKhachHang,
   },
   {
     path: "/khach-hang/Test",
