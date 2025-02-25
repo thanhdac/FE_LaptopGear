@@ -136,26 +136,24 @@
                                         <div class="card border-0 shadow-sm">
                                             <div class="card-body p-4">
                                                 <h5 class="card-title mb-4">Đổi mật khẩu</h5>
-                                                <form>
                                                     <div class="mb-3">
                                                         <label class="form-label fw-semibold">Mật khẩu hiện tại</label>
-                                                        <input type="password" class="form-control"
+                                                        <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
                                                             placeholder="Nhập mật khẩu hiện tại">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label fw-semibold">Mật khẩu mới</label>
-                                                        <input type="password" class="form-control"
+                                                        <input v-model="doi_mat_khau.mat_khau_moi" type="password" class="form-control"
                                                             placeholder="Nhập mật khẩu mới">
                                                     </div>
                                                     <div class="mb-4">
                                                         <label class="form-label fw-semibold">Xác nhận mật khẩu
                                                             mới</label>
-                                                        <input type="password" class="form-control"
+                                                        <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password" class="form-control"
                                                             placeholder="Nhập lại mật khẩu mới">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary px-4">Cập nhật mật
+                                                    <button v-on:click="doiMatKhau()" type="submit" class="btn btn-primary px-4">Cập nhật mật
                                                         khẩu</button>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -278,6 +276,11 @@ export default {
                 so_dien_thoai_nhan: '',
                 dia_chi_nhan_hang: ''
             },
+            doi_mat_khau: {
+                mat_khau_cu: '',
+                mat_khau_moi: '',
+                xac_nhan_mat_khau_moi: ''
+            },
             delete_dia_chi: {}
         }
     },
@@ -286,6 +289,33 @@ export default {
         this.loadDataDiaChi();
     },
     methods: {
+        doiMatKhau()
+        {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/doi-mat-khau", this.doi_mat_khau , {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        this.$toast.success(res.data.message);
+                        this.doi_mat_khau = {
+                            mat_khau_cu: '',
+                            mat_khau_moi: '',
+                            xac_nhan_mat_khau_moi: ''
+                        }
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
         layThongTinLogin() {
             var token = localStorage.getItem("khach_hang_login");
             axios
@@ -305,14 +335,22 @@ export default {
 
         loadDataDiaChi() {
             axios
-                .get("http://127.0.0.1:8000/api/khach-hang/dia-chi/data")
+                .get("http://127.0.0.1:8000/api/khach-hang/dia-chi/data", {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_dia_chi = res.data.data;
                 });
         },
         themDiaChi() {
             axios
-                .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/create", this.create_dia_chi)
+                .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/create", this.create_dia_chi , {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
