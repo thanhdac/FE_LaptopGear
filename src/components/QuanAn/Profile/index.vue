@@ -17,7 +17,7 @@
                                    </div>
                                    <div class="mt-3">
                                        <h4>{{ user.ten_quan_an }}</h4>
-                                       <p class="text-secondary mb-1">Quản trị viên</p>
+                                       <p class="text-secondary mb-1">Quán Ăn</p>
                                        <p class="text-muted font-size-sm">
                                            <i class="fa-solid fa-circle text-success me-1"></i>
                                            Đang hoạt động
@@ -114,7 +114,7 @@
                                            <h6 class="mb-0">Mật khẩu hiện tại</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input type="password" class="form-control"
+                                           <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
                                                placeholder="Nhập mật khẩu hiện tại">
                                        </div>
                                    </div>
@@ -123,7 +123,7 @@
                                            <h6 class="mb-0">Mật khẩu mới</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input type="password" class="form-control" placeholder="Nhập mật khẩu mới">
+                                           <input v-model="doi_mat_khau.mat_khau_moi" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
                                        </div>
                                    </div>
                                    <div class="row mb-3">
@@ -131,10 +131,16 @@
                                            <h6 class="mb-0">Xác nhận mật khẩu</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input type="password" class="form-control"
+                                           <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password" class="form-control"
                                                placeholder="Xác nhận mật khẩu mới">
                                        </div>
                                    </div>
+                                   <div class="row mb-3">
+                                        <div class="col-lg-12 d-flex justify-content-end">
+                                            <button v-on:click="doiMatKhau()" type="button" class="btn btn-outline-primary">Thay Đổi Mật
+                                                Khẩu</button>
+                                        </div>
+                                    </div>
                                </div>
 
                                <div class="text-end mt-4">
@@ -159,13 +165,45 @@ import axios from 'axios';
 export default {
    data() {
        return {
-           user: {}
+           user: {},
+           doi_mat_khau : {
+                mat_khau_cu: '',
+                mat_khau_moi: '',
+                xac_nhan_mat_khau_moi: ''
+           }
        }
    },
    mounted() {
        this.layThongTinLogin();
    },
    methods: {
+        doiMatKhau()
+        {
+            axios
+                .post("http://127.0.0.1:8000/api/quan-an/doi-mat-khau", this.doi_mat_khau , {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        this.$toast.success(res.data.message);
+                        this.doi_mat_khau = {
+                            mat_khau_cu: '',
+                            mat_khau_moi: '',
+                            xac_nhan_mat_khau_moi: ''
+                        }
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
        layThongTinLogin() {
            var token = localStorage.getItem("quan_an_login");
            axios

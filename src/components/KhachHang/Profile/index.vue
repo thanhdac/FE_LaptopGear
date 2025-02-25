@@ -136,6 +136,7 @@
                                         <div class="card border-0 shadow-sm">
                                             <div class="card-body p-4">
                                                 <h5 class="card-title mb-4">Đổi mật khẩu</h5>
+
                                                 <div class="mb-3">
                                                     <label class="form-label fw-semibold">Mật khẩu hiện tại</label>
                                                     <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
@@ -239,7 +240,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addDiaChiModalLabel"> Cập Nhật Địa Chỉ</h1>
+                    <h1 class="modal-title fs-5" id="addDiaChiModalLabel"> Xóa Địa Chỉ</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -341,6 +342,7 @@ export default {
         themDiaChi() {
             var token = localStorage.getItem("khach_hang_login");
             axios
+
                 .post("http://127.0.0.1:8000/api/khach-hang/dia-chi/create", this.create_dia_chi, {
                     headers: {
                         Authorization: "Bearer " + token,
