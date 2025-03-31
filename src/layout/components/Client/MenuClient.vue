@@ -21,6 +21,15 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/khach-hang/mon-an">
+						<a class="nav-link" href="/khach-hang/mon-an">
+							<div class="parent-icon"><i class="fa-solid fa-utensils"></i>
+							</div>
+							<div class="menu-title">Món Ăn</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>
