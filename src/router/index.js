@@ -70,6 +70,7 @@ const routes = [
     path: "/khach-hang/profile",
     component: () => import("../components/KhachHang/Profile/index.vue"),
     meta: { layout: "client" },
+    beforeEnter: checkKhachHang,
   },
   {
     path: "/khach-hang/Test",
@@ -81,6 +82,8 @@ const routes = [
     path: "/khach-hang/mon-an",
     component: () => import("../components/KhachHang/MonAn/index.vue"),
     meta: { layout: "client" },
+    beforeEnter: checkKhachHang,
+
   },
   // Quán Ăn
   {
