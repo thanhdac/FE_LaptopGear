@@ -174,19 +174,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label class="">Tên người nhận</label>
-                        <input  type="text" class="form-control"
-                            placeholder="Nhập tên người nhận">
-                    </div>
-                    <div class="mb-2">
-                        <label class="">Số điện thoại</label>
-                        <input  type="text" class="form-control"
-                            placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="mb-2">
                         <label class="">Địa chỉ</label>
                         <input type="text" class="form-control"
                             placeholder="Nhập địa chỉ">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Địa chỉ</label>
+                        <select class="form-control">
+                            <option value="0">Hà Nội</option>
+                            <option value="1">Hà Tĩnh</option>
+                        </select>
                     </div>
 
                 </div>
