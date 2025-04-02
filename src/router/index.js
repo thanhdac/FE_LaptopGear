@@ -108,6 +108,33 @@ const routes = [
     meta: { layout: "quan_an" },
     beforeEnter: checkQuanAn,
   },
+  {
+    path: "/quan-an/danh-muc",
+    component: () => import("../components/QuanAn/DanhMuc/index.vue"),
+    meta: { layout: "quan_an" },
+    beforeEnter: checkQuanAn,
+
+  },
+  
+  {
+    path: "/quan-an/mon-an",
+    component: () => import("../components/QuanAn/MonAn/index.vue"),
+    meta: { layout: "quan_an" },
+    beforeEnter: checkQuanAn,
+  },
+  
+  {
+    path: "/quan-an/voucher",
+    component: () => import("../components/QuanAn/Voucher/index.vue"),
+    meta: { layout: "quan_an" },
+    beforeEnter: checkQuanAn,
+  },
+  {
+    path: "/quan-an/thong-ke",
+    component: () => import("../components/QuanAn/ThongKe/DoanhThu/index.vue"),
+    meta: { layout: "quan_an" },
+    beforeEnter: checkQuanAn,
+  },
   // Shipper
   {
     path: "/shipper/dang-ky",

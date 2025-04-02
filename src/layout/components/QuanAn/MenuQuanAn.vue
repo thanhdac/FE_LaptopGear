@@ -21,6 +21,33 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/quan-an/danh-muc">
+						<a class="nav-link" href="/quan-an/danh-muc">
+							<div class="parent-icon"><i class="fa-solid fa-list"></i>
+							</div>
+							<div class="menu-title">Danh Mục</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/quan-an/mon-an">
+						<a class="nav-link" href="/quan-an/mon-an">
+							<div class="parent-icon"><i class="fa-solid fa-utensils"></i>
+							</div>
+							<div class="menu-title"> Món Ăn</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/quan-an/voucher">
+						<a class="nav-link" href="/quan-an/voucher">
+							<div class="parent-icon"><i class="fa-solid fa-ticket"></i>
+							</div>
+							<div class="menu-title"> Voucher</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>
