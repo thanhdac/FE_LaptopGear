@@ -177,8 +177,7 @@ export default {
         this.layThongTinLogin();
     },
     methods: {
-        doiMatKhau()
-        {
+        doiMatKhau(){
             axios
                 .post("http://127.0.0.1:8000/api/admin/doi-mat-khau", this.doi_mat_khau , {
                     headers: {

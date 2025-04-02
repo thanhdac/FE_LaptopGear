@@ -58,32 +58,35 @@
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Họ và tên</label>
-                                                            <input v-model="user.ho_va_ten" type="text" class="form-control"
-                                                                placeholder="Nhập họ và tên">
+                                                            <input v-model="user.ho_va_ten" type="text"
+                                                                class="form-control" placeholder="Nhập họ và tên">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Email</label>
-                                                            <input v-model="user.email" disabled type="email" class="form-control"
-                                                                placeholder="example@email.com">
+                                                            <input v-model="user.email" disabled type="email"
+                                                                class="form-control" placeholder="example@email.com">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Số điện thoại</label>
-                                                            <input v-model="user.so_dien_thoai" type="tel" class="form-control"
-                                                                placeholder="0123 456 789">
+                                                            <input v-model="user.so_dien_thoai" type="tel"
+                                                                class="form-control" placeholder="0123 456 789">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Ngày sinh</label>
-                                                            <input v-model="user.ngay_sinh" type="date" class="form-control">
+                                                            <input v-model="user.ngay_sinh" type="date"
+                                                                class="form-control">
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Ảnh đại diện</label>
-                                                            <input v-model="user.avatar" type="text" class="form-control"
+                                                            <input v-model="user.avatar" type="text"
+                                                                class="form-control"
                                                                 placeholder="Nhập vào link đường ảnh giao diện - ta sẽ upload file sau">
                                                         </div>
                                                     </div>
                                                     <div class="text-end mt-4">
                                                         <button type="button" class="btn btn-light me-2">Huỷ</button>
-                                                        <button type="submit" class="btn btn-primary px-4">Lưu thay
+                                                        <button type="button" v-on:click="updateProfile()"
+                                                            class="btn btn-primary px-4">Lưu thay
                                                             đổi</button>
                                                     </div>
                                                 </form>
@@ -139,20 +142,24 @@
                                                 <div class="mb-3">
                                                     <label class="form-label fw-semibold">Mật khẩu hiện tại</label>
                                                     <input type="password" class="form-control"
+                                                        v-model="doi_mat_khau.old_password"
                                                         placeholder="Nhập mật khẩu hiện tại">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label fw-semibold">Mật khẩu mới</label>
                                                     <input type="password" class="form-control"
+                                                        v-model="doi_mat_khau.password"
                                                         placeholder="Nhập mật khẩu mới">
                                                 </div>
                                                 <div class="mb-4">
                                                     <label class="form-label fw-semibold">Xác nhận mật khẩu
                                                         mới</label>
                                                     <input type="password" class="form-control"
+                                                        v-model="doi_mat_khau.re_password"
                                                         placeholder="Nhập lại mật khẩu mới">
                                                 </div>
-                                                <button type="submit" class="btn btn-primary px-4">Cập nhật mật
+                                                <button v-on:click="doiMatKhau()" type="submit"
+                                                    class="btn btn-primary px-4">Cập nhật mật
                                                     khẩu</button>
                                             </div>
                                         </div>
@@ -263,7 +270,7 @@
                     <div class="alert alert-warning" role="alert">
                         Bạn có chắc chắn muốn xóa địa chỉ <b>{{ detail_dia_chi.dia_chi }}, {{
                             detail_dia_chi.ten_quan_huyen
-                        }}, {{ detail_dia_chi.ten_tinh_thanh }}</b> này không?
+                            }}, {{ detail_dia_chi.ten_tinh_thanh }}</b> này không?
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -285,7 +292,12 @@ export default {
             dia_chi: {},
             list_quan_huyen: [],
             detail_dia_chi: {},
-            user : {}
+            user: {},
+            doi_mat_khau: {
+                old_password: '',
+                password: '',
+                re_password: ''
+            }
         }
     },
     mounted() {
@@ -304,9 +316,12 @@ export default {
                 .then((res) => {
                     this.list_dia_chi = res.data.data;
                 })
-                .catch(error => {
-                    console.error(error);
-                });
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         addDiaChi() {
             axios
@@ -325,9 +340,35 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    this.$toast.error(error);
-                });
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        updateProfile() {
+            axios
+                .post('http://127.0.0.1:8000/api/khach-hang/update-profile', this.user, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.layThongTinLogin();
+                        this.$toast.success(res.data.message);
+                    }
+                    else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         updateDiaChi() {
             // console.log(this.detail_dia_chi);
@@ -380,9 +421,12 @@ export default {
                 .then((res) => {
                     this.list_quan_huyen = res.data.data;
                 })
-                .catch(error => {
-                    console.error(error);
-                });
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         layThongTinLogin() {
             var token = localStorage.getItem("khach_hang_login");
@@ -395,13 +439,39 @@ export default {
                 .then((res) => {
                     if (res.data.status) {
                         console.log(res.data.data);
-                        
+
                         this.user = res.data.data;
                     } else {
                         toaster.error(res.data.message);
                     }
                 });
-        }
+        },
+        doiMatKhau() {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/update-password", this.doi_mat_khau, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.doi_mat_khau = {
+                            mat_khau_cu: '',
+                            mat_khau_moi: '',
+                            xac_nhan_mat_khau_moi: ''
+                        }
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
     }
 }
 </script>
