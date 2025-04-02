@@ -482,21 +482,33 @@ export default {
     methods: {
         xemQuanHuyen(value) {
             axios
-                .post('http://127.0.0.1:8000/api/admin/quan-huyen/data', value)
+                .post('http://127.0.0.1:8000/api/admin/quan-huyen/data', value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_quan_huyen = res.data.data;
                 })
         },
         LoadDataDanhMuc() {
             axios
-                .get('http://localhost:8000/api/admin/danh-muc/data')
+                .get('http://localhost:8000/api/admin/danh-muc/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_danh_muc = res.data.data;
                 })
         },
         themMoi() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/danh-muc/create", this.create_danh_muc)
+                .post("http://127.0.0.1:8000/api/admin/danh-muc/create", this.create_danh_muc, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -513,7 +525,11 @@ export default {
         },
         capNhat() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/danh-muc/update", this.update_danh_muc)
+                .post("http://127.0.0.1:8000/api/admin/danh-muc/update", this.update_danh_muc, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.LoadDataDanhMuc();
@@ -529,7 +545,11 @@ export default {
         },
         xoa() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/danh-muc/delete", this.delete_danh_muc)
+                .post("http://127.0.0.1:8000/api/admin/danh-muc/delete", this.delete_danh_muc, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.LoadDataDanhMuc();
@@ -545,14 +565,22 @@ export default {
         },
         LoadDataTinhHuyen() {
             axios
-                .get('http://localhost:8000/api/admin/tinh-thanh/data')
+                .get('http://localhost:8000/api/admin/tinh-thanh/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_tinh_huyen = res.data.data;
                 })
         },
         themMoiTinhHuyen() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/create", this.create_tinh_huyen)
+                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/create", this.create_tinh_huyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -571,7 +599,11 @@ export default {
         },
         capNhatTinhHuyen() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/update", this.update_tinh_huyen)
+                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/update", this.update_tinh_huyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.LoadDataTinhHuyen();
@@ -587,7 +619,11 @@ export default {
         },
         xoaTinhHuyen() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/delete", this.delete_tinh_huyen)
+                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/delete", this.delete_tinh_huyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.LoadDataTinhHuyen();

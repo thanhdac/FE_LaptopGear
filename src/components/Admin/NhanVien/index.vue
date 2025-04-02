@@ -32,7 +32,8 @@
                                     <td class="align-middle">{{ value.dia_chi }}</td>
                                     <td class="align-middle text-center">{{ value.ngay_sinh }}</td>
                                     <td class="align-middle text-center">
-                                        <button v-if="value.tinh_trang == 1" class="btn btn-info w-100" style="color: white;">
+                                        <button v-if="value.tinh_trang == 1" class="btn btn-info w-100"
+                                            style="color: white;">
                                             Hoạt động
                                         </button>
                                         <button v-else class="btn btn-secondary w-100">
@@ -42,7 +43,8 @@
                                     <td class="align-middle text-center">
                                         <button v-on:click="
                                             edit_nhan_vien = Object.assign(edit_nhan_vien, value)
-                                            " class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                            " class="btn btn-success me-2" data-bs-toggle="modal"
+                                            data-bs-target="#updateModal">
                                             Cập nhật
                                         </button>
                                         <button v-on:click="del_nhan_vien = value" class="btn btn-danger"
@@ -161,7 +163,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatNhanVien()">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        v-on:click="capNhatNhanVien()">
                         Cập nhật
                     </button>
                 </div>
@@ -233,14 +236,22 @@ export default {
     methods: {
         loadData() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/nhan-vien/data')
+                .get('http://127.0.0.1:8000/api/admin/nhan-vien/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_nhan_vien = res.data.data;
                 });
         },
         themNhanVien() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/nhan-vien/create', this.create_nhan_vien)
+                .post('http://127.0.0.1:8000/api/admin/nhan-vien/create', this.create_nhan_vien, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -272,7 +283,11 @@ export default {
         },
         capNhatNhanVien() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/nhan-vien/update', this.edit_nhan_vien)
+                .post('http://127.0.0.1:8000/api/admin/nhan-vien/update', this.edit_nhan_vien, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -294,7 +309,11 @@ export default {
         },
         xoaNhanVien() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/nhan-vien/delete', this.del_nhan_vien)
+                .post('http://127.0.0.1:8000/api/admin/nhan-vien/delete', this.del_nhan_vien, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);

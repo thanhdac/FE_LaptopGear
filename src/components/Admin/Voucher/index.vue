@@ -26,7 +26,7 @@
                         <tbody>
                             <template v-for="(value, index) in list_ma_giam_gia" :key="index">
                                 <tr>
-                                    <th class="align-middle text-center" >{{ index + 1 }}</th>
+                                    <th class="align-middle text-center">{{ index + 1 }}</th>
                                     <td class="align-middle">{{ value.ma_code }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_ket_thuc }}</td>
@@ -49,7 +49,8 @@
                                     <td class="align-middle text-end">{{ formatVND(value.so_tien_toi_da) }}</td>
                                     <td class="align-middle text-end">{{ formatVND(value.don_hang_toi_thieu) }}</td>
                                     <td class="align-middle text-center">
-                                        <button v-if="value.tinh_trang == 1" class="btn btn-info"  style="color: white;">Hiển thị</button>
+                                        <button v-if="value.tinh_trang == 1" class="btn btn-info"
+                                            style="color: white;">Hiển thị</button>
                                         <button v-else class="btn btn-secondary">Tạm
                                             tắt</button>
                                     </td>
@@ -247,14 +248,22 @@ export default {
         },
         loadData() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/voucher/data')
+                .get('http://127.0.0.1:8000/api/admin/voucher/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_ma_giam_gia = res.data.data;
                 });
         },
         themMoiMaGiamGia() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/voucher/create', this.them_ma_giam_gia)
+                .post('http://127.0.0.1:8000/api/admin/voucher/create', this.them_ma_giam_gia, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -286,7 +295,11 @@ export default {
         },
         capNhatMaGiamGia() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/voucher/update', this.edit_ma_giam_gia)
+                .post('http://127.0.0.1:8000/api/admin/voucher/update', this.edit_ma_giam_gia, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -308,7 +321,11 @@ export default {
         },
         xoaMaGiamGia() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/voucher/delete', this.del_ma_giam_gia)
+                .post('http://127.0.0.1:8000/api/admin/voucher/delete', this.del_ma_giam_gia, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);

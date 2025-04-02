@@ -20,7 +20,7 @@
                                 <button class="btn btn-outline-secondary" type="button" @click="searchQuyen">Tìm
                                     Kiếm</button>
                             </div>
-                        </div>  
+                        </div>
                         <div class="modal fade" id="themMoiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -123,7 +123,7 @@
                                                 <h6 class="mb-0 text-dark">Warning</h6>
                                                 <div class="text-dark">
                                                     <p>Bạn có muốn xóa quyền <b class="text-danger">{{
-                                                            delete_quyen.ten_quyen }}</b> này
+                                                        delete_quyen.ten_quyen }}</b> này
                                                         không?
                                                     </p>
                                                     <p>
@@ -257,14 +257,18 @@ export default {
     methods: {
         themQuyen() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/create', this.create_quyen)
+                .post('http://127.0.0.1:8000/api/admin/phan-quyen/create', this.create_quyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(response => {
                     if (response.data.status) {
                         this.$toast.success(response.data.message);
                         this.create_quyen = {}
                         this.layDataQuyen();
                     } else {
-                         this.$toast.error(response.data.message);
+                        this.$toast.error(response.data.message);
                     }
                 })
                 .catch(error => {
@@ -281,20 +285,28 @@ export default {
 
         layDataQuyen() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/phan-quyen/data')
+                .get('http://127.0.0.1:8000/api/admin/phan-quyen/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(response => {
                     this.list_quyen = response.data.data;
                 })
         },
         updateQuyen() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/update', this.update_quyen)
+                .post('http://127.0.0.1:8000/api/admin/phan-quyen/update', this.update_quyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(response => {
-                   if (response.data.status) {
+                    if (response.data.status) {
                         this.$toast.success(response.data.message);
                         this.layDataQuyen();
                     } else {
-                         this.$toast.error(response.data.message);
+                        this.$toast.error(response.data.message);
                     }
                 })
                 .catch(error => {
@@ -310,13 +322,17 @@ export default {
         },
         deleteQuyen() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/delete', this.delete_quyen)
+                .post('http://127.0.0.1:8000/api/admin/phan-quyen/delete', this.delete_quyen, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(response => {
-                   if (response.data.status) {
+                    if (response.data.status) {
                         this.$toast.success(response.data.message);
                         this.layDataQuyen();
                     } else {
-                         this.$toast.error(response.data.message);
+                        this.$toast.error(response.data.message);
                     }
                 })
                 .catch(error => {
