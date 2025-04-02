@@ -30,7 +30,7 @@
                                                 <img src="https://scs.duytan.edu.vn/upload/images/13-1-2021-7-24-29-57.JPG"
                                                     alt="Avatar" class="rounded-circle mb-3 shadow-sm" width="120"
                                                     height="120">
-                                                <h5 class="mb-1">Nguyễn Văn A</h5>
+                                                <h5 class="mb-1">{{ user.ho_va_ten }}</h5>
                                                 <p class="text-muted mb-3">Khách hàng thân thiết</p>
                                                 <div class="row g-3">
                                                     <div class="col-6">
@@ -58,26 +58,26 @@
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Họ và tên</label>
-                                                            <input type="text" class="form-control"
+                                                            <input v-model="user.ho_va_ten" type="text" class="form-control"
                                                                 placeholder="Nhập họ và tên">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Email</label>
-                                                            <input type="email" class="form-control"
+                                                            <input v-model="user.email" disabled type="email" class="form-control"
                                                                 placeholder="example@email.com">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Số điện thoại</label>
-                                                            <input type="tel" class="form-control"
+                                                            <input v-model="user.so_dien_thoai" type="tel" class="form-control"
                                                                 placeholder="0123 456 789">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Ngày sinh</label>
-                                                            <input type="date" class="form-control">
+                                                            <input v-model="user.ngay_sinh" type="date" class="form-control">
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Ảnh đại diện</label>
-                                                            <input type="text" class="form-control"
+                                                            <input v-model="user.avatar" type="text" class="form-control"
                                                                 placeholder="Nhập vào link đường ảnh giao diện - ta sẽ upload file sau">
                                                         </div>
                                                     </div>
@@ -112,12 +112,14 @@
                                                         value.ten_quan_huyen }}, {{ value.ten_tinh_thanh }}</p>
                                                 </div>
                                                 <div>
-                                                    <button class="btn btn-outline-primary btn-2xl me-2"
+                                                    <button v-on:click="Object.assign(detail_dia_chi, value)"
+                                                        class="btn btn-outline-primary btn-2xl me-2"
                                                         data-bs-toggle="modal" data-bs-target="#updateDiaChiModal">
                                                         <i class="fa-solid fa-pen"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-danger btn-2xl"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteDiaChiModal">
+                                                    <button v-on:click="Object.assign(detail_dia_chi, value)"
+                                                        class="btn btn-outline-danger btn-2xl" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteDiaChiModal">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -217,17 +219,31 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-2">
+                        <label class="">Họ và tên</label>
+                        <input v-model="detail_dia_chi.ten_nguoi_nhan" type="text" class="form-control mt-1"
+                            placeholder="Nhập địa chỉ">
+                    </div>
+                    <div class="mb-2">
+                        <label class="">Số điện thoại</label>
+                        <input v-model="detail_dia_chi.so_dien_thoai" type="text" class="form-control mt-1"
+                            placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="mb-2">
                         <label class="">Địa chỉ</label>
-                        <input type="text" class="form-control">
+                        <input v-model="detail_dia_chi.dia_chi" type="text" class="form-control">
                     </div>
                     <div class="mb-2">
                         <label class="">Quận Huyện</label>
-                        <input type="text" class="form-control">
+                        <select v-model="detail_dia_chi.id_quan_huyen" class="form-select mt-1">
+                            <template v-for="(value, index) in list_quan_huyen" :key="index">
+                                <option v-bind:value="value.id">{{ value.ten_quan_huyen }}</option>
+                            </template>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác
+                    <button @click="updateDiaChi()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác
                         Nhận</button>
                 </div>
             </div>
@@ -245,12 +261,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-warning" role="alert">
-                        Bạn có chắc chắn muốn xóa địa chỉ <b></b> này không?
+                        Bạn có chắc chắn muốn xóa địa chỉ <b>{{ detail_dia_chi.dia_chi }}, {{
+                            detail_dia_chi.ten_quan_huyen
+                        }}, {{ detail_dia_chi.ten_tinh_thanh }}</b> này không?
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác
+                    <button @click="deleteDiaChi()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xác
                         Nhận</button>
                 </div>
             </div>
@@ -266,11 +284,14 @@ export default {
             list_dia_chi: [],
             dia_chi: {},
             list_quan_huyen: [],
+            detail_dia_chi: {},
+            user : {}
         }
     },
     mounted() {
         this.loadDiaChi();
         this.loadQuanHuyen();
+        this.layThongTinLogin();
     },
     methods: {
         loadDiaChi() {
@@ -295,20 +316,59 @@ export default {
                     },
                 })
                 .then((res) => {
-                    this.list_dia_chi = res.data.data;
-                    console.log(this.list_dia_chi);
-                    this.loadDiaChi();
-                    this.$toast.success(res.data.message);
+                    if (res.data.status) {
+                        this.list_dia_chi = res.data.data;
+                        this.loadDiaChi();
+                        this.$toast.success(res.data.message);
+                    }
+                    else {
+                        this.$toast.error(res.data.message);
+                    }
                 })
                 .catch(error => {
                     this.$toast.error(error);
                 });
         },
         updateDiaChi() {
-            // Logic to update an address
+            // console.log(this.detail_dia_chi);
+            axios
+                .post('http://127.0.0.1:8000/api/khach-hang/dia-chi/update', this.detail_dia_chi, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadDiaChi();
+                        this.$toast.success(res.data.message);
+                    }
+                    else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch(error => {
+                    this.$toast.error(error);
+                });
         },
         deleteDiaChi() {
-            // Logic to delete an address
+            axios
+                .post('http://127.0.0.1:8000/api/khach-hang/dia-chi/delete', this.detail_dia_chi, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.loadDiaChi();
+                    }
+                    else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch(error => {
+                    this.$toast.error(error);
+                });
         },
         loadQuanHuyen() {
             axios
@@ -322,6 +382,24 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
+                });
+        },
+        layThongTinLogin() {
+            var token = localStorage.getItem("khach_hang_login");
+            axios
+                .get("http://127.0.0.1:8000/api/khach-hang/data-login", {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        console.log(res.data.data);
+                        
+                        this.user = res.data.data;
+                    } else {
+                        toaster.error(res.data.message);
+                    }
                 });
         }
     }
