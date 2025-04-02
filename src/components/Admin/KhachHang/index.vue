@@ -36,9 +36,10 @@
                                     <button class="btn btn-danger me-1 w-100" v-else>Tạm Tắt</button>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-warning me-1 w-100" v-if="value.is_active == 0" style="color: white;">Chưa Kích
+                                    <button class="btn btn-warning me-1 w-100" v-if="value.is_active == 0"
+                                        style="color: white;">Chưa Kích
                                         Hoạt</button>
-                                    <button class="btn btn-primary me-1 w-100" v-else >Đã Kích Hoạt</button>
+                                    <button class="btn btn-primary me-1 w-100" v-else>Đã Kích Hoạt</button>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-primary me-1"
@@ -225,14 +226,22 @@ export default {
     },
     methods: {
         loadData() {
-            axios.get('http://127.0.0.1:8000/api/admin/khach-hang/data')
+            axios.get('http://127.0.0.1:8000/api/admin/khach-hang/data', {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                },
+            })
                 .then((res) => {
                     this.list_khach_hang = res.data.data;
                 });
         },
         themMoi() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/khach-hang/create', this.create_khach_hang)
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/create', this.create_khach_hang, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -263,7 +272,11 @@ export default {
         },
         capNhatKhachHang() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/khach-hang/update', this.update_khach_hang)
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/update', this.update_khach_hang, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);
@@ -292,7 +305,11 @@ export default {
         },
         xoaKhachHang() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/khach-hang/delete', this.del_khach_hang)
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/delete', this.del_khach_hang, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     if (res.data.status) {
                         this.$toast.success(res.data.message);

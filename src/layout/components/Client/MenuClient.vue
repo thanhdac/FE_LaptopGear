@@ -30,6 +30,15 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/khach-hang/quan-an">
+						<a class="nav-link" href="/khach-hang/quan-an">
+							<div class="parent-icon"><i class="fa-solid fa-shop"></i>
+							</div>
+							<div class="menu-title">Quán Ăn</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>

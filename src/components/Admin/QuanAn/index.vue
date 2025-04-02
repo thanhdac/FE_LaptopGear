@@ -144,10 +144,12 @@
                                     <td>
                                         <button class="btn btn-success w-100" v-if="value.tinh_trang == 1">Hoạt
                                             động</button>
-                                        <button class="btn btn-warning w-100" v-else style="color: white;">Tạm dừng</button>
+                                        <button class="btn btn-warning w-100" v-else style="color: white;">Tạm
+                                            dừng</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-info w-100" v-if="value.is_active == 1" style="color: white;">Đã Kích
+                                        <button class="btn btn-info w-100" v-if="value.is_active == 1"
+                                            style="color: white;">Đã Kích
                                             hoạt</button>
                                         <button class="btn btn-secondary w-100" v-else>Chưa kích hoạt</button>
                                     </td>
@@ -327,28 +329,44 @@ export default {
     methods: {
         loadDataTinhThanh() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/tinh-thanh/data-open')
+                .get('http://127.0.0.1:8000/api/admin/tinh-thanh/data-open', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_tinh_thanh = res.data.data;
                 })
         },
         loadDataQuanHuyen() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open')
+                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_quan_huyen = res.data.data;
                 })
         },
         layDataQuanAn() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/quan-an/data')
+                .get('http://127.0.0.1:8000/api/admin/quan-an/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.list_quan = res.data.data;
                 })
         },
         themMoiQuanAn() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/quan-an/create', this.quan_an_create)
+                .post('http://127.0.0.1:8000/api/admin/quan-an/create', this.quan_an_create, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.quan_an_create = {};
                     this.$toast.success(res.data.message);
@@ -367,7 +385,11 @@ export default {
         },
         xoaQuanAn() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/quan-an/delete', this.quan_an_delete)
+                .post('http://127.0.0.1:8000/api/admin/quan-an/delete', this.quan_an_delete, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.$toast.success(res.data.message);
                     this.layDataQuanAn();
@@ -385,7 +407,11 @@ export default {
         },
         capNhatQuanAn() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/quan-an/update', this.quan_an_edit)
+                .post('http://127.0.0.1:8000/api/admin/quan-an/update', this.quan_an_edit, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.$toast.success(res.data.message);
                     this.layDataQuanAn();

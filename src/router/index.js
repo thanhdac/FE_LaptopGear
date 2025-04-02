@@ -62,6 +62,16 @@ const routes = [
     meta: { layout: "blank" },
   },
   {
+    path: "/",
+    component: () => import("../components/KhachHang/Test/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/khach-hang/quan-an",
+    component: () => import("../components/KhachHang/QuanAn/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
     path: "/khach-hang/dang-ky",
     component: () => import("../components/KhachHang/DangKi/index.vue"),
     meta: { layout: "blank" },

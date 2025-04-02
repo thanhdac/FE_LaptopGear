@@ -19,10 +19,6 @@
                                     <th class="align-middle text-center">Email</th>
                                     <th class="align-middle text-center">CMMD</th>
                                     <th class="align-middle text-center">Địa Chỉ Thường Trú</th>
-                                    <th class="align-middle text-center">Tỉnh Thành</th>
-                                    <th class="align-middle text-center">Quận Huyện</th>
-                                    <th class="align-middle text-center">Tọa Độ X</th>
-                                    <th class="align-middle text-center">Tọa Độ X</th>
                                     <th class="align-middle text-center">Trạng Thái</th>
                                     <th class="align-middle text-center">Tình Trạng</th>
                                     <th class="align-middle text-center">Action</th>
@@ -41,19 +37,7 @@
                                         <td class="align-middle text-center">{{ value.email }}</td>
                                         <td class="align-middle text-center">{{ value.cccd }}</td>
                                         <td class="align-middle text-center">
-                                            {{ value.dia_chi_thuong_tru }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ value.id_tinh_thanh }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ value.id_quan_huyen }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ value.toa_do_x }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ value.toa_do_y }}
+                                            {{ value.dia_chi }}
                                         </td>
                                         <td class="align-middle text-center">
                                             <button v-if="value.is_open == 0" class="btn btn-success w-100">
@@ -98,7 +82,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
                         Thêm Mới Shipper
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -114,7 +98,7 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label class="mb-1">Số Điện Thoại</label>
-                                <input v-model="create_shipper.so_dien_thoai" type="number" class="form-control" />
+                                <input v-model="create_shipper.so_dien_thoai" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -139,48 +123,6 @@
                             <div class="mb-2">
                                 <label class="mb-1">Nhập Lại Mật Khẩu</label>
                                 <input v-model="create_shipper.re_password" type="password" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Địa Chỉ Thường Trú</label>
-                                <input v-model="create_shipper.dia_chi_thuong_tru" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tỉnh Thành</label>
-                                <select v-model="create_shipper.id_tinh_thanh" class="form-select">
-                                    <template v-for="(value, index) in list_tinh_thanh" :key="index">
-                                        <option :value="value.id">
-                                            {{ value.ten_tinh_thanh }}
-                                        </option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Quận Huyện</label>
-                                <select v-model="create_shipper.id_quan_huyen" class="form-select">
-                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
-                                        <option :value="value.id">
-                                            {{ value.ten_quan_huyen }}
-                                        </option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tọa Độ X</label>
-                                <input v-model="create_shipper.toa_do_x" type="number" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tọa Độ Y</label>
-                                <input v-model="create_shipper.toa_do_y" type="number" class="form-control" />
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -250,48 +192,6 @@
                             <div class="mb-2">
                                 <label class="mb-1">Chứng Minh Nhân Dân/Căn Cước Công Dân</label>
                                 <input v-model="update_shipper.cccd" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Địa Chỉ Thường Trú</label>
-                                <input v-model="update_shipper.dia_chi_thuong_tru" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tỉnh Thành</label>
-                                <select v-model="update_shipper.id_tinh_thanh" class="form-select">
-                                    <template v-for="(value, index) in list_tinh_thanh" :key="index">
-                                        <option :value="value.id">
-                                            {{ value.ten_tinh_thanh }}
-                                        </option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Quận Huyện</label>
-                                <select v-model="update_shipper.id_quan_huyen" class="form-select">
-                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
-                                        <option :value="value.id">
-                                            {{ value.ten_quan_huyen }}
-                                        </option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tọa Độ X</label>
-                                <input v-model="update_shipper.toa_do_x" type="number" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label class="mb-1">Tọa Độ Y</label>
-                                <input v-model="update_shipper.toa_do_y" type="number" class="form-control" />
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -387,28 +287,44 @@ export default {
     methods: {
         loadDataTinhThanh() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/tinh-thanh/data-open')
+                .get('http://127.0.0.1:8000/api/admin/tinh-thanh/data-open', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_tinh_thanh = res.data.data;
                 })
         },
         loadDataQuanHuyen() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open')
+                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then((res) => {
                     this.list_quan_huyen = res.data.data;
                 })
         },
         loadDataShipper() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/shipper/data')
+                .get('http://127.0.0.1:8000/api/admin/shipper/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.list_shipper = res.data.data;
                 })
         },
         createShipper() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/shipper/create', this.create_shipper)
+                .post('http://127.0.0.1:8000/api/admin/shipper/create', this.create_shipper, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.create_shipper = {};
                     this.$toast.success(res.data.message);
@@ -427,7 +343,11 @@ export default {
         },
         updateShipper() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/shipper/update', this.update_shipper)
+                .post('http://127.0.0.1:8000/api/admin/shipper/update', this.update_shipper, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.update_shipper = {};
                     this.$toast.success(res.data.message);
@@ -447,7 +367,11 @@ export default {
 
         deleteShipper() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/shipper/delete', this.del_shipper)
+                .post('http://127.0.0.1:8000/api/admin/shipper/delete', this.del_shipper, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
                 .then(res => {
                     this.$toast.success(res.data.message);
                     this.loadDataShipper();
