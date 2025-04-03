@@ -5,11 +5,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-6">
-                            Danh Sách Quyền
+                            Danh Sách Chức Vụ
                         </div>
                         <div class="col-lg-6 text-end">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themMoiModal">Thêm
-                                Quyền</button>
+                                Chức Vụ</button>
                         </div>
                         <div class="col-lg-12">
                             <div class="input-group mt-3 w-100">
@@ -26,20 +26,20 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Quyền</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Chức Vụ</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="col-12 mb-2">
-                                            <label class="form-label">Tên Quyền</label>
-                                            <input v-model="create_quyen.ten_quyen" type="text" class="form-control">
+                                            <label class="form-label">Tên Chức Vụ</label>
+                                            <input v-model="create_chuc_vu.ten_chuc_vu" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary" @click="themQuyen()"
+                                        <button type="button" class="btn btn-primary" @click="themChucVu()"
                                             data-bs-dismiss="modal">Tạo
                                             Mới</button>
                                     </div>
@@ -54,21 +54,21 @@
                             <thead class="text-center align-middle">
                                 <tr class="bg-primary text-light">
                                     <th>#</th>
-                                    <th>Tên Quyền</th>
+                                    <th>Tên Chức Vụ</th>
                                     <th>Cấp Quyền</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(value, index) in list_quyen" :key="index" class="align-middle">
+                                <tr v-for="(value, index) in list_chuc_vu" :key="index" class="align-middle">
                                     <th class="text-center">{{ index + 1 }}</th>
-                                    <td>{{ value.ten_quyen }}</td>
+                                    <td>{{ value.ten_chuc_vu }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-info text-white">Phân
                                             Quyền</button>
                                     </td>
                                     <td class="text-center">
-                                        <i @click="Object.assign(update_quyen, value)"
+                                        <i @click="Object.assign(update_chuc_vu, value)"
                                             class="fa-solid fa-square-pen fa-3x text-primary me-2"
                                             data-bs-toggle="modal" data-bs-target="#updateModal"></i>
                                         <i @click="delete_quyen = value" class="fa-solid fa-trash fa-3x text-danger"
@@ -83,14 +83,14 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Quyền</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Chức Vụ</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="col-12 mb-2">
                                         <label class="form-label">Tên Quyền</label>
-                                        <input v-model="update_quyen.ten_quyen" type="text" class="form-control">
+                                        <input v-model="update_chuc_vu.ten_chuc_vu" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -220,44 +220,21 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            list_chuc_nang: [
-                { 'id': '1', 'ten_chuc_nang': 'Lấy Danh Sách Các Quán Ăn' },
-                { 'id': '2', 'ten_chuc_nang': 'Tạo Mới Quán Ăn ' },
-                { 'id': '3', 'ten_chuc_nang': 'Xóa Quán Ăn' },
-                { 'id': '4', 'ten_chuc_nang': 'Cập Nhật Quán Ăn' },
-                { 'id': '5', 'ten_chuc_nang': 'Thêm món ăn' },
-                { 'id': '6', 'ten_chuc_nang': 'Xóa Món Ăn' },
-                { 'id': '7', 'ten_chuc_nang': 'Cập Nhật Món Ăn' },
-                { 'id': '8', 'ten_chuc_nang': 'Lấy Danh Sách Các Món Ăn' },
-                { 'id': '10', 'ten_chuc_nang': 'Giao món ăn' },
-                { 'id': '10', 'ten_chuc_nang': 'Giao hàng' },
-                { 'id': '11', 'ten_chuc_nang': 'Lấy Danh Sách Mã Giảm Giá' },
-                { 'id': '12', 'ten_chuc_nang': 'Tạo Mới Mã Giảm Giá' },
-                { 'id': '13', 'ten_chuc_nang': 'Xóa Mã Giảm Giá' },
-                { 'id': '14', 'ten_chuc_nang': 'Cập Nhật Mã Giảm Giá' },
-                { 'id': '15', 'ten_chuc_nang': 'Đối Trạng Thái Mã Giảm Giá' },
-                { 'id': '16', 'ten_chuc_nang': 'Xem Chi Tiết Đơn hàng' },
-                { 'id': '17', 'ten_chuc_nang': 'Đặt món ăn' },
-                { 'id': '18', 'ten_chuc_nang': 'Tạo Mới Phân Quyền' },
-                { 'id': '19', 'ten_chuc_nang': 'Cập Nhật Phân Quyền' },
-                { 'id': '20', 'ten_chuc_nang': 'Xóa Phân Quyền' },
-                { 'id': '21', 'ten_chuc_nang': 'Lấy Danh Sách Chức Năng' },
-                { 'id': '22', 'ten_chuc_nang': 'Tạo Mới Chi Tiết Phân Quyền' },
-                { 'id': '23', 'ten_chuc_nang': 'Lấy Danh Sách Chi Tiết Phân Quyền' },
-            ],
-            list_quyen: [],
-            create_quyen: {},
-            update_quyen: {},
+            list_chuc_nang: [],
+            list_chuc_vu: [],
+            create_chuc_vu: {},
+            update_chuc_vu: {},
             delete_quyen: {}
         }
     },
     mounted() {
-        this.layDataQuyen();
+        this.layDataChucVu();
+        this.layDataChucNang();
     },
     methods: {
-        themQuyen() {
+        themChucVu() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/create', this.create_quyen, {
+                .post('http://127.0.0.1:8000/api/admin/chuc-vu/create', this.create_chuc_vu, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -265,8 +242,8 @@ export default {
                 .then(response => {
                     if (response.data.status) {
                         this.$toast.success(response.data.message);
-                        this.create_quyen = {}
-                        this.layDataQuyen();
+                        this.create_chuc_vu = {}
+                        this.layDataChucVu();
                     } else {
                         this.$toast.error(response.data.message);
                     }
@@ -283,20 +260,32 @@ export default {
                 });
         },
 
-        layDataQuyen() {
+        layDataChucNang() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/phan-quyen/data', {
+                .get('http://127.0.0.1:8000/api/admin/chuc-nang/data', {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
                 })
                 .then(response => {
-                    this.list_quyen = response.data.data;
+                    this.list_chuc_nang = response.data.data;
+                })
+        },
+
+        layDataChucVu() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/chuc-vu/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then(response => {
+                    this.list_chuc_vu = response.data.data;
                 })
         },
         updateQuyen() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/update', this.update_quyen, {
+                .post('http://127.0.0.1:8000/api/admin/chuc-vu/update', this.update_chuc_vu, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -304,7 +293,7 @@ export default {
                 .then(response => {
                     if (response.data.status) {
                         this.$toast.success(response.data.message);
-                        this.layDataQuyen();
+                        this.layDataChucVu();
                     } else {
                         this.$toast.error(response.data.message);
                     }
@@ -322,7 +311,7 @@ export default {
         },
         deleteQuyen() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/phan-quyen/delete', this.delete_quyen, {
+                .post('http://127.0.0.1:8000/api/admin/chuc-vu/delete', this.delete_quyen, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -330,7 +319,7 @@ export default {
                 .then(response => {
                     if (response.data.status) {
                         this.$toast.success(response.data.message);
-                        this.layDataQuyen();
+                        this.layDataChucVu();
                     } else {
                         this.$toast.error(response.data.message);
                     }

@@ -410,7 +410,7 @@
         <!-- Modal Xem Quận/Huyện -->
         <div class="modal fade" id="xemQuanHuyenModal" tabindex="-1" aria-labelledby="xemQuanHuyenModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="updateTinhThanhModalLabel">
@@ -432,10 +432,10 @@
                                     <tr class="align-middle text-center">
                                         <td>{{ index + 1 }}</td>
                                         <td>{{ value.ten_quan_huyen }}</td>
-                                        <td>
-                                            <button v-if="value.trang_thai == 0" class="btn btn-warning me-1">Tạm
+                                        <td class="text-nowrap">
+                                            <button v-if="value.tinh_trang == 0" class="btn btn-warning">Tạm
                                                 Tắt </button>
-                                                <button v-if="value.trang_thai == 1" class="btn btn-success me-1">Hoạt Động </button>
+                                                <button v-if="value.tinh_trang == 1" class="btn btn-success">Hoạt Động </button>
                                         </td>
                                     </tr>
                                 </template>
@@ -482,7 +482,7 @@ export default {
     methods: {
         xemQuanHuyen(value) {
             axios
-                .post('http://127.0.0.1:8000/api/admin/quan-huyen/data', value, {
+                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data', value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },

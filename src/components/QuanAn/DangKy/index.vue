@@ -71,37 +71,6 @@
                                                         type="text" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <label>Tỉnh Thành</label>
-                                                <div class="ms-auto position-relative">
-                                                    <select v-model="quan_an_create.id_tinh_thanh" class="form-select">
-                                                        <template v-for="(value, index) in list_tinh_thanh"
-                                                            :key="index">
-                                                            <option v-bind:value="value.id">{{ value.ten_tinh_thanh }}
-                                                            </option>
-                                                        </template>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Quận Huyện</label>
-                                                <div class="ms-auto position-relative">
-                                                    <select v-model="quan_an_create.id_quan_huyen" class="form-select">
-                                                        <template v-for="(value, index) in list_quan_huyen"
-                                                            :key="index">
-                                                            <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
-                                                            </option>
-                                                        </template>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <label>Địa Chỉ</label>
-                                                <div class="ms-auto position-relative">
-                                                    <textarea v-model="quan_an_create.dia_chi" type="text"
-                                                        class="form-control" placeholder="Nhập địa chỉ"></textarea>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="col-lg-12 mt-4">
                                             <div class="col-12">
@@ -141,37 +110,16 @@ export default {
                 're_password': "",
                 'ma_so_thue': "",
                 'ten_quan_an': "",
-                'dia_chi': "",
                 'so_dien_thoai': "",
                 'gio_mo_cua': "",
                 'gio_dong_cua': "",
-                'id_quan_huyen': "",
-                'id_tinh_thanh': "",
             },
-            list_tinh_thanh: [],
-            list_quan_huyen: []
         }
 
     },
     mounted() {
-        this.loadDataTinhThanh();
-        this.loadDataQuanHuyen();
     },
     methods: {
-        loadDataTinhThanh() {
-            axios
-                .get('http://127.0.0.1:8000/api/admin/tinh-thanh/data-open')
-                .then((res) => {
-                    this.list_tinh_thanh = res.data.data;
-                })
-        },
-        loadDataQuanHuyen() {
-            axios
-                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open')
-                .then((res) => {
-                    this.list_quan_huyen = res.data.data;
-                })
-        },
         dangKyQuanAn() {
             axios
                 .post('http://127.0.0.1:8000/api/quan-an/dang-ky', this.quan_an_create)

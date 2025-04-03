@@ -18,6 +18,7 @@
                                 <th class="text-center">Số Điện Thoại</th>
                                 <th class="text-center">Địa Chỉ</th>
                                 <th class="text-center">Ngày Sinh</th>
+                                <th class="text-center">Chức Vụ</th>
                                 <th class="text-center">Tình Trạng</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -31,6 +32,7 @@
                                     <td class="align-middle text-center">{{ value.so_dien_thoai }}</td>
                                     <td class="align-middle">{{ value.dia_chi }}</td>
                                     <td class="align-middle text-center">{{ value.ngay_sinh }}</td>
+                                    <td class="align-middle">{{ value.ten_chuc_vu }}</td>
                                     <td class="align-middle text-center">
                                         <button v-if="value.tinh_trang == 1" class="btn btn-info w-100"
                                             style="color: white;">
@@ -106,6 +108,14 @@
                                 <option value="0">Tạm tắt</option>
                             </select>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Chức Vụ</label>
+                            <select v-model="create_nhan_vien.id_chuc_vu" class="form-select">
+                                <template v-for="(value, index) in list_chuc_vu" :key="index">
+                                    <option :value="value.id">{{ value.ten_chuc_vu }}</option>
+                                </template>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -155,6 +165,14 @@
                             <select v-model="edit_nhan_vien.tinh_trang" class="form-select">
                                 <option value="1">Hoạt động</option>
                                 <option value="0">Tạm tắt</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Chức Vụ</label>
+                            <select v-model="edit_nhan_vien.id_chuc_vu" class="form-select">
+                                <template v-for="(value, index) in list_chuc_vu" :key="index">
+                                    <option :value="value.id">{{ value.ten_chuc_vu }}</option>
+                                </template>
                             </select>
                         </div>
                     </div>
@@ -228,12 +246,25 @@ export default {
                 tinh_trang: "",
             },
             del_nhan_vien: {},
+            list_chuc_vu: []
         };
     },
     mounted() {
         this.loadData();
+        this.layDataChucVu();
     },
     methods: {
+        layDataChucVu() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/chuc-vu/data', {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then(response => {
+                    this.list_chuc_vu = response.data.data;
+                })
+        },
         loadData() {
             axios
                 .get('http://127.0.0.1:8000/api/admin/nhan-vien/data', {
