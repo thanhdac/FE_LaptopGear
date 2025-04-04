@@ -33,7 +33,8 @@
                         <input v-model="suavoucher.so_tien_toi_da" type="text" class="form-control mt-2">
                         <div class="mb-2">
                             <label>Đơn Hàng Tối Thiểu</label>
-                            <textarea v-model="suavoucher.don_hang_toi_thieu" class="form-control mt-2" rows="5"></textarea>
+                            <textarea v-model="suavoucher.don_hang_toi_thieu" class="form-control mt-2"
+                                rows="5"></textarea>
                             <div class="mb-2">
                                 <label>Tình trạng</label>
                                 <select v-model="suavoucher.tinh_trang" class="form-select mt-2">
@@ -44,7 +45,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button v-on:click="updatevoucher()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cập
+                            <button v-on:click="updatevoucher()" type="button" class="btn btn-primary"
+                                data-bs-dismiss="modal">Cập
                                 nhật</button>
                         </div>
                     </div>
@@ -67,7 +69,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button v-on:click="deletevoucher()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                    <button v-on:click="deletevoucher()" type="button" class="btn btn-danger"
+                        data-bs-dismiss="modal">Xóa</button>
                 </div>
             </div>
         </div>
@@ -80,7 +83,8 @@
                 <div class="card-header d-flex justify-content-between">
                     <h6 class="mt-2"><b>DANH SÁCH MÃ VOUCHER</b></h6>
                     <div>
-                        <button v-on:click="Object.assign(taovoucher,item)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themMoi">Thêm
+                        <button v-on:click="Object.assign(taovoucher, item)" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#themMoi">Thêm
                             Mới</button>
                     </div>
                     <div class="modal fade" id="themMoi" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -97,26 +101,30 @@
                                         <div class="col-lg-6">
                                             <div class="mb-2">
                                                 <label>Mã Voucher</label>
-                                                <input v-model="taovoucher.ma_code" type="text" class="form-control mt-2">
+                                                <input v-model="taovoucher.ma_code" type="text"
+                                                    class="form-control mt-2">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-2">
                                                 <label>Số Tiền Giảm</label>
-                                                <input v-model="taovoucher.so_giam_gia" type="text" class="form-control mt-2">
+                                                <input v-model="taovoucher.so_giam_gia" type="number"
+                                                    class="form-control mt-2">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-2">
                                                 <label>Thời Gian Bắt Đầu</label>
-                                                <input v-model="taovoucher.thoi_gian_bat_dau" type="date" class="form-control mt-2">
+                                                <input v-model="taovoucher.thoi_gian_bat_dau" type="date"
+                                                    class="form-control mt-2">
                                             </div>
 
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-2">
                                                 <label>Thời Gian Kết Thúc</label>
-                                                <input v-model="taovoucher.thoi_gian_ket_thuc" type="date" class="form-control mt-2">
+                                                <input v-model="taovoucher.thoi_gian_ket_thuc" type="date"
+                                                    class="form-control mt-2">
                                             </div>
                                         </div>
                                     </div>
@@ -126,10 +134,12 @@
                                     </div>
                                     <div class="mb-2">
                                         <label>Số Tiền Tối Đa</label>
-                                        <input v-model="taovoucher.so_tien_toi_da" type="text" class="form-control mt-2">
+                                        <input v-model="taovoucher.so_tien_toi_da" type="number"
+                                            class="form-control mt-2">
                                         <div class="mb-2">
                                             <label>Đơn Hàng Tối Thiểu</label>
-                                            <textarea v-model="taovoucher.don_hang_toi_thieu" class="form-control mt-2" rows="5"></textarea>
+                                            <input v-model="taovoucher.don_hang_toi_thieu" type="number"
+                                                class="form-control mt-2">
                                             <div class="mb-2">
                                                 <label>Tình trạng</label>
                                                 <select v-model="taovoucher.tinh_trang" class="form-select mt-2">
@@ -143,7 +153,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Đóng</button>
-                                    <button v-on:click="createvoucher()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Thêm
+                                    <button v-on:click="createvoucher()" type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Thêm
                                         Mới</button>
                                 </div>
                             </div>
@@ -180,13 +191,17 @@
 
                                         <td class="align-middle text-end">{{ item.don_hang_toi_thieu }}</td>
                                         <td class="align-middle">
-                                            <button v-on:click="changetrangthai(item)" v-if="item.tinh_trang == 0" class="btn btn-warning me-1" style="color: white;">Tạm Tắt </button>
-                                            <button v-on:click="changetrangthai(item)" v-else class="btn btn-success" style="color: white;">Hiển Thị </button>
+                                            <button v-on:click="changetrangthai(item)" v-if="item.tinh_trang == 0"
+                                                class="btn btn-warning me-1" style="color: white;">Tạm Tắt </button>
+                                            <button v-on:click="changetrangthai(item)" v-else class="btn btn-success"
+                                                style="color: white;">Hiển Thị </button>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <button v-on:click="Object.assign(suavoucher,item)" class="btn btn-primary me-1" style='width: 100px'
-                                                data-bs-toggle="modal" data-bs-target="#suaVoucher">Cập Nhật</button>
-                                            <button v-on:click="Object.assign(xoavoucher,item)" class="btn btn-danger" style='width: 100px' data-bs-toggle="modal"
+                                            <button v-on:click="Object.assign(suavoucher, item)"
+                                                class="btn btn-primary me-1" style='width: 100px' data-bs-toggle="modal"
+                                                data-bs-target="#suaVoucher">Cập Nhật</button>
+                                            <button v-on:click="Object.assign(xoavoucher, item)" class="btn btn-danger"
+                                                style='width: 100px' data-bs-toggle="modal"
                                                 data-bs-target="#delVoucher">Xóa</button>
                                         </td>
                                     </tr>
@@ -222,7 +237,7 @@ export default {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
-                })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                })
                 .then(res => {
                     this.voucher = res.data.data;
                 })
@@ -231,7 +246,7 @@ export default {
                 });
         },
 
-        
+
 
         createvoucher() {
             axios
@@ -247,7 +262,7 @@ export default {
                     }
                 })
                 .catch((res) => {
-                    const list = Object.values(res.res.data.errors);
+                    const list = Object.values(res.response.data.errors);
                     list.forEach((v, i) => {
                         this.$toast.error(v[0]);
                     });
@@ -263,10 +278,15 @@ export default {
                 })
                 .then(res => {
                     this.getvoucher();
+                    this.$toast.success(res.data.message);
+
                 })
-                .catch(error => {
-                    console.error("There was an error fetching the data!", error);
-                });
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
 
         deletevoucher() {
@@ -284,7 +304,7 @@ export default {
                     }
                 })
                 .catch((res) => {
-                    const list = Object.values(res.res.data.errors);
+                    const list = Object.values(res.response.data.errors);
                     list.forEach((v, i) => {
                         this.$toast.error(v[0]);
                     });
@@ -305,7 +325,7 @@ export default {
                     }
                 })
                 .catch((res) => {
-                    const list = Object.values(res.res.data.errors);
+                    const list = Object.values(res.response.data.errors);
                     list.forEach((v, i) => {
                         this.$toast.error(v[0]);
                     });

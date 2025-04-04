@@ -37,14 +37,18 @@
                             <td class="text-center align-middle">
                                 <img v-bind:src="mon.hinh_anh" alt="" style="width: 50px; height: 50px;">
                             </td>
-                            <td class="text-center align-middle"> {{  mon.id_danh_muc  }} </td>
+                            <td class="text-center align-middle"> {{ mon.id_danh_muc }} </td>
                             <td class="align-middle">
-                              <button v-on:click="changeMonAn(mon)" v-if="mon.tinh_trang == 1" class="btn btn-success">Hiển thị</button>
-                              <button v-on:click="changeMonAn(mon)" v-else class="btn btn-danger">Tạm tắt</button>
-                           </td>
+                                <button v-on:click="changeMonAn(mon)" v-if="mon.tinh_trang == 1"
+                                    class="btn btn-success">Hiển thị</button>
+                                <button v-on:click="changeMonAn(mon)" v-else class="btn btn-danger">Tạm tắt</button>
+                            </td>
                             <td class="text-center align-middle">
-                                <button v-on:click="Object.assign(updateMon, mon)" data-bs-toggle="modal" data-bs-target="#capnhat" class="btn btn-primary me-1 " style="width: 100px ;">Cập Nhật</button>
-                                <button v-on:click="Object.assign(deleteMon, mon)" data-bs-toggle="modal" data-bs-target="#xoa" class="btn btn-danger" style="width: 100px;">Xóa</button>
+                                <button v-on:click="Object.assign(updateMon, mon)" data-bs-toggle="modal"
+                                    data-bs-target="#capnhat" class="btn btn-primary me-1 " style="width: 100px ;">Cập
+                                    Nhật</button>
+                                <button v-on:click="Object.assign(deleteMon, mon)" data-bs-toggle="modal"
+                                    data-bs-target="#xoa" class="btn btn-danger" style="width: 100px;">Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -64,30 +68,30 @@
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label>Tên Món Ăn</label>
-                                <input v-model="addMon.ten_mon_an" type="text" class="form-control mt-2" >
+                                <input v-model="addMon.ten_mon_an" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Slug Món Ăn</label>
-                                <input v-model="addMon.slug_mon_an" type="text" class="form-control mt-2" >
+                                <input v-model="addMon.slug_mon_an" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Giá Bán</label>
-                                <input v-model="addMon.gia_ban" type="number" class="form-control mt-2" >
+                                <input v-model="addMon.gia_ban" type="number" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Giá Khuyến Mãi</label>
-                                <input v-model="addMon.gia_khuyen_mai" type="number" class="form-control mt-2" >
+                                <input v-model="addMon.gia_khuyen_mai" type="number" class="form-control mt-2">
                             </div>
-                         
+
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label>Mô Tả</label>
-                                <input v-model="addMon.mo_ta" type="text" class="form-control mt-2" >
+                                <input v-model="addMon.mo_ta" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Tên Quán</label>
-                                <input v-model="addMon.id_quan_an" type="text" class="form-control mt-2" >
+                                <input v-model="addMon.id_quan_an" type="text" class="form-control mt-2">
                                 <!-- <select class="form-control">
                                     <option value="0">Quan ABC</option>
                                     <option value="1">Quan BCD</option>
@@ -95,25 +99,26 @@
                             </div>
                             <div class="mb-2">
                                 <label>Hình Ảnh</label>
-                                <input v-model="addMon.hinh_anh" type="text" class="form-control mt-2" >
+                                <input v-model="addMon.hinh_anh" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Tình Trạng</label>
-                                <select v-model="addMon.tinh_trang" class="form-select mt-2" >
+                                <select v-model="addMon.tinh_trang" class="form-select mt-2">
                                     <option value="1">Còn hàng</option>
                                     <option value="0">Hết hàng</option>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-2">
-                                <label>Danh Mục</label>
-                                <input v-model="addMon.id_danh_muc" type="text" class="form-control mt-2" >
-                            </div>
+                            <label>Danh Mục</label>
+                            <input v-model="addMon.id_danh_muc" type="text" class="form-control mt-2">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button v-on:click="addMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Thêm Mới</button>
+                    <button v-on:click="addMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Thêm
+                        Mới</button>
                 </div>
             </div>
         </div>
@@ -134,25 +139,25 @@
                             </div>
                             <div class="mb-2">
                                 <label>Slug Món Ăn</label>
-                                <input v-model="updateMon.slug_mon_an" type="text" class="form-control mt-2" >
+                                <input v-model="updateMon.slug_mon_an" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Giá Bán</label>
-                                <input v-model="updateMon.gia_ban" type="number" class="form-control mt-2" >
+                                <input v-model="updateMon.gia_ban" type="number" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Giá Khuyến Mãi</label>
-                                <input v-model="updateMon.gia_khuyen_mai" type="number" class="form-control mt-2" >
+                                <input v-model="updateMon.gia_khuyen_mai" type="number" class="form-control mt-2">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label>Mô Tả</label>
-                                <input v-model="updateMon.mo_ta" type="text" class="form-control mt-2" >
+                                <input v-model="updateMon.mo_ta" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Tên Quán</label>
-                                <input v-model="updateMon.id_quan_an" type="text" class="form-control mt-2" >
+                                <input v-model="updateMon.id_quan_an" type="text" class="form-control mt-2">
                             </div>
                             <div class="mb-2">
                                 <label>Hình Ảnh</label>
@@ -160,21 +165,22 @@
                             </div>
                             <div class="mb-2">
                                 <label>Tình Trạng</label>
-                                <select v-model="updateMon.tinh_trang" class="form-select mt-2" >
+                                <select v-model="updateMon.tinh_trang" class="form-select mt-2">
                                     <option value="1">Còn hàng</option>
                                     <option value="0">Hết hàng</option>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-2">
-                                <label>Danh Mục</label>
-                                <input v-model="updateMon.id_danh_muc" type="text" class="form-control mt-2" >
-                            </div>
+                            <label>Danh Mục</label>
+                            <input v-model="updateMon.id_danh_muc" type="text" class="form-control mt-2">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button v-on:click="updateMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cập Nhật</button>
+                    <button v-on:click="updateMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cập
+                        Nhật</button>
                 </div>
             </div>
         </div>
@@ -192,7 +198,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button v-on:click="deleteMonAn()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                    <button v-on:click="deleteMonAn()" type="button" class="btn btn-danger"
+                        data-bs-dismiss="modal">Xóa</button>
                 </div>
             </div>
         </div>
@@ -216,82 +223,100 @@ export default {
     methods: {
         getMonAn() {
             axios
-            .get('http://127.0.0.1:8000/api/quan-an/mon-an/data',{
-                headers: {
+                .get('http://127.0.0.1:8000/api/quan-an/mon-an/data', {
+                    headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
-                },
-            })
-            .then(response => {
-                this.listMonAn = response.data.data;
-                this.$toast.success(res.data.message);
+                    },
+                })
+                .then(response => {
+                    this.listMonAn = response.data.data;
+                    this.$toast.success(res.data.message);
 
-            }).catch(error => {
-                console.error(error);
-            });
+                }).catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         addMonAn() {
             axios
-            .post('http://127.0.0.1:8000/api/quan-an/mon-an/create', this.addMon,{
-                headers: {
+                .post('http://127.0.0.1:8000/api/quan-an/mon-an/create', this.addMon, {
+                    headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
-                },
-            })
-            .then(response => {
-                this.getMonAn();
-                this.addMon = {};
-                this.$toast.success(res.data.message);
+                    },
+                })
+                .then(response => {
+                    this.getMonAn();
+                    this.addMon = {};
+                    this.$toast.success(res.data.message);
 
-            }).catch(error => {
-                console.error(error);
-            });
+                }).catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         updateMonAn() {
-            
-            axios
-            .post('http://127.0.0.1:8000/api/quan-an/mon-an/update',this.updateMon,{
-                headers: {
-                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
-                },
-            })
-            .then(response => {
-                this.getMonAn();
-                this.$toast.success(res.data.message);
 
-            }).catch(error => {
-                console.error(error);
-            });
+            axios
+                .post('http://127.0.0.1:8000/api/quan-an/mon-an/update', this.updateMon, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                    },
+                })
+                .then(response => {
+                    this.getMonAn();
+                    this.$toast.success(res.data.message);
+
+                }).catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
         deleteMonAn() {
             axios
-            .post('http://127.0.0.1:8000/api/quan-an/mon-an/delete',this.deleteMon,{
-                headers: {
+                .post('http://127.0.0.1:8000/api/quan-an/mon-an/delete', this.deleteMon, {
+                    headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
-                },
-            })
-            .then(response => {
-                this.getMonAn();
-                this.$toast.success(res.data.message);
-
-            }).catch(error => {
-                console.error(error);
-            });
-        },
-        changeMonAn(v){
-            console.log(v);
-            axios
-            .post("http://127.0.0.1:8000/api/quan-an/mon-an/change",v ,{
-                headers: {
-                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
-                },
-            })
-            .then((response) => {
-                if(response.data.status){
+                    },
+                })
+                .then(response => {
                     this.getMonAn();
                     this.$toast.success(res.data.message);
-                }else{
-                    this.$toast.error(res.data.message);
-                }
-            })
+
+                }).catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeMonAn(v) {
+            console.log(v);
+            axios
+                .post("http://127.0.0.1:8000/api/quan-an/mon-an/change", v, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                    },
+                })
+                .then((response) => {
+                    if (response.data.status) {
+                        this.getMonAn();
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         }
     },
 };
