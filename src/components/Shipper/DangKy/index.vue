@@ -32,23 +32,15 @@
                                         <label class="form-label">CCCD</label>
                                         <input v-model="them_shipper.cccd" type="text" class="form-control" />
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <label class="form-label">Mật Khẩu</label>
                                         <input v-model="them_shipper.password" type="password" class="form-control" />
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <label class="form-label">Nhập Lại Mật Khẩu</label>
                                         <input v-model="them_shipper.re_password" type="password" class="form-control" />
                                     </div>
-                                    <div class="col-6">
-                                        <label class="form-label">Tỉnh Thành</label>
-                                        <select class="form-select" v-model="them_shipper.id_tinh_thanh">
-                                            <template v-for="(value, index) in list_tinh_thanh" :key="index">
-                                                <option :value="value.id">{{ value.ten_tinh_thanh }}</option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <label class="form-label">Quận Huyện</label>
                                         <select class="form-select" v-model="them_shipper.id_quan_huyen">
                                             <template v-for="(value, index) in list_quan_huyen" :key="index">
@@ -56,17 +48,9 @@
                                             </template>
                                         </select>
                                     </div>
-                                    <div class="col-6">
-                                        <label class="form-label">Tọa Độ X</label>
-                                        <input v-model="them_shipper.toa_do_x" type="text" class="form-control" />
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="form-label">Tọa Độ Y</label>
-                                        <input v-model="them_shipper.toa_do_y" type="text" class="form-control" />
-                                    </div>
                                     <div class="col-12">
                                         <label>Địa chỉ thường trú</label>
-                                        <textarea v-model="them_shipper.dia_chi_thuong_tru"
+                                        <textarea v-model="them_shipper.dia_chi"
                                             class="form-control"></textarea>
                                     </div>
                                     <div class="col-12">

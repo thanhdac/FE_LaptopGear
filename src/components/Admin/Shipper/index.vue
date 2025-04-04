@@ -127,6 +127,23 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
+                                <label class="mb-1">Địa Chỉ</label>
+                                <input v-model="create_shipper.dia_chi" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <label class="mb-1">Quận Huyện</label>
+                                <select class="form-select" v-model="create_shipper.id_quan_huyen">
+                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
+                                        <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
+                                        </option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
                                 <label class="mb-1">Trạng Thái</label>
                                 <select v-model="create_shipper.is_active" class="form-select">
                                     <option value="1">Đã Kích Hoạt</option>
@@ -192,6 +209,23 @@
                             <div class="mb-2">
                                 <label class="mb-1">Chứng Minh Nhân Dân/Căn Cước Công Dân</label>
                                 <input v-model="update_shipper.cccd" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <label class="mb-1">Địa Chỉ</label>
+                                <input v-model="update_shipper.dia_chi" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <label class="mb-1">Quận Huyện</label>
+                                <select class="form-select" v-model="update_shipper.id_quan_huyen">
+                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
+                                        <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
+                                        </option>
+                                    </template>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6">

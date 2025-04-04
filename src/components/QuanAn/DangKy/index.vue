@@ -133,6 +133,8 @@ export default {
                 'gio_dong_cua': "",
                 'dia_chi': "",
                 'id_quan_huyen': "",
+                'is_active' : "",
+                'tinh_trang' : ""
             },
             quan_huyen: [],
         }

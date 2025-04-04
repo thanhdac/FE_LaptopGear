@@ -41,38 +41,29 @@
                                                     class="form-control" placeholder="Nhập mật khẩu">
                                             </div>
                                             <div class="form-group mb-3 col-lg-6">
+                                                <label>Nhập Lại Password</label>
+                                                <input v-model="quan_an_create.re_password" type="text"
+                                                    class="form-control" placeholder="Nhập lại mật khẩu">
+                                            </div>
+                                            <div class="form-group mb-3 col-lg-6">
                                                 <label>Mã Số Thuế</label>
                                                 <input v-model="quan_an_create.ma_so_thue" type="text"
                                                     class="form-control" placeholder="Nhập mã số thuế">
                                             </div>
                                             <div class="form-group mb-3 col-lg-6">
                                                 <label>Giờ mở cửa</label>
-                                                <input v-model="quan_an_create.gio_mo_cua" type="text"
+                                                <input v-model="quan_an_create.gio_mo_cua" type="time"
                                                     class="form-control" placeholder="Nhập giờ mở cửa">
                                             </div>
                                             <div class="form-group mb-3 col-lg-6">
                                                 <label>Giờ đóng cửa</label>
-                                                <input v-model="quan_an_create.gio_dong_cua" type="text"
+                                                <input v-model="quan_an_create.gio_dong_cua" type="time"
                                                     class="form-control" placeholder="Nhập giờ đóng cửa">
                                             </div>
                                             <div class="form-group mb-3 col-lg-6">
-                                                <label>Tọa độ x</label>
-                                                <input v-model="quan_an_create.toa_do_x" type="datetime"
-                                                    class="form-control" placeholder="Nhập tọa độ x">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Tọa độ y</label>
-                                                <input v-model="quan_an_create.toa_do_y" type="datetime"
-                                                    class="form-control" placeholder="Nhập tọa độ y">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Tỉnh Thành</label>
-                                                <select class="form-select" v-model="quan_an_create.id_tinh_thanh">
-                                                    <template v-for="(value, index) in list_tinh_thanh" :key="index">
-                                                        <option v-bind:value="value.id">{{ value.ten_tinh_thanh }}
-                                                        </option>
-                                                    </template>
-                                                </select>
+                                                <label>Địa Chỉ</label>
+                                                <input v-model="quan_an_create.dia_chi" type="text" class="form-control"
+                                                    placeholder="Nhập Địa Chỉ">
                                             </div>
                                             <div class="form-group mb-3 col-lg-6">
                                                 <label>Quận Huyện</label>
@@ -97,11 +88,6 @@
                                                     <option value="0">Chưa kích hoạt</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Địa Chỉ</label>
-                                                <input v-model="quan_an_create.dia_chi" type="text" class="form-control"
-                                                    placeholder="Nhập Địa Chỉ">
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -124,6 +110,7 @@
                                     <th>Tên Quán Ăn</th>
                                     <th>Email</th>
                                     <th>Số Điện Thoại</th>
+                                    <th>Địa Chỉ</th>
                                     <th>Mã Số Thuế</th>
                                     <th>Giờ mở cửa</th>
                                     <th>Giờ Đóng Cửa</th>
@@ -138,6 +125,7 @@
                                     <td>{{ value.ten_quan_an }}</td>
                                     <td>{{ value.email }}</td>
                                     <td>{{ value.so_dien_thoai }}</td>
+                                    <td>{{ value.dia_chi }}</td>
                                     <td>{{ value.ma_so_thue }}</td>
                                     <td class="text-center">{{ value.gio_mo_cua }}</td>
                                     <td class="text-center">{{ value.gio_dong_cua }}</td>
@@ -188,8 +176,8 @@
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
                                             <label>Số Điện Thoại</label>
-                                            <input v-model="quan_an_edit.so_dien_thoai" type="text" class="form-control"
-                                                placeholder="Nhập Số điện thoại">
+                                            <input v-model="quan_an_edit.so_dien_thoai" type="text"
+                                                class="form-control" placeholder="Nhập Số điện thoại">
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
                                             <label>Mã Số Thuế</label>
@@ -198,28 +186,18 @@
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
                                             <label>Giờ mở cửa</label>
-                                            <input v-model="quan_an_edit.gio_mo_cua" type="text" class="form-control">
+                                            <input v-model="quan_an_edit.gio_mo_cua" type="time" class="form-control"
+                                                placeholder="Nhập giờ mở cửa">
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
                                             <label>Giờ đóng cửa</label>
-                                            <input v-model="quan_an_edit.gio_dong_cua" type="text" class="form-control">
+                                            <input v-model="quan_an_edit.gio_dong_cua" type="time"
+                                                class="form-control" placeholder="Nhập giờ đóng cửa">
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
-                                            <label>Tọa độ x</label>
-                                            <input v-model="quan_an_edit.toa_do_x" type="datetime" class="form-control">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Tọa độ y</label>
-                                            <input v-model="quan_an_edit.toa_do_y" type="datetime" class="form-control">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Tỉnh Thành</label>
-                                            <select class="form-select" v-model="quan_an_edit.id_tinh_thanh">
-                                                <template v-for="(value, index) in list_tinh_thanh" :key="index">
-                                                    <option v-bind:value="value.id">{{ value.ten_tinh_thanh }}
-                                                    </option>
-                                                </template>
-                                            </select>
+                                            <label>Địa Chỉ</label>
+                                            <input v-model="quan_an_edit.dia_chi" type="text" class="form-control"
+                                                placeholder="Nhập Địa Chỉ">
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
                                             <label>Quận Huyện</label>
@@ -234,7 +212,7 @@
                                             <label>Tình trạng</label>
                                             <select class="form-select" v-model="quan_an_edit.tinh_trang">
                                                 <option value="1">Hoạt đông</option>
-                                                <option value="0">Tạm dừng</option>
+                                                <option value="1">Tạm dừng</option>
                                             </select>
                                         </div>
                                         <div class="form-group mb-3 col-lg-6">
@@ -243,10 +221,6 @@
                                                 <option value="1">Kích hoạt</option>
                                                 <option value="0">Chưa kích hoạt</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Địa Chỉ</label>
-                                            <input v-model="quan_an_edit.dia_chi" type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>

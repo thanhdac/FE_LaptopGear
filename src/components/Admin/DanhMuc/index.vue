@@ -129,7 +129,7 @@
                                                 <td class="align-middle">
                                                     {{ value.id_danh_muc_cha }}
                                                 </td>
-                                                <td>
+                                                <td v-on:click="changeStatus(value)">
                                                     <button 
                                                         v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white">Tạm
                                                         Tắt </button>
@@ -182,7 +182,7 @@
                                             <tr class="align-middle text-center">
                                                 <th>{{ index + 1 }}</th>
                                                 <td>{{ value.ten_tinh_thanh }}</td>
-                                                <td>
+                                                <td v-on:click="changeStatusTinhThanh(value)">
                                                     <button 
                                                         v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white;" >Tạm
                                                         Tắt </button>
@@ -637,6 +637,66 @@ export default {
                     });
                 })
         },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/danh-muc/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.LoadDataDanhMuc();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeStatusTinhThanh(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/tinh-thanh/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.LoadDataTinhHuyen();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeStatusQuanHuyen(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/quan-huyen/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.LoadDataTinhHuyen();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        }
     },
 
 };
