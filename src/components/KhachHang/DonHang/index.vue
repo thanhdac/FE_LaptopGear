@@ -1,64 +1,188 @@
 <template>
-    <div class="container mt-5">
-        <div class="card shadow-lg mb-4">
-            <div class="card-header bg-primary text-white">
-                <h4 class="text-white">Đơn hàng #123456</h4>
-                <p class="mb-0">Khách hàng: Nguyễn Văn A</p>
-                <p class="mb-0">Ngày đặt: 05/01/2025</p>
-                <p class="mb-0">Trạng thái: <span class="badge bg-warning">Đang xử lý</span></p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Search and Add Order Section -->
+            <div class="d-lg-flex align-items-center mb-4 gap-3">
+                <div class="position-relative flex-grow-1">
+                    <input 
+                        type="text" 
+                        v-model="searchTerm"
+                        class="form-control ps-5 radius-30" 
+                        placeholder="Tìm kiếm đơn hàng"
+                    > 
+                    <span class="position-absolute top-50 product-show translate-middle-y">
+                        <i class="bx bx-search"></i>
+                    </span>
+                </div>
+                <div class="mt-3 mt-lg-0">
+                    <select v-model="statusFilter" class="form-select">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="completed">Đã giao</option>
+                        <option value="pending">Đang giao</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5>Địa chỉ giao hàng</h5>
-                        <p>123 Đường, Đà Nẵng, Việt Nam</p>
-                    </div>
-                    <div class="text-end">
-                        <h5>Tổng giá trị</h5>
-                        <h3 class="text-success">250.000đ</h3>
-                    </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">Mã đơn hàng</th>
+                            <th>Tên quán ăn</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th class="text-end">Tổng tiền</th>
+                            <th class="text-center">Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="order in filteredOrders" :key="order.id">
+                            <td class="text-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <span class="fw-bold">#{{ order.id }}</span>
+                                </div>
+                            </td>
+                            <td>{{ order.customerName }}</td>
+                            <td>
+                                <span :class="getStatusBadgeClass(order.status)" class="badge rounded-pill px-3">
+                                    <i class="bx bxs-circle me-1"></i>
+                                    {{ getStatusLabel(order.status) }}
+                                </span>
+                            </td>
+                            <td>{{ formatDate(order.orderDate) }}</td>
+                            <td class="text-end fw-bold">{{ formatCurrency(order.totalPrice) }}</td>
+                            <td class="text-center">
+                                <button 
+                                    type="button" 
+                                    class="btn btn-primary btn-sm radius-30 px-4"
+                                    @click="showOrderDetails(order)"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#orderDetailsModal"
+                                >
+                                    <i class="bx bx-detail me-1"></i>Chi tiết
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Thông báo khi không có đơn hàng -->
+                <div v-if="filteredOrders.length === 0" class="text-center py-4">
+                    <p class="text-muted">Không có đơn hàng nào</p>
                 </div>
+            </div>
+        </div>
 
-                <div class="my-4">
-                    <label for="voucher" class="form-label">Nhập mã giảm giá</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="voucher" placeholder="Nhập mã giảm giá">
-                        <button class="btn btn-success">Áp dụng</button>
+        <!-- Modal Chi Tiết Đơn Hàng -->
+        <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" v-if="selectedOrder">
+                    <div class="modal-header  text-white">
+                        <h5 class="modal-title">
+                            <i class="bx bx-package me-2"></i>
+                            Chi Tiết Đơn Hàng #{{ selectedOrder.id }}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="mt-3">
-                        <p><strong>Mã giảm giá đã áp dụng:</strong> <span class="text-success">Giảm 10%</span></p>
-                        <p><strong>Giảm giá:</strong> 25.000đ</p>
-                        <p><strong>Tổng mới:</strong> 225.000đ</p>
-                    </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <!-- Thông Tin Đơn Hàng -->
+                            <div class="col-md-6 d-flex">
+                                <div class="card border-0 bg-light flex-fill">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-3">
+                                            <i class="bx bx-info-circle me-2"></i>Thông Tin Đơn Hàng
+                                        </h6>
+                                        <div class="mb-2">
+                                            <i class="bx bx-user text-primary me-2"></i>
+                                            <strong>Khách Hàng:</strong> 
+                                            <span class="ms-1">{{ selectedOrder.customerName }}</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <i class="bx bx-calendar text-primary me-2"></i>
+                                            <strong>Ngày Đặt:</strong> 
+                                            <span class="ms-1">{{ formatDate(selectedOrder.orderDate) }}</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <i class="bx bx-check-circle text-primary me-2"></i>
+                                            <strong>Trạng Thái:</strong> 
+                                            <span :class="getStatusBadgeClass(selectedOrder.status)" 
+                                                  class="badge rounded-pill px-3 ms-1">
+                                                <i class="bx bxs-circle me-1"></i>
+                                                {{ getStatusLabel(selectedOrder.status) }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Đơn giá</th>
-                                <th>Tổng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Burger</td>
-                                <td>2</td>
-                                <td>50.000đ</td>
-                                <td>100.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>Pizza</td>
-                                <td>1</td>
-                                <td>150.000</td>
-                                <td>150.000đ</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-end">
-                        <button class="btn btn-danger"> Đặt Đơn</button>
+                            <!-- Địa Chỉ Giao Hàng -->
+                            <div class="col-md-6 d-flex">
+                                <div class="card border-0 bg-light flex-fill">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-3">
+                                            <i class="bx bx-map me-2"></i>Địa Chỉ Giao Hàng
+                                        </h6>
+                                        <p class="mb-1">
+                                            <i class="bx bx-location-plus text-primary me-2"></i>
+                                            {{ selectedOrder.shippingAddress }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chi Tiết Sản Phẩm -->
+                        <h6 class="mb-3">
+                            <i class="bx bx-cart me-2"></i>Chi Tiết Sản Phẩm
+                        </h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover border">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th class="text-center">Số Lượng</th>
+                                        <th class="text-end">Đơn Giá</th>
+                                        <th class="text-end">Ghi Chú</th>
+                                        <th class="text-end">Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in selectedOrder.items" :key="item.id">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bx bx-dish me-2 text-primary"></i>
+                                                {{ item.name }}
+                                            </div>
+                                        </td>
+                                        <td class="text-center">{{ item.quantity }}</td>
+                                        <td class="text-end">{{ formatCurrency(item.price) }}</td>
+                                        <td class="text-end">{{ item.note }}</td>
+                                        <td class="text-end fw-bold">{{ formatCurrency(item.quantity * item.price) }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <td colspan="3" class="text-end">
+                                            <strong>Tổng Cộng:</strong>
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-primary fs-5 fw-bold">
+                                                {{ formatCurrency(selectedOrder.totalPrice) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                            <i class="bx bx-x me-1"></i>Đóng
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="bx bx-printer me-1"></i>In đơn hàng
+                        </button>
                     </div>
                 </div>
             </div>
@@ -68,6 +192,95 @@
 
 <script>
 export default {
-
+    name: 'DonHang',
+    data() {
+        return {
+            searchTerm: '',
+            statusFilter: '',
+            selectedOrder: null,
+            orders: [
+                {
+                    id: 'OS-000354',
+                    customerName: 'Nguyễn Văn A',
+                    status: 'completed',
+                    totalPrice: 485000,
+                    orderDate: new Date('2024-03-10'),
+                    shippingAddress: '123 Đường ABC, Quận 1, TP.HCM',
+                    items: [
+                        { id: 1, name: 'Burger', quantity: 2, price: 50000 },
+                        { id: 2, name: 'Pizza', quantity: 1, price: 385000 }
+                    ]
+                },
+                {
+                    id: 'OS-000355',
+                    customerName: 'Trần Thị B',
+                    status: 'pending',
+                    totalPrice: 968000,
+                    orderDate: new Date('2024-03-10'),
+                    shippingAddress: '456 Đường XYZ, Quận 2, TP.HCM',
+                    items: [
+                        { id: 1, name: 'Combo 1', quantity: 1, price: 968000 }
+                    ]
+                }
+            ]
+        }
+    },
+    computed: {
+        filteredOrders() {
+            return this.orders.filter(order => {
+                const matchesSearch = !this.searchTerm || 
+                    order.id.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                    order.customerName.toLowerCase().includes(this.searchTerm.toLowerCase())
+                
+                const matchesStatus = !this.statusFilter || order.status === this.statusFilter
+                
+                return matchesSearch && matchesStatus
+            })
+        }
+    },
+    methods: {
+        formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { 
+                style: 'currency', 
+                currency: 'VND' 
+            }).format(amount)
+        },
+        formatDate(date) {
+            return new Date(date).toLocaleDateString('vi-VN')
+        },
+        getStatusBadgeClass(status) {
+            const statusClasses = {
+                'completed': 'bg-success-subtle text-success',
+                'pending': 'bg-warning-subtle text-warning',
+                'cancelled': 'bg-danger-subtle text-danger'
+            }
+            return statusClasses[status] || 'bg-secondary-subtle text-secondary'
+        },
+        getStatusLabel(status) {
+            const statusLabels = {
+                'completed': 'Đã giao',
+                'pending': 'Đang giao',
+                'cancelled': 'Đã hủy'
+            }
+            return statusLabels[status] || 'Không xác định'
+        },
+        showOrderDetails(order) {
+            this.selectedOrder = order
+        }
+    }
 }
 </script>
+
+<style scoped>
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+.badge {
+    padding: 0.5em 1em;
+}
+</style>
