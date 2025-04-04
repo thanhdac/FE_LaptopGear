@@ -10,19 +10,19 @@
                 <div class="modal-body">
                     <div class="mb-2">
                         <label>Tên Danh Mục</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="addMon.ten_danh_muc"  type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Slug</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="addMon.slug_danh_muc" type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Hình Ảnh</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="addMon.hinh_anh" type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Dạnh Mục Cha</label>
-                        <select class="form-control mt-2">
+                        <select v-model="addMon.id_danh_muc_cha" class="form-control mt-2">
                             <option value="0">Không Có</option>
                             <option value="1">Bánh Xèo</option>
                             <option value="2">Mỳ Quảng</option>
@@ -31,14 +31,14 @@
                     </div>
                     <div class="mb-2">
                         <label>Trạng Thái</label>
-                        <select class="form-select mt-2">
+                        <select v-model="addMon.tinh_trang" class="form-select mt-2">
                             <option value="0">Tạm Tắt</option>
                             <option value="1">Hoạt Động</option>
                         </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Thêm Mới</button>
+                        <button v-on:click="addMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Thêm Mới</button>
                     </div>
                 </div>
             </div>
@@ -55,19 +55,19 @@
                 <div class="modal-body">
                     <div class="mb-2">
                         <label>Tên Danh Mục</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="editMon.ten_danh_muc" type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Slug</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="editMon.slug_danh_muc" type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Hình Ảnh</label>
-                        <input type="text" class="form-control mt-2">
+                        <input v-model="editMon.hinh_anh" type="text" class="form-control mt-2">
                     </div>
                     <div class="mb-2">
                         <label>Dạnh Mục Cha</label>
-                        <select class="form-control mt-2">
+                        <select v-model="editMon.id_danh_muc_cha" class="form-control mt-2">
                             <option value="0">Không Có</option>
                             <option value="1">Bánh Xèo</option>
                             <option value="2">Mỳ Quảng</option>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="mb-2">
                         <label>Tình Trạng</label>
-                        <select class="form-control mt-2">
+                        <select v-model="editMon.tinh_trang" class="form-control mt-2">
                             <option value="0">Tạm Tắt</option>
                             <option value="1">Hoạt Động</option>
                         </select>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu Thay Đổi</button>
+                    <button v-on:click="updateMonAn()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu Thay Đổi</button>
                 </div>
             </div>
         </div>
@@ -98,12 +98,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc muốn xóa danh mục <b class="text-danger"> .....</b> này
+                    Bạn có chắc muốn xóa danh mục <b class="text-danger"> {{ deleteMon.ten_danh_muc }}</b> này
                     không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
+                    <button v-on:click="deleteMonAn()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa</button>
                 </div>
             </div>
         </div>
@@ -130,27 +130,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                       <template v-for="(item, index) in listDanhMuc" :key="index">
                         <tr>
-                            <td class="align-middle text-center">1</td>
-                            <td class="align-middle">Bánh truyền thống</td>
-                            <td class="align-middle">banh-xeo-truyen-thong</td>
+                            <td class="align-middle text-center">{{ index + 1}}</td>
+                            <td class="align-middle">{{ item.ten_danh_muc }}</td>
+                            <td class="align-middle">{{item.slug_danh_muc}}</td>
                             <td class="align-middle text-center">
-                                <img src="https://afamilycdn.com/150157425591193600/2021/9/10/24130700020582136376707604290604352532348575n-1631264758126969867816.jpeg"
+                                <img v-bind:src="item.hinh_anh"
                                     width="50">
                             </td>
                             <td class="align-middle text-center">
-                                Bánh Xèo
+                                {{ item.id_danh_muc_cha }}
                             </td>
                             <td class="align-middle  ">
-                                <button class="btn btn-success w-100">Hiển thị</button>
+                                <button v-if="item.tinh_trang == 1" v-on:click="changeMonAn(item)" class="btn btn-success w-100">Hiển thị</button>
+                                <button v-else class="btn btn-danger w-100" v-on:click="changeMonAn(item)">Tạm dừng</button>
                             </td>
                             <td class="align-middle text-center text-nowrap">
-                                <button class="btn btn-primary me-1" style="width: 100px;" data-bs-toggle="modal"
+                                <button v-on:click="Object.assign(editMon, item)" class="btn btn-primary me-1" style="width: 100px;" data-bs-toggle="modal"
                                     data-bs-target="#capnhat">Cập Nhật</button>
-                                <button data-bs-toggle="modal" data-bs-target="#xoa" class="btn btn-danger"
+                                <button v-on:click="Object.assign(deleteMon,item)" data-bs-toggle="modal" data-bs-target="#xoa" class="btn btn-danger"
                                     style="width: 100px;">Xóa</button>
                             </td>
                         </tr>
+                       </template>
                     </tbody>
                 </table>
             </div>
@@ -159,7 +162,117 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    data() {
+        return {
+            listDanhMuc: [],
+            addMon : {},
+            editMon:{},
+            deleteMon:{},
+            change:{}
+        }
+    },
+    mounted() {
+        this.getListDanhMuc();
+    },
+    methods: {
+        getListDanhMuc() {
+            axios
+            .get('http://127.0.0.1:8000/api/quan-an/danh-muc/data', {
+                headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                },
+            })
+            .then((response) => {
+                    this.listDanhMuc = response.data.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            },
+        addMonAn(){
+            axios
+            .post("http://127.0.0.1:8000/api/quan-an/danh-muc/create",this.addMon ,{
+                headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                },
+            })
+            .then((response) => {
+                if(response.data.status){
+                    this.getListDanhMuc();
+                    this.addMon = {
+                        ten_danh_muc: "",
+                        slug_danh_muc: "",
+                        hinh_anh: "",
+                        id_danh_muc_cha: 0,
+                        tinh_trang: 1,
+                    }
+                    this.$toast.success(res.data.message);
+                }else{
+                    this.$toast.error(res.data.message);
+                }
+            })
+        },
+        updateMonAn(){
+            axios
+            .post("http://127.0.0.1:8000/api/quan-an/danh-muc/update",this.editMon ,{
+                headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                },
+            })
+            .then((response) => {
+                if(response.data.status){
+                    this.getListDanhMuc();
+                    this.editMon = {
+                        ten_danh_muc: "",
+                        slug_danh_muc: "",
+                        hinh_anh: "",
+                        id_danh_muc_cha: 0,
+                        tinh_trang: 1,
+                    }
+                    this.$toast.success(res.data.message);
+                }else{
+                    this.$toast.error(res.data.message);
+                }
+            })
+        },
+        deleteMonAn(){
+            axios
+            .post("http://127.0.0.1:8000/api/quan-an/danh-muc/delete",this.deleteMon ,{
+                headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                },
+            })
+            .then((response) => {
+                if(response.data.status){
+                    this.getListDanhMuc();
+                    this.$toast.success(res.data.message);
+                }else{
+                    this.$toast.error(res.data.message);
+                }
+            })
+        },
+        changeMonAn(v){
+            console.log(v);
+            axios
+            .post("http://127.0.0.1:8000/api/quan-an/danh-muc/change",v ,{
+                headers: {
+                        Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
+                },
+            })
+            .then((response) => {
+                if(response.data.status){
+                    this.getListDanhMuc();
+                    this.$toast.success(res.data.message);
+                }else{
+                    this.$toast.error(res.data.message);
+                }
+            })
+        }
 
+    },
+
+    
 };
 </script>
