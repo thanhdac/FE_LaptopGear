@@ -105,26 +105,30 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Tên món</th>
-                  <th>Số lượng</th>
-                  <th>Đơn giá</th>
-                  <th>Ghi chú</th>
-                  <th>Tổng</th>
+                  <th class="align-middle">Tên món</th>
+                  <th class="align-middle">Số lượng</th>
+                  <th class="align-middle">Đơn giá</th>
+                  <th class="align-middle">Ghi chú</th>
+                  <th class="align-middle">Tổng</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr class="align-middle">
                   <td>Mì trộn tê cay</td>
-                  <td>1</td>
+                  <td style="width: 100px;">
+                    <input type="number" class="form-control" placeholder="1">
+                  </td>
                   <td>50k</td>
                   <td>
                     <input type="text" class="form-control" placeholder="Ghi chú">
                   </td>
                   <td>50k</td>
                 </tr>
-                <tr>
+                <tr class="align-middle">
                   <td>Cơm</td>
-                  <td>2</td>
+                  <td style="width: 100px;">
+                    <input type="number" class="form-control" placeholder="1">
+                  </td>
                   <td>30k</td>
                   <td>
                     <input type="text" class="form-control" placeholder="Ghi chú">

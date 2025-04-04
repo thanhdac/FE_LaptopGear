@@ -21,7 +21,7 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
-                        <tr>
+                        <tr class="align-middle">
                             <th class="text-center">Mã đơn hàng</th>
                             <th>Tên quán ăn</th>
                             <th>Trạng thái</th>
@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class="align-middle">
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <span class="fw-bold">#123456</span>
@@ -124,7 +124,7 @@
                         <div class="table-responsive">
                             <table class="table table-hover border">
                                 <thead class="table-light">
-                                    <tr>
+                                    <tr class="align-middle">
                                         <th>Sản Phẩm</th>
                                         <th class="text-center">Số Lượng</th>
                                         <th class="text-end">Đơn Giá</th>
@@ -133,7 +133,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr class="align-middle">
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <i class="bx bx-dish me-2 text-primary"></i>
@@ -149,7 +149,7 @@
                                     </tr>
                                 </tbody>
                                 <tfoot class="table-light">
-                                    <tr>
+                                    <tr class="align-middle">
                                         <td colspan="3" class="text-end">
                                             <strong>Tổng Cộng:</strong>
                                         </td>
