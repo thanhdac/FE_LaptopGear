@@ -1,21 +1,16 @@
 <template>
     <div class="card shadow-sm">
         <div class="card-body">
-            <!-- Search and Add Order Section -->
+            <!-- Search and Filter Section -->
             <div class="d-lg-flex align-items-center mb-4 gap-3">
                 <div class="position-relative flex-grow-1">
-                    <input 
-                        type="text" 
-                        v-model="searchTerm"
-                        class="form-control ps-5 radius-30" 
-                        placeholder="Tìm kiếm đơn hàng"
-                    > 
+                    <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm đơn hàng">
                     <span class="position-absolute top-50 product-show translate-middle-y">
                         <i class="bx bx-search"></i>
                     </span>
                 </div>
                 <div class="mt-3 mt-lg-0">
-                    <select v-model="statusFilter" class="form-select">
+                    <select class="form-select">
                         <option value="">Tất cả trạng thái</option>
                         <option value="completed">Đã giao</option>
                         <option value="pending">Đang giao</option>
@@ -36,51 +31,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="order in filteredOrders" :key="order.id">
+                        <tr>
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <span class="fw-bold">#{{ order.id }}</span>
+                                    <span class="fw-bold">#123456</span>
                                 </div>
                             </td>
-                            <td>{{ order.customerName }}</td>
+                            <td>Quán Ăn 1</td>
                             <td>
-                                <span :class="getStatusBadgeClass(order.status)" class="badge rounded-pill px-3">
+                                <span class="badge rounded-pill px-3 bg-success">
                                     <i class="bx bxs-circle me-1"></i>
-                                    {{ getStatusLabel(order.status) }}
+                                    Đã giao
                                 </span>
                             </td>
-                            <td>{{ formatDate(order.orderDate) }}</td>
-                            <td class="text-end fw-bold">{{ formatCurrency(order.totalPrice) }}</td>
+                            <td>2024-03-10</td>
+                            <td class="text-end fw-bold">100.000đ</td>
                             <td class="text-center">
-                                <button 
-                                    type="button" 
-                                    class="btn btn-primary btn-sm radius-30 px-4"
-                                    @click="showOrderDetails(order)"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#orderDetailsModal"
-                                >
+                                <button type="button" class="btn btn-primary btn-sm radius-30 px-4"
+                                    data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
                                     <i class="bx bx-detail me-1"></i>Chi tiết
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
-                <!-- Thông báo khi không có đơn hàng -->
-                <div v-if="filteredOrders.length === 0" class="text-center py-4">
-                    <p class="text-muted">Không có đơn hàng nào</p>
-                </div>
+
             </div>
         </div>
 
         <!-- Modal Chi Tiết Đơn Hàng -->
         <div class="modal fade" id="orderDetailsModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content" v-if="selectedOrder">
-                    <div class="modal-header  text-white">
+                <div class="modal-content">
+                    <div class="modal-header text-white">
                         <h5 class="modal-title">
                             <i class="bx bx-package me-2"></i>
-                            Chi Tiết Đơn Hàng #{{ selectedOrder.id }}
+                            Chi Tiết Đơn Hàng #123456
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
@@ -95,21 +81,20 @@
                                         </h6>
                                         <div class="mb-2">
                                             <i class="bx bx-user text-primary me-2"></i>
-                                            <strong>Khách Hàng:</strong> 
-                                            <span class="ms-1">{{ selectedOrder.customerName }}</span>
+                                            <strong>Khách Hàng:</strong>
+                                            <span class="ms-1">Nguyễn Văn A</span>
                                         </div>
                                         <div class="mb-2">
                                             <i class="bx bx-calendar text-primary me-2"></i>
-                                            <strong>Ngày Đặt:</strong> 
-                                            <span class="ms-1">{{ formatDate(selectedOrder.orderDate) }}</span>
+                                            <strong>Ngày Đặt:</strong>
+                                            <span class="ms-1">2024-03-10</span>
                                         </div>
                                         <div class="mb-2">
                                             <i class="bx bx-check-circle text-primary me-2"></i>
-                                            <strong>Trạng Thái:</strong> 
-                                            <span :class="getStatusBadgeClass(selectedOrder.status)" 
-                                                  class="badge rounded-pill px-3 ms-1">
+                                            <strong>Trạng Thái:</strong>
+                                            <span class="badge rounded-pill bg-success px-3 ms-1">
                                                 <i class="bx bxs-circle me-1"></i>
-                                                {{ getStatusLabel(selectedOrder.status) }}
+                                                Đã giao
                                             </span>
                                         </div>
                                     </div>
@@ -125,7 +110,7 @@
                                         </h6>
                                         <p class="mb-1">
                                             <i class="bx bx-location-plus text-primary me-2"></i>
-                                            {{ selectedOrder.shippingAddress }}
+                                            123 Đường ABC, Quận 1, TP.HCM
                                         </p>
                                     </div>
                                 </div>
@@ -148,17 +133,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in selectedOrder.items" :key="item.id">
+                                    <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <i class="bx bx-dish me-2 text-primary"></i>
-                                                {{ item.name }}
+                                                Mì trộn tê cay
                                             </div>
                                         </td>
-                                        <td class="text-center">{{ item.quantity }}</td>
-                                        <td class="text-end">{{ formatCurrency(item.price) }}</td>
-                                        <td class="text-end">{{ item.note }}</td>
-                                        <td class="text-end fw-bold">{{ formatCurrency(item.quantity * item.price) }}</td>
+                                        <td class="text-center">1</td>
+                                        <td class="text-end">50k</td>
+                                        <td class="text-end">
+                                            <input type="text" class="form-control" disabled placeholder="Ghi chú">
+                                        </td>
+                                        <td class="text-end fw-bold">50k</td>
                                     </tr>
                                 </tbody>
                                 <tfoot class="table-light">
@@ -168,7 +155,7 @@
                                         </td>
                                         <td class="text-end">
                                             <span class="text-primary fs-5 fw-bold">
-                                                {{ formatCurrency(selectedOrder.totalPrice) }}
+                                                100k
                                             </span>
                                         </td>
                                     </tr>
@@ -192,7 +179,6 @@
 
 <script>
 export default {
-    name: 'DonHang',
     data() {
         return {
             searchTerm: '',
@@ -207,8 +193,8 @@ export default {
                     orderDate: new Date('2024-03-10'),
                     shippingAddress: '123 Đường ABC, Quận 1, TP.HCM',
                     items: [
-                        { id: 1, name: 'Burger', quantity: 2, price: 50000 },
-                        { id: 2, name: 'Pizza', quantity: 1, price: 385000 }
+                        { id: 1, name: 'Burger', quantity: 2, price: 50000, note: 'Không hành' },
+                        { id: 2, name: 'Pizza', quantity: 1, price: 385000, note: '' }
                     ]
                 },
                 {
@@ -219,7 +205,7 @@ export default {
                     orderDate: new Date('2024-03-10'),
                     shippingAddress: '456 Đường XYZ, Quận 2, TP.HCM',
                     items: [
-                        { id: 1, name: 'Combo 1', quantity: 1, price: 968000 }
+                        { id: 1, name: 'Combo 1', quantity: 1, price: 968000, note: 'Thêm nước ngọt' }
                     ]
                 }
             ]
@@ -228,51 +214,24 @@ export default {
     computed: {
         filteredOrders() {
             return this.orders.filter(order => {
-                const matchesSearch = !this.searchTerm || 
+                const matchesSearch = !this.searchTerm ||
                     order.id.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                    order.customerName.toLowerCase().includes(this.searchTerm.toLowerCase())
-                
-                const matchesStatus = !this.statusFilter || order.status === this.statusFilter
-                
-                return matchesSearch && matchesStatus
-            })
+                    order.customerName.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+                const matchesStatus = !this.statusFilter || order.status === this.statusFilter;
+
+                return matchesSearch && matchesStatus;
+            });
         }
     },
     methods: {
-        formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', { 
-                style: 'currency', 
-                currency: 'VND' 
-            }).format(amount)
-        },
-        formatDate(date) {
-            return new Date(date).toLocaleDateString('vi-VN')
-        },
-        getStatusBadgeClass(status) {
-            const statusClasses = {
-                'completed': 'bg-success-subtle text-success',
-                'pending': 'bg-warning-subtle text-warning',
-                'cancelled': 'bg-danger-subtle text-danger'
-            }
-            return statusClasses[status] || 'bg-secondary-subtle text-secondary'
-        },
-        getStatusLabel(status) {
-            const statusLabels = {
-                'completed': 'Đã giao',
-                'pending': 'Đang giao',
-                'cancelled': 'Đã hủy'
-            }
-            return statusLabels[status] || 'Không xác định'
-        },
-        showOrderDetails(order) {
-            this.selectedOrder = order
-        }
     }
 }
 </script>
 
 <style scoped>
-.table td, .table th {
+.table td,
+.table th {
     vertical-align: middle;
 }
 

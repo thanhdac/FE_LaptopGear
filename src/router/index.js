@@ -63,7 +63,7 @@ const routes = [
   },
   {
     path: "/",
-    component: () => import("../components/KhachHang/Test/index.vue"),
+    component: () => import("../components/KhachHang/TrangChu/index.vue"),
     meta: { layout: "client" },
   },
   {
@@ -92,7 +92,7 @@ const routes = [
     path: "/khach-hang/don-hang",
     component: () => import("../components/KhachHang/DonHang/index.vue"),
     meta: { layout: "client" },
-    // beforeEnter: checkKhachHang,
+    beforeEnter: checkKhachHang,
   },
 
   {

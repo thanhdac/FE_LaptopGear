@@ -49,12 +49,24 @@
 	</div>
 </template>
 <script>
+import axios from 'axios';
 export default {
 	data() {
 		return {
 			ho_ten: localStorage.getItem('ho_ten_khach_hang')
 		}
 	},
+	methods: {
+		logout() {
+				axios.post('http://127.0.0.1:8000/api/khach-hang/dang-xuat')
+				.then(response => {
+					alert('Đăng xuất thành công');
+				})
+				.catch(error => {
+					console.error('Error logging out:', error);
+				});
+		},
+	}
 }
 </script>
 <style></style>
