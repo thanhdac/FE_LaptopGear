@@ -60,15 +60,33 @@
                                             <div class="col-lg-6">
                                                 <label>Giờ mở cửa</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input placeholder="Nhập giờ mở cửa" v-model="quan_an_create.gio_mo_cua"
-                                                        type="text" class="form-control">
+                                                    <input placeholder="Nhập giờ mở cửa"
+                                                        v-model="quan_an_create.gio_mo_cua" type="time"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label>Giờ đóng cửa</label>
                                                 <div class="ms-auto position-relative">
-                                                    <input placeholder="Nhập giờ đóng cửa" v-model="quan_an_create.gio_dong_cua"
+                                                    <input placeholder="Nhập giờ đóng cửa"
+                                                        v-model="quan_an_create.gio_dong_cua" type="time"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Địa Chỉ</label>
+                                                <div class="ms-auto position-relative">
+                                                    <input placeholder="Nhập địa chỉ" v-model="quan_an_create.dia_chi"
                                                         type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Quận huyện</label>
+                                                <div class="ms-auto position-relative">
+                                                    <select class="form-control" v-model="quan_an_create.id_quan_huyen">
+                                                        <option v-for="item in quan_huyen" :key="item.id"
+                                                            :value="item.id">{{ item.ten_quan_huyen }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,11 +131,15 @@ export default {
                 'so_dien_thoai': "",
                 'gio_mo_cua': "",
                 'gio_dong_cua': "",
+                'dia_chi': "",
+                'id_quan_huyen': "",
             },
+            quan_huyen: [],
         }
 
     },
     mounted() {
+        this.getQuanHuyen();
     },
     methods: {
         dangKyQuanAn() {
@@ -126,6 +148,22 @@ export default {
                 .then(res => {
                     this.quan_an_create = {};
                     this.$toast.success(res.data.message);
+                })
+                .catch(error => {
+                    var obj = error.response.data.errors;
+                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
+                    result.forEach((value_1, key_1) => {
+                        var xxx = value_1[1];
+                        xxx.forEach((value, key) => {
+                            this.$toast.error(value);
+                        });
+                    });
+                });
+        },
+        getQuanHuyen() {
+            axios.get('http://127.0.0.1:8000/api/admin/quan-huyen/data-open')
+                .then(res => {
+                    this.quan_huyen = res.data.data;
                 })
                 .catch(error => {
                     var obj = error.response.data.errors;

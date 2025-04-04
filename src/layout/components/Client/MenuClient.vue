@@ -39,6 +39,24 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/khach-hang/don-dat-hang">
+						<a class="nav-link" href="/khach-hang/don-dat-hang">
+							<div class="parent-icon"><i class="fa-solid fa-cart-shopping"></i>
+							</div>
+							<div class="menu-title">Đơn Đặt Hàng</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/khach-hang/don-hang">
+						<a class="nav-link" href="/khach-hang/don-hang">
+							<div class="parent-icon"><i class="fa-solid fa-file-invoice"></i>
+							</div>
+							<div class="menu-title">Đơn Hàng</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>

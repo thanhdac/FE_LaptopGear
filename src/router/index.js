@@ -83,6 +83,19 @@ const routes = [
     beforeEnter: checkKhachHang,
   },
   {
+    path: "/khach-hang/don-dat-hang",
+    component: () => import("../components/KhachHang/DonDatHang/index.vue"),
+    meta: { layout: "client" },
+    // beforeEnter: checkKhachHang,
+  },
+  {
+    path: "/khach-hang/don-hang",
+    component: () => import("../components/KhachHang/DonHang/index.vue"),
+    meta: { layout: "client" },
+    // beforeEnter: checkKhachHang,
+  },
+
+  {
     path: "/khach-hang/Test",
     component: () => import("../components/KhachHang/Test/index.vue"),
     meta: { layout: "client" },
@@ -92,7 +105,7 @@ const routes = [
     path: "/khach-hang/mon-an",
     component: () => import("../components/KhachHang/MonAn/index.vue"),
     meta: { layout: "client" },
-    beforeEnter: checkKhachHang,
+    // beforeEnter: checkKhachHang,
 
   },
   // Quán Ăn
