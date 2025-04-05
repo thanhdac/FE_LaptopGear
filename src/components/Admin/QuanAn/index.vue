@@ -412,6 +412,8 @@ export default {
                     if (res.data.status) {
                         this.layDataQuanAn();
                         this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -432,6 +434,8 @@ export default {
                     if (res.data.status) {
                         this.layDataQuanAn();
                         this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
                     }
                 })
                 .catch((res) => {
