@@ -105,47 +105,49 @@
                                 </div>
 
                                 <div class="border rounded-3 p-4">
-                                   <h5 class="mb-4 text-primary">
-                                       <i class="fa-solid fa-lock me-2"></i>
-                                       Đổi mật khẩu
-                                   </h5>
-                                   <div class="row mb-3">
-                                       <div class="col-sm-3">
-                                           <h6 class="mb-0">Mật khẩu hiện tại</h6>
-                                       </div>
-                                       <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
-                                               placeholder="Nhập mật khẩu hiện tại">
-                                       </div>
-                                   </div>
-                                   <div class="row mb-3">
-                                       <div class="col-sm-3">
-                                           <h6 class="mb-0">Mật khẩu mới</h6>
-                                       </div>
-                                       <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.mat_khau_moi" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
-                                       </div>
-                                   </div>
-                                   <div class="row mb-3">
-                                       <div class="col-sm-3">
-                                           <h6 class="mb-0">Xác nhận mật khẩu</h6>
-                                       </div>
-                                       <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password" class="form-control"
-                                               placeholder="Xác nhận mật khẩu mới">
-                                       </div>
-                                   </div>
-                                   <div class="row mb-3">
+                                    <h5 class="mb-4 text-primary">
+                                        <i class="fa-solid fa-lock me-2"></i>
+                                        Đổi mật khẩu
+                                    </h5>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mật khẩu hiện tại</h6>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input v-model="doi_mat_khau.mat_khau_cu" type="password"
+                                                class="form-control" placeholder="Nhập mật khẩu hiện tại">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mật khẩu mới</h6>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input v-model="doi_mat_khau.mat_khau_moi" type="password"
+                                                class="form-control" placeholder="Nhập mật khẩu mới">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Xác nhận mật khẩu</h6>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password"
+                                                class="form-control" placeholder="Xác nhận mật khẩu mới">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <div class="col-lg-12 d-flex justify-content-end">
-                                            <button v-on:click="doiMatKhau()" type="button" class="btn btn-outline-primary">Thay Đổi Mật
+                                            <button v-on:click="doiMatKhau()" type="button"
+                                                class="btn btn-outline-primary">Thay Đổi Mật
                                                 Khẩu</button>
                                         </div>
                                     </div>
-                               </div>
+                                </div>
 
                                 <div class="text-end mt-4">
                                     <button type="button" class="btn btn-light me-2">Hủy thay đổi</button>
-                                    <button type="button" class="btn btn-primary px-4">
+                                    <button type="button" class="btn btn-primary px-4" v-on:click="updateProfile()">
                                         <i class="fa-regular fa-floppy-disk me-2"></i>
                                         Lưu thay đổi
                                     </button>
@@ -166,7 +168,7 @@ export default {
     data() {
         return {
             user: {},
-            doi_mat_khau : {
+            doi_mat_khau: {
                 mat_khau_cu: "",
                 mat_khau_moi: "",
                 xac_nhan_mat_khau_moi: ""
@@ -177,9 +179,9 @@ export default {
         this.layThongTinLogin();
     },
     methods: {
-        doiMatKhau(){
+        doiMatKhau() {
             axios
-                .post("http://127.0.0.1:8000/api/admin/doi-mat-khau", this.doi_mat_khau , {
+                .post("http://127.0.0.1:8000/api/admin/doi-mat-khau", this.doi_mat_khau, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -203,6 +205,29 @@ export default {
                     });
                 })
         },
+
+        updateProfile() {
+            axios
+                .post("http://127.0.0.1:8000/api/admin/update-profile", this.user, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+
         layThongTinLogin() {
             var token = localStorage.getItem("nhan_vien_login");
             axios

@@ -99,7 +99,7 @@
                                             <h6 class="mb-0">Địa chỉ</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="user.dia_chi_thuong_tru" type="text" class="form-control">
+                                            <input v-model="user.dia_chi" type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
 
                                 <div class="text-end mt-4">
                                     <button type="button" class="btn btn-light me-2">Hủy thay đổi</button>
-                                    <button type="button" class="btn btn-primary px-4">
+                                    <button type="button" class="btn btn-primary px-4" v-on:click="updateProfile()">
                                         <i class="fa-regular fa-floppy-disk me-2"></i>
                                         Lưu thay đổi
                                     </button>
@@ -176,8 +176,7 @@ export default {
         this.layThongTinLogin();
     },
     methods: {
-        doiMatKhau()
-        {
+        doiMatKhau(){
             axios
                 .post("http://127.0.0.1:8000/api/shipper/doi-mat-khau", this.doi_mat_khau , {
                     headers: {
@@ -203,10 +202,38 @@ export default {
                     });
                 })
         },
+
+        updateProfile(){
+            axios
+                .post("http://127.0.0.1:8000/api/shipper/update-profile", this.user , {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("shipper_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        this.$toast.success(res.data.message);
+                        this.doi_mat_khau = {
+                            mat_khau_cu: '',
+                            mat_khau_moi: '',
+                            xac_nhan_mat_khau_moi: ''
+                        }
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+
         layThongTinLogin() {
             var token = localStorage.getItem("shipper_login");
             axios
-                .get("http://127.0.0.1:8000/api/shipper/profile", {
+                .get("http://127.0.0.1:8000/api/shipper/data-login", {
                     headers: {
                         Authorization: "Bearer " + token,
                     },

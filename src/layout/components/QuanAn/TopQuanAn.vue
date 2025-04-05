@@ -361,7 +361,7 @@
 			<div class="user-box dropdown">
 				<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="https://dzfullstack.com/assets/images/logo-img.png" class="user-img" alt="user avatar">
+					<img :src="hinh_anh" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
 						<p class="user-name mb-0">{{ ten_quan_an }}</p>
 						<p class="designattion mb-0">Quán ăn</p>
@@ -385,7 +385,8 @@
 export default {
 	data() {
 		return {
-			ten_quan_an	: localStorage.getItem('ten_quan_an')
+			ten_quan_an	: localStorage.getItem('ten_quan_an'),
+			hinh_anh	: localStorage.getItem('hinh_anh')
 		}
 	},
 }

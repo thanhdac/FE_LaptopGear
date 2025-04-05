@@ -12,6 +12,7 @@ export default function (to, from, next) {
     .then((res) => {
       if (res.data.status) {
         localStorage.setItem("ho_ten_khach_hang", res.data.ho_ten);
+        localStorage.setItem("avatar", res.data.avatar);
         next();
       } else {
         toaster.error(res.data.message);
