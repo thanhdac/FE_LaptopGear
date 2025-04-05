@@ -129,13 +129,13 @@
                                     <td>{{ value.ma_so_thue }}</td>
                                     <td class="text-center">{{ value.gio_mo_cua }}</td>
                                     <td class="text-center">{{ value.gio_dong_cua }}</td>
-                                    <td>
+                                    <td v-on:click="changeStatus(value)" class="text-center">
                                         <button class="btn btn-success w-100" v-if="value.tinh_trang == 1">Hoạt
                                             động</button>
                                         <button class="btn btn-warning w-100" v-else style="color: white;">Tạm
                                             dừng</button>
                                     </td>
-                                    <td>
+                                    <td v-on:click="changeActive(value)" class="text-center">
                                         <button class="btn btn-info w-100" v-if="value.is_active == 1"
                                             style="color: white;">Đã Kích
                                             hoạt</button>
@@ -400,7 +400,47 @@ export default {
                         });
                     });
                 });
-        }
+        },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/quan-an/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.layDataQuanAn();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeActive(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/quan-an/change-active", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.layDataQuanAn();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
     }
 }
 </script>

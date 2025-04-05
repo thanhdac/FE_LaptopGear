@@ -33,7 +33,7 @@
                                     <td class="align-middle">{{ value.dia_chi }}</td>
                                     <td class="align-middle text-center">{{ value.ngay_sinh }}</td>
                                     <td class="align-middle">{{ value.ten_chuc_vu }}</td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" v-on:click="changeStatus(value)">
                                         <button v-if="value.tinh_trang == 1" class="btn btn-info w-100"
                                             style="color: white;">
                                             Hoạt động
@@ -363,6 +363,26 @@ export default {
                         });
                     });
                 });
+        },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/nhan-vien/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadData();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
     },
 };

@@ -30,12 +30,12 @@
                                 <td>{{ value.email }}</td>
                                 <td class="text-center">{{ value.so_dien_thoai }}</td>
                                 <td class="text-center">{{ value.ngay_sinh }}</td>
-                                <td class="text-center">
+                                <td class="text-center" v-on:click="changeStatus(value)">
                                     <button class="btn btn-success me-1 w-100" v-if="value.is_block == 0">Hoạt
                                         Động</button>
                                     <button class="btn btn-danger me-1 w-100" v-else>Tạm Tắt</button>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" v-on:click="changeActive(value)">
                                     <button class="btn btn-warning me-1 w-100" v-if="value.is_active == 0"
                                         style="color: white;">Chưa Kích
                                         Hoạt</button>
@@ -328,7 +328,47 @@ export default {
                         });
                     });
                 });
-        }
+        },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/khach-hang/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadData();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeActive(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/khach-hang/change-active", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadData();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
     }
 };
 </script>

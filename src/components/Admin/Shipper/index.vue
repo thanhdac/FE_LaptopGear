@@ -39,7 +39,7 @@
                                         <td class="align-middle text-center">
                                             {{ value.dia_chi }}
                                         </td>
-                                        <td class="align-middle text-center">
+                                        <td class="align-middle text-center" v-on:click="changeStatus(value)">
                                             <button v-if="value.is_open == 0" class="btn btn-success w-100">
                                                 Hoạt Động
                                             </button>
@@ -47,7 +47,7 @@
                                                 Đã Chặn
                                             </button>
                                         </td>
-                                        <td class="align-middle text-center">
+                                        <td class="align-middle text-center" v-on:click="changeActive(value)">
                                             <button v-if="value.is_active == 1" class="btn btn-success w-100">
                                                 Đã Kích Hoạt
                                             </button>
@@ -420,6 +420,46 @@ export default {
                         });
                     });
                 });
+        },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/shipper/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadDataShipper();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        changeActive(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/shipper/active", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadDataShipper();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
         },
     }
 };

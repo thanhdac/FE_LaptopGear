@@ -30,7 +30,7 @@
                                     <td class="align-middle">{{ value.ma_code }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_ket_thuc }}</td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" >
                                         <template v-if="value.loai_giam == 0">
                                             Giảm %
                                         </template>
@@ -38,7 +38,7 @@
                                             Tiền Mặt
                                         </template>
                                     </td>
-                                    <td class="align-middle text-end">
+                                    <td class="align-middle text-end" >
                                         <template v-if="value.loai_giam == 0">
                                             {{ value.so_giam_gia }} %
                                         </template>
@@ -48,7 +48,7 @@
                                     </td>
                                     <td class="align-middle text-end">{{ formatVND(value.so_tien_toi_da) }}</td>
                                     <td class="align-middle text-end">{{ formatVND(value.don_hang_toi_thieu) }}</td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" v-on:click="changeStatus(value)">
                                         <button v-if="value.tinh_trang == 1" class="btn btn-info"
                                             style="color: white;">Hiển thị</button>
                                         <button v-else class="btn btn-secondary">Tạm
@@ -344,7 +344,27 @@ export default {
                         });
                     });
                 });
-        }
+        },
+        changeStatus(value) {
+            axios
+            .post("http://127.0.0.1:8000/api/admin/voucher/change-status", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.loadData();
+                        this.$toast.success(res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
     },
 }
 </script>

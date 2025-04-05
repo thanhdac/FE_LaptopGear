@@ -114,7 +114,7 @@
                                            <h6 class="mb-0">Mật khẩu hiện tại</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
+                                           <input v-model="doi_mat_khau.old_password" type="password" class="form-control"
                                                placeholder="Nhập mật khẩu hiện tại">
                                        </div>
                                    </div>
@@ -123,7 +123,7 @@
                                            <h6 class="mb-0">Mật khẩu mới</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.mat_khau_moi" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
+                                           <input v-model="doi_mat_khau.password" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
                                        </div>
                                    </div>
                                    <div class="row mb-3">
@@ -131,7 +131,7 @@
                                            <h6 class="mb-0">Xác nhận mật khẩu</h6>
                                        </div>
                                        <div class="col-sm-9">
-                                           <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password" class="form-control"
+                                           <input v-model="doi_mat_khau.re_password" type="password" class="form-control"
                                                placeholder="Xác nhận mật khẩu mới">
                                        </div>
                                    </div>
@@ -166,11 +166,11 @@ export default {
    data() {
        return {
            user: {},
-           doi_mat_khau : {
-                mat_khau_cu: '',
-                mat_khau_moi: '',
-                xac_nhan_mat_khau_moi: ''
-           }
+           doi_mat_khau: {
+                old_password: '',
+                password: '',
+                re_password: ''
+            }
        }
    },
    mounted() {
@@ -180,7 +180,7 @@ export default {
         doiMatKhau()    
         {
             axios
-                .post("http://127.0.0.1:8000/api/quan-an/doi-mat-khau", this.doi_mat_khau , {
+                .post("http://127.0.0.1:8000/api/quan-an/update-password", this.doi_mat_khau , {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
@@ -189,9 +189,9 @@ export default {
                     if (res.data.status == 1) {
                         this.$toast.success(res.data.message);
                         this.doi_mat_khau = {
-                            mat_khau_cu: '',
-                            mat_khau_moi: '',
-                            xac_nhan_mat_khau_moi: ''
+                            old_password: '',
+                            password: '',
+                            re_password: ''
                         }
                     } else {
                         this.$toast.error(res.data.message);
@@ -207,7 +207,7 @@ export default {
        layThongTinLogin() {
            var token = localStorage.getItem("quan_an_login");
            axios
-               .get("http://127.0.0.1:8000/api/quan-an/profile", {
+               .get("http://127.0.0.1:8000/api/quan-an/data-login", {
                    headers: {
                        Authorization: "Bearer " + token,
                    },
