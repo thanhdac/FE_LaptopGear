@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="mt-2">Danh Sách Khách Hàng</h4>
                     <div>
@@ -39,7 +39,7 @@
                                     <button class="btn btn-warning me-1 w-100" v-if="value.is_active == 0"
                                         style="color: white;">Chưa Kích
                                         Hoạt</button>
-                                    <button class="btn btn-primary me-1 w-100" v-else>Đã Kích Hoạt</button>
+                                    <button class="btn btn-success me-1 w-100" v-else>Đã Kích Hoạt</button>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-primary me-1"
@@ -177,7 +177,7 @@
                             <div class="ms-3">
                                 <h6 class="mb-0 text-white">Cảnh Báo!</h6>
                                 <div class="text-white">Bạn có chắc chắn xóa tài khoản <b>{{ del_khach_hang.ho_va_ten
-                                        }}</b> này không!</div>
+                                }}</b> này không!</div>
                             </div>
                         </div>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -331,7 +331,7 @@ export default {
         },
         changeStatus(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/khach-hang/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/khach-hang/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -351,7 +351,7 @@ export default {
         },
         changeActive(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/khach-hang/change-active", value, {
+                .post("http://127.0.0.1:8000/api/admin/khach-hang/change-active", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -360,6 +360,8 @@ export default {
                     if (res.data.status) {
                         this.loadData();
                         this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
                     }
                 })
                 .catch((res) => {

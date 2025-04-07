@@ -8,8 +8,8 @@
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <div class="position-relative">
-                                        <img src="https://th.bing.com/th/id/OIP.V0NH3fa-mZ4AJ94SEQTy_wHaHa?rs=1&pid=ImgDetMain"
-                                            alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                        <img v-bind:src="user.hinh_anh" alt="Admin"
+                                            class="rounded-circle p-1 bg-primary" width="110" height="110">
                                         <button
                                             class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0">
                                             <i class="fa-solid fa-camera"></i>
@@ -65,7 +65,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="border rounded-3 p-4 mb-4">
+                                <div class="border rounded-3 p-4 mb-3">
                                     <h5 class="mb-4 text-primary">
                                         <i class="fa-regular fa-user me-2"></i>
                                         Thông tin cá nhân
@@ -83,7 +83,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="user.email" type="text" class="form-control">
+                                            <input v-model="user.email" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -101,9 +101,15 @@
                                         <div class="col-sm-9">
                                             <input v-model="user.dia_chi" type="text" class="form-control">
                                         </div>
+                                        <div class="col-lg-12 text-end mt-3">
+                                            <button type="button" class="btn btn-primary px-4"
+                                                v-on:click="updateProfile()">
+                                                <i class="fa-regular fa-floppy-disk me-2"></i>
+                                                Lưu thay đổi
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="border rounded-3 p-4">
                                     <h5 class="mb-4 text-primary">
                                         <i class="fa-solid fa-lock me-2"></i>
@@ -133,24 +139,17 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <input v-model="doi_mat_khau.re_password" type="password"
-                                                class="form-control" placeholder="Xác nhận mật khẩu mới">
+                                                class="form-control" placeholder="Nhập lại mật khẩu mới">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <div class="col-lg-12 d-flex justify-content-end">
-                                            <button v-on:click="doiMatKhau()" type="button"
-                                                class="btn btn-outline-primary">Thay Đổi Mật
-                                                Khẩu</button>
+                                            <button v-on:click="doiMatKhau()" type="button" class="btn btn-primary px-4">
+                                                <i class="fa-solid fa-key"></i>
+                                                Đổi Mật Khẩu
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="text-end mt-4">
-                                    <button type="button" class="btn btn-light me-2">Hủy thay đổi</button>
-                                    <button type="button" class="btn btn-primary px-4" v-on:click="updateProfile()">
-                                        <i class="fa-regular fa-floppy-disk me-2"></i>
-                                        Lưu thay đổi
-                                    </button>
                                 </div>
                             </div>
                         </div>

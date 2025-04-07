@@ -13,7 +13,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="align-middle text-center">STT</th>
+                                    <th class="align-middle text-center">#</th>
                                     <th class="align-middle text-center">Họ Và Tên</th>
                                     <th class="align-middle text-center">Số Điện Thoại</th>
                                     <th class="align-middle text-center">Email</th>
@@ -34,9 +34,9 @@
                                         <td class="align-middle text-center">
                                             {{ value.so_dien_thoai }}
                                         </td>
-                                        <td class="align-middle text-center">{{ value.email }}</td>
+                                        <td class="align-middle">{{ value.email }}</td>
                                         <td class="align-middle text-center">{{ value.cccd }}</td>
-                                        <td class="align-middle text-center">
+                                        <td class="align-middle">
                                             {{ value.dia_chi }}
                                         </td>
                                         <td class="align-middle text-center" v-on:click="changeStatus(value)">

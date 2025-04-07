@@ -83,7 +83,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="user.email" type="text" class="form-control">
+                                            <input v-model="user.email" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -101,6 +101,13 @@
                                         <div class="col-sm-9">
                                             <input v-model="user.dia_chi" type="text" class="form-control">
                                         </div>
+                                        <div class="col-lg-12 text-end mt-3">
+                                            <button type="button" class="btn btn-primary px-4"
+                                                v-on:click="updateProfile()">
+                                                <i class="fa-regular fa-floppy-disk me-2"></i>
+                                                Lưu thay đổi
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -114,8 +121,8 @@
                                             <h6 class="mb-0">Mật khẩu hiện tại</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="doi_mat_khau.mat_khau_cu" type="password" class="form-control"
-                                                placeholder="Nhập mật khẩu hiện tại">
+                                            <input v-model="doi_mat_khau.mat_khau_cu" type="password"
+                                                class="form-control" placeholder="Nhập mật khẩu hiện tại">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -123,7 +130,8 @@
                                             <h6 class="mb-0">Mật khẩu mới</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="doi_mat_khau.mat_khau_moi" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
+                                            <input v-model="doi_mat_khau.mat_khau_moi" type="password"
+                                                class="form-control" placeholder="Nhập mật khẩu mới">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -131,24 +139,18 @@
                                             <h6 class="mb-0">Xác nhận mật khẩu</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi"  type="password" class="form-control"
-                                                placeholder="Xác nhận mật khẩu mới">
+                                            <input v-model="doi_mat_khau.xac_nhan_mat_khau_moi" type="password"
+                                                class="form-control" placeholder="Nhập lại mật khẩu mới">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <div class="col-lg-12 d-flex justify-content-end">
-                                            <button v-on:click="doiMatKhau()" type="button" class="btn btn-outline-primary">Thay Đổi Mật
-                                                Khẩu</button>
+                                            <button v-on:click="doiMatKhau()" type="button" class="btn btn-primary px-4">
+                                                <i class="fa-solid fa-key"></i>
+                                                Đổi Mật Khẩu
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="text-end mt-4">
-                                    <button type="button" class="btn btn-light me-2">Hủy thay đổi</button>
-                                    <button type="button" class="btn btn-primary px-4" v-on:click="updateProfile()">
-                                        <i class="fa-regular fa-floppy-disk me-2"></i>
-                                        Lưu thay đổi
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -176,9 +178,9 @@ export default {
         this.layThongTinLogin();
     },
     methods: {
-        doiMatKhau(){
+        doiMatKhau() {
             axios
-                .post("http://127.0.0.1:8000/api/shipper/doi-mat-khau", this.doi_mat_khau , {
+                .post("http://127.0.0.1:8000/api/shipper/doi-mat-khau", this.doi_mat_khau, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("shipper_login"),
                     },
@@ -203,9 +205,9 @@ export default {
                 })
         },
 
-        updateProfile(){
+        updateProfile() {
             axios
-                .post("http://127.0.0.1:8000/api/shipper/update-profile", this.user , {
+                .post("http://127.0.0.1:8000/api/shipper/update-profile", this.user, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("shipper_login"),
                     },

@@ -4,7 +4,7 @@
             <!-- Search and Filter Section -->
             <div class="d-lg-flex align-items-center mb-4 gap-3">
                 <div class="position-relative flex-grow-1">
-                    <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm đơn hàng">
+                    <input type="text" class="form-control ps-5" placeholder="Tìm kiếm đơn hàng">
                     <span class="position-absolute top-50 product-show translate-middle-y">
                         <i class="bx bx-search"></i>
                     </span>
@@ -19,33 +19,33 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-light">
-                        <tr class="align-middle">
-                            <th class="text-center">Mã đơn hàng</th>
+                <table class="table table-bordered table-hover align-middle">
+                    <thead>
+                        <tr class="align-middle bg-primary text-light text-center">
+                            <th class="">Mã đơn hàng</th>
                             <th>Tên quán ăn</th>
                             <th>Trạng thái</th>
                             <th>Ngày đặt</th>
-                            <th class="text-end">Tổng tiền</th>
-                            <th class="text-center">Chi tiết</th>
+                            <th class="">Tổng tiền</th>
+                            <th class="">Chi tiết</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="align-middle">
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <span class="fw-bold">#123456</span>
+                                    <span class="">#123456</span>
                                 </div>
                             </td>
                             <td>Quán Ăn 1</td>
-                            <td>
+                            <td class="text-center">
                                 <span class="badge rounded-pill px-3 bg-success">
                                     <i class="bx bxs-circle me-1"></i>
                                     Đã giao
                                 </span>
                             </td>
-                            <td>2024-03-10</td>
-                            <td class="text-end fw-bold">100.000đ</td>
+                            <td class="text-center">2024-03-10</td>
+                            <td class="text-end">100.000đ</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-primary btn-sm radius-30 px-4"
                                     data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
@@ -123,13 +123,13 @@
                         </h6>
                         <div class="table-responsive">
                             <table class="table table-hover border">
-                                <thead class="table-light">
-                                    <tr class="align-middle">
+                                <thead class="">
+                                    <tr class="align-middle bg-primary text-light text-center">
                                         <th>Sản Phẩm</th>
-                                        <th class="text-center">Số Lượng</th>
-                                        <th class="text-end">Đơn Giá</th>
-                                        <th class="text-end">Ghi Chú</th>
-                                        <th class="text-end">Tổng</th>
+                                        <th class="">Số Lượng</th>
+                                        <th class="">Đơn Giá</th>
+                                        <th class="">Ghi Chú</th>
+                                        <th class="">Tổng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,7 +153,7 @@
                                         <td colspan="3" class="text-end">
                                             <strong>Tổng Cộng:</strong>
                                         </td>
-                                        <td class="text-end">
+                                        <td colspan="2" class="text-end">
                                             <span class="text-primary fs-5 fw-bold">
                                                 100k
                                             </span>
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             <i class="bx bx-x me-1"></i>Đóng
                         </button>
                         <button type="button" class="btn btn-primary">

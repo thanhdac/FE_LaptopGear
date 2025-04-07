@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="mt-2"><b>DANH SÁCH MÃ GIẢM GIÁ</b></h4>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Thêm mã giảm
@@ -30,20 +30,20 @@
                                     <td class="align-middle">{{ value.ma_code }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ value.thoi_gian_ket_thuc }}</td>
-                                    <td class="align-middle" >
+                                    <td class="align-middle">
                                         <template v-if="value.loai_giam == 0">
-                                            Giảm %
-                                        </template>
-                                        <template v-else>
                                             Tiền Mặt
                                         </template>
+                                        <template v-else>
+                                            Giảm %
+                                        </template>
                                     </td>
-                                    <td class="align-middle text-end" >
+                                    <td class="align-middle text-end">
                                         <template v-if="value.loai_giam == 0">
-                                            {{ value.so_giam_gia }} %
+                                            {{ formatVND(value.so_giam_gia) }}
                                         </template>
                                         <template v-else>
-                                            {{ formatVND(value.so_giam_gia) }}
+                                            {{ value.so_giam_gia }} %
                                         </template>
                                     </td>
                                     <td class="align-middle text-end">{{ formatVND(value.so_tien_toi_da) }}</td>
@@ -347,7 +347,7 @@ export default {
         },
         changeStatus(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/voucher/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/voucher/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },

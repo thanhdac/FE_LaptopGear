@@ -1,104 +1,14 @@
 <template>
     <div class="row">
         <div class="col-lg-12 col-md-12">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mt-1">DANH SÁCH QUÁN ĂN</h5>
+                    <h5 class="mt-2">DANH SÁCH QUÁN ĂN</h5>
                     <div>
                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#themmMoiModal">
                             <i class="fa-solid fa-plus me-1"></i> Thêm mới
                         </button>
-                        <!-- Modal Thêm Mới -->
-                        <div class="modal fade" id="themmMoiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Quán Ăn</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Tên Quán Ăn</label>
-                                                <input v-model="quan_an_create.ten_quan_an" type="text"
-                                                    class="form-control" placeholder="Nhập Tên Quán Ăn">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Email</label>
-                                                <input v-model="quan_an_create.email" type="text" class="form-control"
-                                                    placeholder="Nhập Email">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Số Điện Thoại</label>
-                                                <input v-model="quan_an_create.so_dien_thoai" type="text"
-                                                    class="form-control" placeholder="Nhập Số điện thoại">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Password</label>
-                                                <input v-model="quan_an_create.password" type="text"
-                                                    class="form-control" placeholder="Nhập mật khẩu">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Nhập Lại Password</label>
-                                                <input v-model="quan_an_create.re_password" type="text"
-                                                    class="form-control" placeholder="Nhập lại mật khẩu">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Mã Số Thuế</label>
-                                                <input v-model="quan_an_create.ma_so_thue" type="text"
-                                                    class="form-control" placeholder="Nhập mã số thuế">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Giờ mở cửa</label>
-                                                <input v-model="quan_an_create.gio_mo_cua" type="time"
-                                                    class="form-control" placeholder="Nhập giờ mở cửa">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Giờ đóng cửa</label>
-                                                <input v-model="quan_an_create.gio_dong_cua" type="time"
-                                                    class="form-control" placeholder="Nhập giờ đóng cửa">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Địa Chỉ</label>
-                                                <input v-model="quan_an_create.dia_chi" type="text" class="form-control"
-                                                    placeholder="Nhập Địa Chỉ">
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Quận Huyện</label>
-                                                <select class="form-select" v-model="quan_an_create.id_quan_huyen">
-                                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
-                                                        <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
-                                                        </option>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Tình trạng</label>
-                                                <select class="form-select" v-model="quan_an_create.tinh_trang">
-                                                    <option value="1">Hoạt đông</option>
-                                                    <option value="1">Tạm dừng</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group mb-3 col-lg-6">
-                                                <label>Kích hoạt</label>
-                                                <select class="form-select" v-model="quan_an_create.is_active">
-                                                    <option value="1">Kích hoạt</option>
-                                                    <option value="0">Chưa kích hoạt</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary" v-on:click="themMoiQuanAn()"
-                                            data-bs-dismiss="modal">Xác Nhận</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -143,7 +53,7 @@
                                     </td>
                                     <td class="text-center">
                                         <button v-on:click="Object.assign(quan_an_edit, value)"
-                                            class="btn btn-info me-2" data-bs-toggle="modal"
+                                            class="btn btn-primary me-2" data-bs-toggle="modal"
                                             data-bs-target="#updateModal" style="color: white;">Cập nhật</button>
                                         <button v-on:click="Object.assign(quan_an_delete, value)" class="btn btn-danger"
                                             data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
@@ -152,118 +62,204 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- Update Modal -->
-                    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Tài Khoản</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Tên Quán Ăn</label>
-                                            <input v-model="quan_an_edit.ten_quan_an" type="text" class="form-control"
-                                                placeholder="Nhập Tên Quán Ăn">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Email</label>
-                                            <input v-model="quan_an_edit.email" type="text" class="form-control"
-                                                placeholder="Nhập Email">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Số Điện Thoại</label>
-                                            <input v-model="quan_an_edit.so_dien_thoai" type="text"
-                                                class="form-control" placeholder="Nhập Số điện thoại">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Mã Số Thuế</label>
-                                            <input v-model="quan_an_edit.ma_so_thue" type="text" class="form-control"
-                                                placeholder="Nhập mã số thuế">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Giờ mở cửa</label>
-                                            <input v-model="quan_an_edit.gio_mo_cua" type="time" class="form-control"
-                                                placeholder="Nhập giờ mở cửa">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Giờ đóng cửa</label>
-                                            <input v-model="quan_an_edit.gio_dong_cua" type="time"
-                                                class="form-control" placeholder="Nhập giờ đóng cửa">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Địa Chỉ</label>
-                                            <input v-model="quan_an_edit.dia_chi" type="text" class="form-control"
-                                                placeholder="Nhập Địa Chỉ">
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Quận Huyện</label>
-                                            <select class="form-select" v-model="quan_an_edit.id_quan_huyen">
-                                                <template v-for="(value, index) in list_quan_huyen" :key="index">
-                                                    <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
-                                                    </option>
-                                                </template>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Tình trạng</label>
-                                            <select class="form-select" v-model="quan_an_edit.tinh_trang">
-                                                <option value="1">Hoạt đông</option>
-                                                <option value="1">Tạm dừng</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3 col-lg-6">
-                                            <label>Kích hoạt</label>
-                                            <select class="form-select" v-model="quan_an_edit.is_active">
-                                                <option value="1">Kích hoạt</option>
-                                                <option value="0">Chưa kích hoạt</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Đóng</button>
-                                    <button v-on:click="capNhatQuanAn()" type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Xác
-                                        Nhận</button>
-                                </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal Thêm Mới -->
+        <div class="modal fade" id="themmMoiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Quán Ăn</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Tên Quán Ăn</label>
+                                <input v-model="quan_an_create.ten_quan_an" type="text" class="form-control"
+                                    placeholder="Nhập Tên Quán Ăn">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Email</label>
+                                <input v-model="quan_an_create.email" type="text" class="form-control"
+                                    placeholder="Nhập Email">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Số Điện Thoại</label>
+                                <input v-model="quan_an_create.so_dien_thoai" type="text" class="form-control"
+                                    placeholder="Nhập Số điện thoại">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Password</label>
+                                <input v-model="quan_an_create.password" type="text" class="form-control"
+                                    placeholder="Nhập mật khẩu">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Nhập Lại Password</label>
+                                <input v-model="quan_an_create.re_password" type="text" class="form-control"
+                                    placeholder="Nhập lại mật khẩu">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Mã Số Thuế</label>
+                                <input v-model="quan_an_create.ma_so_thue" type="text" class="form-control"
+                                    placeholder="Nhập mã số thuế">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Giờ mở cửa</label>
+                                <input v-model="quan_an_create.gio_mo_cua" type="time" class="form-control"
+                                    placeholder="Nhập giờ mở cửa">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Giờ đóng cửa</label>
+                                <input v-model="quan_an_create.gio_dong_cua" type="time" class="form-control"
+                                    placeholder="Nhập giờ đóng cửa">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Địa Chỉ</label>
+                                <input v-model="quan_an_create.dia_chi" type="text" class="form-control"
+                                    placeholder="Nhập Địa Chỉ">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Quận Huyện</label>
+                                <select class="form-select" v-model="quan_an_create.id_quan_huyen">
+                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
+                                        <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
+                                        </option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Tình trạng</label>
+                                <select class="form-select" v-model="quan_an_create.tinh_trang">
+                                    <option value="1">Hoạt đông</option>
+                                    <option value="1">Tạm dừng</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Kích hoạt</label>
+                                <select class="form-select" v-model="quan_an_create.is_active">
+                                    <option value="1">Kích hoạt</option>
+                                    <option value="0">Chưa kích hoạt</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Delete Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Tài Khoản</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="alert alert-danger" role="alert">
-                                        Bạn có chắc chắn muốn xóa voucher <b>{{ quan_an_delete.ten_quan_an }}</b>
-                                        này chứ
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button v-on:click="xoaQuanAn()" type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Xác
-                                        Nhận</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" v-on:click="themMoiQuanAn()"
+                            data-bs-dismiss="modal">Xác
+                            Nhận</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Tài Khoản</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger" role="alert">
+                            Bạn có chắc chắn muốn xóa voucher <b>{{ quan_an_delete.ten_quan_an }}</b>
+                            này chứ
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button v-on:click="xoaQuanAn()" type="button" class="btn btn-primary"
+                            data-bs-dismiss="modal">Xác
+                            Nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Tài Khoản</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Tên Quán Ăn</label>
+                                <input v-model="quan_an_edit.ten_quan_an" type="text" class="form-control"
+                                    placeholder="Nhập Tên Quán Ăn">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Email</label>
+                                <input v-model="quan_an_edit.email" type="text" class="form-control"
+                                    placeholder="Nhập Email">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Số Điện Thoại</label>
+                                <input v-model="quan_an_edit.so_dien_thoai" type="text" class="form-control"
+                                    placeholder="Nhập Số điện thoại">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Mã Số Thuế</label>
+                                <input v-model="quan_an_edit.ma_so_thue" type="text" class="form-control"
+                                    placeholder="Nhập mã số thuế">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Giờ mở cửa</label>
+                                <input v-model="quan_an_edit.gio_mo_cua" type="time" class="form-control"
+                                    placeholder="Nhập giờ mở cửa">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Giờ đóng cửa</label>
+                                <input v-model="quan_an_edit.gio_dong_cua" type="time" class="form-control"
+                                    placeholder="Nhập giờ đóng cửa">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Địa Chỉ</label>
+                                <input v-model="quan_an_edit.dia_chi" type="text" class="form-control"
+                                    placeholder="Nhập Địa Chỉ">
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Quận Huyện</label>
+                                <select class="form-select" v-model="quan_an_edit.id_quan_huyen">
+                                    <template v-for="(value, index) in list_quan_huyen" :key="index">
+                                        <option v-bind:value="value.id">{{ value.ten_quan_huyen }}
+                                        </option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Tình trạng</label>
+                                <select class="form-select" v-model="quan_an_edit.tinh_trang">
+                                    <option value="0">Hoạt đông</option>
+                                    <option value="1">Tạm dừng</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label>Kích hoạt</label>
+                                <select class="form-select" v-model="quan_an_edit.is_active">
+                                    <option value="1">Kích hoạt</option>
+                                    <option value="0">Chưa kích hoạt</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button v-on:click="capNhatQuanAn()" type="button" class="btn btn-primary"
+                            data-bs-dismiss="modal">Xác
+                            Nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 <script>
@@ -403,7 +399,7 @@ export default {
         },
         changeStatus(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/quan-an/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/quan-an/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -425,7 +421,7 @@ export default {
         },
         changeActive(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/quan-an/change-active", value, {
+                .post("http://127.0.0.1:8000/api/admin/quan-an/change-active", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },

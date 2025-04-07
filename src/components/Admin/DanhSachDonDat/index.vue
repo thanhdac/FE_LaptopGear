@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card radius-10 border-top border-0 border-3 border-info">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="col-5">
@@ -18,10 +18,10 @@
                             Sắp xếp theo
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Mới nhất</a></li>
-                            <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
-                            <li><a class="dropdown-item" href="#">Giá cao - thấp</a></li>
-                            <li><a class="dropdown-item" href="#">Giá thấp - cao</a></li>
+                            <li><a class="dropdown-item">Mới nhất</a></li>
+                            <li><a class="dropdown-item">Cũ nhất</a></li>
+                            <li><a class="dropdown-item">Giá cao - thấp</a></li>
+                            <li><a class="dropdown-item">Giá thấp - cao</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
-                    <thead class="table-light">
-                        <tr class="align-middle text-center">
+                    <thead class="">
+                        <tr class="align-middle text-center bg-primary text-white">
                             <th>Mã đơn</th>
                             <th>Khách hàng</th>
                             <th>Tổng tiền</th>
@@ -45,7 +45,9 @@
                             <td>Nguyễn Văn A</td>
                             <td>500.000đ</td>
                             <td>2025-02-14</td>
-                            <td><span class="badge bg-warning">Chờ xác nhận</span></td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">Chờ xác nhận</button>
+                            </td>
                             <td>
                                 <button class="btn btn-info btn-sm me-2" data-bs-toggle='modal'
                                     data-bs-target='#chiTietModal' style="color: white;">
@@ -76,35 +78,35 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Tên Người Nhận:</th>
+                                <th>Tên Người Nhận</th>
                                 <td>Nguyễn Văn A</td>
                             </tr>
                             <tr>
-                                <th>Địa chỉ:</th>
+                                <th>Địa chỉ</th>
                                 <td>123 Đường ABC, Quận 1, TP.HCM</td>
                             </tr>
                             <tr>
-                                <th>Số điện thoại:</th>
+                                <th>Số điện thoại</th>
                                 <td>0123456789</td>
                             </tr>
                             <tr>
-                                <th>Quán:</th>
+                                <th>Quán</th>
                                 <td>Quán Ăn Ngon</td>
                             </tr>
                             <tr>
-                                <th>Shippper:</th>
+                                <th>Shippper</th>
                                 <td>Nguyễn Văn A</td>
                             </tr>
                             <tr>
-                                <th>Mã voucher:</th>
+                                <th>Mã voucher</th>
                                 <td>ABC123</td>
                             </tr>
                             <tr>
-                                <th>Phí ship:</th>
+                                <th>Phí ship</th>
                                 <td>20.000đ</td>
                             </tr>
                             <tr>
-                                <th>Trạng thái:</th>
+                                <th>Trạng thái</th>
                                 <td><span class="badge bg-warning">Chờ xác nhận</span></td>
                             </tr>
                         </tbody>

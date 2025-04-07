@@ -248,7 +248,7 @@
                         <template v-for="(v, k) in monAnData" :key="k">
                             <div class="col-lg-3 d-flex" v-if="k < 8">
                                 <div class="card flex-fill">
-                                    <img :src="v.hinh_anh" class="card-img-top" style="height: 150px" alt="..." />
+                                    <img :src="v.hinh_anh" class="card-img-top" style="height: 300px" alt="..." />
                                     <div class="card-body">
                                         <h6 class="card-title cursor-pointer">
                                             {{ v.ten_mon_an }}

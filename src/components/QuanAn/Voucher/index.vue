@@ -8,59 +8,58 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-2">
-                        <label>Mã Voucher</label>
-                        <input v-model="suavoucher.ma_code" type="text" class="form-control mt-2">
-                    </div>
-                    <div class="mb-2">
-                        <label>Thời Gian Bắt Đầu</label>
-                        <input v-model="suavoucher.thoi_gian_bat_dau" type="date" class="form-control mt-2">
-                    </div>
-                    <div class="mb-2">
-                        <label>Thời Gian Kết Thúc</label>
-                        <input v-model="suavoucher.thoi_gian_ket_thuc" type="date" class="form-control mt-2">
-                    </div>
-                    <div class="mb-2">
-                        <label>Số Tiền Giảm</label>
-                        <input v-model="suavoucher.so_giam_gia" type="text" class="form-control mt-2">
-                    </div>
-                    <div class="mb-2">
-                        <label>Phần Trăm Giảm</label>
-                        <input v-model="suavoucher.loai_giam" type="number" class="form-control mt-2">
-                    </div>
-                    <div class="mb-2">
-                        <label>Số Tiền Tối Đa</label>
-                        <input v-model="suavoucher.so_tien_toi_da" type="text" class="form-control mt-2">
-                        <div class="mb-2">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Mã Voucher</label>
+                            <input v-model="suavoucher.ma_code" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Tình trạng</label>
+                            <select v-model="suavoucher.tinh_trang" class="form-select mt-2">
+                                <option value="0">Tạm Tắt</option>
+                                <option value="1">Hiển Thị</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Thời Gian Bắt Đầu</label>
+                            <input v-model="suavoucher.thoi_gian_bat_dau" type="date" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Thời Gian Kết Thúc</label>
+                            <input v-model="suavoucher.thoi_gian_ket_thuc" type="date" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Số Tiền Giảm</label>
+                            <input v-model="suavoucher.so_giam_gia" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phần Trăm Giảm</label>
+                            <input v-model="suavoucher.loai_giam" type="number" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Số Tiền Tối Đa</label>
+                            <input v-model="suavoucher.so_tien_toi_da" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
                             <label>Đơn Hàng Tối Thiểu</label>
-                            <textarea v-model="suavoucher.don_hang_toi_thieu" class="form-control mt-2"
-                                rows="5"></textarea>
-                            <div class="mb-2">
-                                <label>Tình trạng</label>
-                                <select v-model="suavoucher.tinh_trang" class="form-select mt-2">
-                                    <option value="0">Tạm Tắt</option>
-                                    <option value="1">Hiển Thị</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button v-on:click="updatevoucher()" type="button" class="btn btn-primary"
-                                data-bs-dismiss="modal">Cập
-                                nhật</button>
+                            <input v-model="suavoucher.don_hang_toi_thieu" type="text" class="form-control mt-2 mb-3">
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button v-on:click="updatevoucher()" type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Cập Nhật</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- xoa -->
-    <div class="modal fade" id="delVoucher" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="delVoucher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h1 class="modal-title fs-5 text-white" id="staticBackdropLabel">Xóa Voucher</h1>
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Xóa Voucher</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -70,15 +69,68 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     <button v-on:click="deletevoucher()" type="button" class="btn btn-danger"
-                        data-bs-dismiss="modal">Xóa</button>
+                        data-bs-dismiss="modal">Xác Nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Them -->
+    <div class="modal fade" id="themMoi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Thêm Mới Voucher</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Mã Voucher</label>
+                            <input v-model="taovoucher.ma_code" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Tình trạng</label>
+                            <select v-model="taovoucher.tinh_trang" class="form-select mt-2">
+                                <option value="0">Tạm Tắt</option>
+                                <option value="1">Hiển Thị</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Thời Gian Bắt Đầu</label>
+                            <input v-model="taovoucher.thoi_gian_bat_dau" type="date" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Thời Gian Kết Thúc</label>
+                            <input v-model="taovoucher.thoi_gian_ket_thuc" type="date" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Số Tiền Giảm</label>
+                            <input v-model="taovoucher.so_giam_gia" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phần Trăm Giảm</label>
+                            <input v-model="taovoucher.loai_giam" type="number" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Số Tiền Tối Đa</label>
+                            <input v-model="taovoucher.so_tien_toi_da" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Đơn Hàng Tối Thiểu</label>
+                            <input v-model="taovoucher.don_hang_toi_thieu" type="text" class="form-control mt-2 mb-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button v-on:click="createvoucher()" type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Thêm Mới</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-
         <div class="col-lg-12">
-
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h6 class="mt-2"><b>DANH SÁCH MÃ VOUCHER</b></h6>
@@ -87,91 +139,18 @@
                             data-bs-toggle="modal" data-bs-target="#themMoi">Thêm
                             Mới</button>
                     </div>
-                    <div class="modal fade" id="themMoi" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header ">
-                                    <h1 class="modal-title fs-5 " id="staticBackdropLabel">Thêm Mới Voucher</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label>Mã Voucher</label>
-                                                <input v-model="taovoucher.ma_code" type="text"
-                                                    class="form-control mt-2">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label>Số Tiền Giảm</label>
-                                                <input v-model="taovoucher.so_giam_gia" type="number"
-                                                    class="form-control mt-2">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label>Thời Gian Bắt Đầu</label>
-                                                <input v-model="taovoucher.thoi_gian_bat_dau" type="date"
-                                                    class="form-control mt-2">
-                                            </div>
-
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label>Thời Gian Kết Thúc</label>
-                                                <input v-model="taovoucher.thoi_gian_ket_thuc" type="date"
-                                                    class="form-control mt-2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label>Phần Trăm Giảm</label>
-                                        <input v-model="taovoucher.loai_giam" type="number" class="form-control mt-2">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label>Số Tiền Tối Đa</label>
-                                        <input v-model="taovoucher.so_tien_toi_da" type="number"
-                                            class="form-control mt-2">
-                                        <div class="mb-2">
-                                            <label>Đơn Hàng Tối Thiểu</label>
-                                            <input v-model="taovoucher.don_hang_toi_thieu" type="number"
-                                                class="form-control mt-2">
-                                            <div class="mb-2">
-                                                <label>Tình trạng</label>
-                                                <select v-model="taovoucher.tinh_trang" class="form-select mt-2">
-                                                    <option value="0">Tạm Tắt</option>
-                                                    <option value="1">Hiển Thị</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Đóng</button>
-                                    <button v-on:click="createvoucher()" type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Thêm
-                                        Mới</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="tbale table-responsive">
                         <table class="table table-bordered table-hover ">
                             <thead>
-                                <tr>
+                                <tr class="bg-primary text-light">
                                     <th class="align-middle text-center">#</th>
                                     <th class="align-middle text-center">Mã Voucher</th>
                                     <th class="align-middle text-center">Thời Gian Bắt Đầu</th>
                                     <th class="align-middle text-center">Thời Gian Kết Thúc</th>
-                                    <th class="align-middle text-center">Số Tiền Giảm</th>
-                                    <th class="align-middle text-center">Phần Trăm Giảm</th>
+                                    <th class="align-middle text-center">Loại Giảm</th>
+                                    <th class="align-middle text-center">Giá trị giảm</th>
                                     <th class="align-middle text-center">Số Tiền Tối Đa</th>
                                     <th class="align-middle text-center">Đơn Hàng Tối Thiểu</th>
                                     <th class="align-middle text-center">Tình Trạng</th>
@@ -185,12 +164,17 @@
                                         <td class="align-middle text-center">{{ item.ma_code }}</td>
                                         <td class="align-middle text-center">{{ item.thoi_gian_bat_dau }}</td>
                                         <td class="align-middle text-center">{{ item.thoi_gian_ket_thuc }}</td>
-                                        <td class="align-middle text-center">{{ item.loai_giam }}</td>
-                                        <td class="align-middle">{{ item.so_giam_gia }}</td>
-                                        <td class="align-middle text-center">{{ item.so_tien_toi_da }}</td>
+                                        <td class="align-middle text-center">{{ item.loai_giam == 1 ? "Phần Trăm"
+                                            : "Tiền Mặt" }}
+                                        </td>
+                                        <td v-if="item.loai_giam == 1" class="align-middle text-end">{{ item.so_giam_gia
+                                            }} %</td>
+                                        <td v-else class="align-middle text-end">{{ formatVND(item.so_giam_gia) }}</td>
+                                        <td class="align-middle text-center">{{ formatVND(item.so_tien_toi_da) }}</td>
 
-                                        <td class="align-middle text-end">{{ item.don_hang_toi_thieu }}</td>
-                                        <td class="align-middle">
+                                        <td class="align-middle text-center">{{ formatVND(item.don_hang_toi_thieu) }}
+                                        </td>
+                                        <td class="align-middle text-center">
                                             <button v-on:click="changetrangthai(item)" v-if="item.tinh_trang == 0"
                                                 class="btn btn-warning me-1" style="color: white;">Tạm Tắt </button>
                                             <button v-on:click="changetrangthai(item)" v-else class="btn btn-success"
@@ -231,6 +215,9 @@ export default {
         this.getvoucher();
     },
     methods: {
+        formatVND(number) {
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+        },
         getvoucher() {
             axios
                 .get('http://127.0.0.1:8000/api/quan-an/voucher/data', {
@@ -245,9 +232,6 @@ export default {
                     console.error("There was an error fetching the data!", error);
                 });
         },
-
-
-
         createvoucher() {
             axios
                 .post('http://127.0.0.1:8000/api/quan-an/voucher/create', this.taovoucher, {
@@ -268,7 +252,6 @@ export default {
                     });
                 })
         },
-
         updatevoucher() {
             axios
                 .post('http://127.0.0.1:8000/api/quan-an/voucher/update', this.suavoucher, {
@@ -288,7 +271,6 @@ export default {
                     });
                 })
         },
-
         deletevoucher() {
 
             axios
@@ -310,7 +292,6 @@ export default {
                     });
                 })
         },
-
         changetrangthai(item) {
             axios
                 .post("http://127.0.0.1:8000/api/quan-an/voucher/change", item, {
@@ -331,8 +312,6 @@ export default {
                     });
                 })
         }
-
-
     },
 
 }

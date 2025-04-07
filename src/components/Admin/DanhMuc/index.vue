@@ -6,7 +6,7 @@
                     <a class="nav-link active" data-bs-toggle="tab" href="#danhMuc" role="tab" aria-selected="true">
                         <div class="d-flex align-items-center">
                             <div class="tab-icon">
-                                <i class="bx bx-home font-18 me-1"></i>
+                                <i class="fa-solid fa-bars me-2"></i>
                             </div>
                             <div class="tab-title">Quản lý Danh Mục</div>
                         </div>
@@ -17,7 +17,7 @@
                         tabindex="-1">
                         <div class="d-flex align-items-center">
                             <div class="tab-icon">
-                                <i class="bx bx-user-pin font-18 me-1"></i>
+                                <i class="fa-solid fa-city me-2"></i>
                             </div>
                             <div class="tab-title">Quản lý Tỉnh/Huyện</div>
                         </div>
@@ -26,192 +26,177 @@
             </ul>
             <div class="tab-content py-3">
                 <div class="tab-pane fade active show" id="danhMuc" role="tabpanel">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h2 class="card-title">Danh Sách Danh Mục</h2>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themMoiMoldel">
-                                    <i class="fas fa-plus"></i> Thêm Mới Danh Mục
-                                </button>
-                                <!-- Modal Thêm Mới-->
-                                <div class="modal fade" id="themMoiMoldel" tabindex="-1" aria-labelledby="themMoiMoldel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="addCategoryModalLabel">
-                                                    Thêm Mới Danh Mục
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="card-title mt-2 mb-4">Danh Sách Danh Mục</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themMoiMoldel">
+                            <i class="fas fa-plus"></i> Thêm Mới Danh Mục
+                        </button>
+                        <!-- Modal Thêm Mới-->
+                        <div class="modal fade" id="themMoiMoldel" tabindex="-1" aria-labelledby="themMoiMoldel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addCategoryModalLabel">
+                                            Thêm Mới Danh Mục
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="ten_danh_muc" class="form-label">Tên Danh
+                                                    Mục</label>
+                                                <input type="text" class="form-control" id="ten_danh_muc"
+                                                    placeholder="Nhập tên danh mục"
+                                                    v-model="create_danh_muc.ten_danh_muc" />
                                             </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="mb-3">
-                                                        <label for="ten_danh_muc" class="form-label">Tên Danh
-                                                            Mục</label>
-                                                        <input type="text" class="form-control" id="ten_danh_muc"
-                                                            placeholder="Nhập tên danh mục"
-                                                            v-model="create_danh_muc.ten_danh_muc" />
-                                                    </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="slug_danh_muc" class="form-label">Slug Danh
-                                                            Muc</label>
-                                                        <input type="text" placeholder="Nhập slug danh mục"
-                                                            class="form-control" id="slug_danh_muc"
-                                                            v-model="create_danh_muc.slug_danh_muc" />
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="hinh_anh" class="form-label">Hình Ảnh</label>
-                                                        <input type="text" class="form-control" id="hinh_anh"
-                                                            placeholder="Nhập hình ảnh"
-                                                            v-model="create_danh_muc.hinh_anh" />
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Danh Mục Cha</label>
-                                                        <select v-model="create_danh_muc.id_danh_muc_cha"
-                                                            class="form-control mt-2"
-                                                            placeholder="Nhập ID Danh Muc Cha">
-                                                            <template v-for="(value, index) in list_danh_muc"
-                                                                :key="index">
-                                                                <option v-bind:value="value.id">{{ value.ten_danh_muc }}
-                                                                </option>
-                                                            </template>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="tinh_trang" class="form-label">Trạng thái</label>
-                                                        <select class="form-control"
-                                                            v-model="create_danh_muc.tinh_trang">
-                                                            <option value="0">Tạm tắt</option>
-                                                            <option value="1">Hiển thị</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
+                                            <div class="mb-3">
+                                                <label for="slug_danh_muc" class="form-label">Slug Danh
+                                                    Muc</label>
+                                                <input type="text" placeholder="Nhập slug danh mục" class="form-control"
+                                                    id="slug_danh_muc" v-model="create_danh_muc.slug_danh_muc" />
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Đóng
-                                                </button>
-                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                                    v-on:click="themMoi()">
-                                                    Thêm Mới
-                                                </button>
+                                            <div class="mb-3">
+                                                <label for="hinh_anh" class="form-label">Hình Ảnh</label>
+                                                <input type="text" class="form-control" id="hinh_anh"
+                                                    placeholder="Nhập hình ảnh" v-model="create_danh_muc.hinh_anh" />
                                             </div>
-                                        </div>
+                                            <div class="mb-3">
+                                                <label>Danh Mục Cha</label>
+                                                <select v-model="create_danh_muc.id_danh_muc_cha"
+                                                    class="form-control mt-2" placeholder="Nhập ID Danh Muc Cha">
+                                                    <template v-for="(value, index) in list_danh_muc" :key="index">
+                                                        <option v-bind:value="value.id">{{ value.ten_danh_muc }}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tinh_trang" class="form-label">Trạng thái</label>
+                                                <select class="form-control" v-model="create_danh_muc.tinh_trang">
+                                                    <option value="0">Tạm tắt</option>
+                                                    <option value="1">Hiển thị</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Đóng
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            v-on:click="themMoi()">
+                                            Thêm Mới
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead class="table-light">
-                                        <tr class="align-middle text-center">
-                                            <th>ID</th>
-                                            <th>Tên Danh Mục</th>
-                                            <th>Slug Danh Mục</th>
-                                            <th>Hình Ảnh</th>
-                                            <th>ID Danh Mục Cha</th>
-                                            <th>Trạng Thái</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <template v-for="(value, index) in list_danh_muc" :key="index">
-                                            <tr class="align-middle text-center">
-                                                <th>{{ index + 1 }}</th>
-                                                <td>{{ value.ten_danh_muc }}</td>
-                                                <td>{{ value.slug_danh_muc }}</td>
-                                                <td>
-                                                    <img v-bind:src="value.hinh_anh" alt="" style="width: 120px;">
-                                                </td>
-                                                <td class="align-middle">
-                                                    {{ value.id_danh_muc_cha }}
-                                                </td>
-                                                <td v-on:click="changeStatus(value)">
-                                                    <button 
-                                                        v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white">Tạm
-                                                        Tắt </button>
-                                                    <button  v-else
-                                                        class="btn btn-success " style="color: white;">Hiển Thị </button>
-                                                </td>
-                                                <td>
-                                                    <button v-on:click="Object.assign(update_danh_muc, value)"
-                                                        class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
-                                                        data-bs-target="#updateModal" style="color: white;">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                    <button v-on:click="Object.assign(delete_danh_muc, value)"
-                                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal">
-                                                        <i class="fas fa-trash"></i> Xóa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </template>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover mb-0">
+                            <thead class="table-light">
+                                <tr class="align-middle text-center table-secondary">
+                                    <th>#</th>
+                                    <th>Tên Danh Mục</th>
+                                    <th>Slug Danh Mục</th>
+                                    <th>Hình Ảnh</th>
+                                    <th>ID Danh Mục Cha</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="(value, index) in list_danh_muc" :key="index">
+                                    <tr class="align-middle">
+                                        <th class="text-center">{{ index + 1 }}</th>
+                                        <td>{{ value.ten_danh_muc }}</td>
+                                        <td>{{ value.slug_danh_muc }}</td>
+                                        <td class="text-center">
+                                            <img v-bind:src="value.hinh_anh" alt="" style="width: 120px;">
+                                        </td>
+                                        <td class="text-center">
+                                            {{ value.id_danh_muc_cha }}
+                                        </td>
+                                        <td class="text-center" v-on:click="changeStatus(value)">
+                                            <button v-if="value.tinh_trang == 0" class="btn btn-warning me-1"
+                                                style="color: white">Tạm
+                                                Tắt </button>
+                                            <button v-else class="btn btn-success" style="color: white;">Hiển Thị
+                                            </button>
+                                        </td>
+                                        <td class="text-center">
+                                            <button v-on:click="Object.assign(update_danh_muc, value)"
+                                                class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" style="color: white;">
+                                                <i class="fas fa-edit"></i> Sửa
+                                            </button>
+                                            <button v-on:click="Object.assign(delete_danh_muc, value)"
+                                                class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal">
+                                                <i class="fas fa-trash"></i> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tinhHuyen" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h2 class="card-title">Danh Sách Tỉnh/Thành phố</h2>
-                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#themMoiTinhThanhModal">
-                                    <i class="fas fa-plus"></i> Thêm Tỉnh/Thành phố
-                                </button>
-                            </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="card-title mt-2 mb-4">Danh Sách Tỉnh/Thành phố</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themMoiTinhThanhModal">
+                            <i class="fas fa-plus"></i> Thêm Tỉnh/Thành phố
+                        </button>
+                    </div>
 
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead class="table-light">
-                                        <tr class="align-middle text-center" >
-                                            <th>ID</th>
-                                            <th>Tên Tỉnh/Thành phố</th>
-                                            <th>Trạng thái</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <template v-for="(value, index) in list_tinh_huyen" :key="index">
-                                            <tr class="align-middle text-center">
-                                                <th>{{ index + 1 }}</th>
-                                                <td>{{ value.ten_tinh_thanh }}</td>
-                                                <td v-on:click="changeStatusTinhThanh(value)">
-                                                    <button 
-                                                        v-if="value.tinh_trang == 0" class="btn btn-warning me-1" style="color: white;" >Tạm
-                                                        Tắt </button>
-                                                    <button  v-else
-                                                        class="btn btn-success" style="color: white;">Hiển Thị </button>
-                                                </td>
-                                                <td>
-                                                    <button v-on:click="Object.assign(update_tinh_huyen, value)"
-                                                        data-bs-toggle="modal" data-bs-target="#updateTinhThanhModal"
-                                                        class="btn btn-warning btn-sm me-2" style="color: white;">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                    <button v-on:click="Object.assign(delete_tinh_huyen, value)"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteTinhThanhModal"
-                                                        class="btn btn-danger btn-sm me-2">
-                                                        <i class="fas fa-trash"></i> Xóa
-                                                    </button>
-                                                    <button class="btn btn-info btn-sm" v-on:click="xemQuanHuyen(value)"
-                                                        data-bs-toggle="modal" data-bs-target="#xemQuanHuyenModal" style="color: white;"> <i
-                                                            class="fas fa-eye"></i> Xem Quận/Huyện
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </template>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr class="align-middle text-center table-secondary">
+                                    <th>#</th>
+                                    <th>Tên Tỉnh/Thành phố</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="(value, index) in list_tinh_huyen" :key="index">
+                                    <tr class="align-middle text-center">
+                                        <th>{{ index + 1 }}</th>
+                                        <td>{{ value.ten_tinh_thanh }}</td>
+                                        <td v-on:click="changeStatusTinhThanh(value)">
+                                            <button v-if="value.tinh_trang == 0" class="btn btn-warning me-1"
+                                                style="color: white;">Tạm
+                                                Tắt </button>
+                                            <button v-else class="btn btn-success" style="color: white;">Hiển
+                                                Thị </button>
+                                        </td>
+                                        <td>
+                                            <button v-on:click="Object.assign(update_tinh_huyen, value)"
+                                                data-bs-toggle="modal" data-bs-target="#updateTinhThanhModal"
+                                                class="btn btn-warning btn-sm me-2" style="color: white;">
+                                                <i class="fas fa-edit"></i> Sửa
+                                            </button>
+                                            <button v-on:click="Object.assign(delete_tinh_huyen, value)"
+                                                data-bs-toggle="modal" data-bs-target="#deleteTinhThanhModal"
+                                                class="btn btn-danger btn-sm me-2">
+                                                <i class="fas fa-trash"></i> Xóa
+                                            </button>
+                                            <button class="btn btn-info btn-sm" v-on:click="xemQuanHuyen(value);"
+                                                data-bs-toggle="modal" data-bs-target="#xemQuanHuyenModal"
+                                                style="color: white;"> <i class="fas fa-eye"></i> Xem Quận/Huyện
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -422,7 +407,7 @@
                         <table class="table table-bordered table-hover">
                             <thead class="table-light">
                                 <tr class="align-middle text-center">
-                                    <th>ID</th>
+                                    <th>#</th>
                                     <th>Tên Quận/Huyện</th>
                                     <th>Trạng thái</th>
                                 </tr>
@@ -432,10 +417,11 @@
                                     <tr class="align-middle text-center">
                                         <td>{{ index + 1 }}</td>
                                         <td>{{ value.ten_quan_huyen }}</td>
-                                        <td class="text-nowrap">
+                                        <td v-on:click="changeStatusQuanHuyen(value)" class="text-nowrap">
                                             <button v-if="value.tinh_trang == 0" class="btn btn-warning">Tạm
                                                 Tắt </button>
-                                                <button v-if="value.tinh_trang == 1" class="btn btn-success">Hoạt Động </button>
+                                            <button v-if="value.tinh_trang == 1" class="btn btn-success">Hoạt Động
+                                            </button>
                                         </td>
                                     </tr>
                                 </template>
@@ -472,7 +458,8 @@ export default {
             update_danh_muc: {
             },
             delete_danh_muc: {},
-            list_quan_huyen: []
+            list_quan_huyen: [],
+            tinh_thanh: {},
         };
     },
     mounted() {
@@ -481,8 +468,9 @@ export default {
     },
     methods: {
         xemQuanHuyen(value) {
+            this.tinh_thanh = value;
             axios
-                .get('http://127.0.0.1:8000/api/admin/quan-huyen/data', value, {
+                .post('http://127.0.0.1:8000/api/admin/quan-huyen/data', value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -639,7 +627,7 @@ export default {
         },
         changeStatus(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/danh-muc/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/danh-muc/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -659,7 +647,7 @@ export default {
         },
         changeStatusTinhThanh(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/tinh-thanh/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/tinh-thanh/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
@@ -679,14 +667,14 @@ export default {
         },
         changeStatusQuanHuyen(value) {
             axios
-            .post("http://127.0.0.1:8000/api/admin/quan-huyen/change-status", value, {
+                .post("http://127.0.0.1:8000/api/admin/quan-huyen/change-status", value, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("nhan_vien_login"),
                     },
                 })
                 .then((res) => {
                     if (res.data.status) {
-                        this.LoadDataTinhHuyen();
+                        this.xemQuanHuyen(this.tinh_thanh);
                         this.$toast.success(res.data.message);
                     }
                 })

@@ -11,14 +11,13 @@
             <div class="table-responsive">
                 <table class="table table-bordered table-hover ">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary text-white">
                             <th class="text-center align-middle">#</th>
                             <th class="text-center align-middle">Tên Món Ăn</th>
                             <th class="text-center align-middle">Slug Món Ăn</th>
                             <th class="text-center align-middle">Giá Bán</th>
                             <th class="text-center align-middle">Giá Khuyến Mãi</th>
                             <th class="text-center align-middle">Mô Tả</th>
-                            <th class="text-center align-middle">Tên Quán</th>
                             <th class="text-center align-middle">Hình Ảnh</th>
                             <th class="text-center align-middle">Danh Mục</th>
                             <th class="text-center align-middle">Tình Trạng</th>
@@ -28,16 +27,15 @@
                     <tbody>
                         <tr v-for="(mon, index) in listMonAn" :key="index">
                             <td class="text-center align-middle">{{ index + 1 }}</td>
-                            <td class="text-center align-middle">{{ mon.ten_mon_an }}</td>
-                            <td class="text-center align-middle">{{ mon.slug_mon_an }}</td>
-                            <td class="text-end align-middle">{{ mon.gia_ban }}</td>
-                            <td class="text-end align-middle">{{ mon.gia_khuyen_mai }}</td>
+                            <td class="align-middle">{{ mon.ten_mon_an }}</td>
+                            <td class="align-middle">{{ mon.slug_mon_an }}</td>
+                            <td class="text-end align-middle">{{ formatVND(mon.gia_ban) }}</td>
+                            <td class="text-end align-middle">{{ formatVND(mon.gia_khuyen_mai) }}</td>
                             <td class="align-middle">{{ mon.mo_ta }}</td>
-                            <td class="text-center align-middle">2</td>
                             <td class="text-center align-middle">
                                 <img v-bind:src="mon.hinh_anh" alt="" style="width: 50px; height: 50px;">
                             </td>
-                            <td class="text-center align-middle"> {{ mon.id_danh_muc }} </td>
+                            <td class="align-middle"> {{ mon.ten_danh_muc }} </td>
                             <td class="align-middle">
                                 <button v-on:click="changeMonAn(mon)" v-if="mon.tinh_trang == 1"
                                     class="btn btn-success">Hiển thị</button>
@@ -45,10 +43,10 @@
                             </td>
                             <td class="text-center align-middle">
                                 <button v-on:click="Object.assign(updateMon, mon)" data-bs-toggle="modal"
-                                    data-bs-target="#capnhat" class="btn btn-primary me-1 " style="width: 100px ;">Cập
+                                    data-bs-target="#capnhat" class="btn btn-primary me-1">Cập
                                     Nhật</button>
                                 <button v-on:click="Object.assign(deleteMon, mon)" data-bs-toggle="modal"
-                                    data-bs-target="#xoa" class="btn btn-danger" style="width: 100px;">Xóa</button>
+                                    data-bs-target="#xoa" class="btn btn-danger" >Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -221,6 +219,9 @@ export default {
         this.getMonAn();
     },
     methods: {
+        formatVND(number) {
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+        },
         getMonAn() {
             axios
                 .get('http://127.0.0.1:8000/api/quan-an/mon-an/data', {
@@ -228,15 +229,8 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
                 })
-                .then(response => {
-                    this.listMonAn = response.data.data;
-                    this.$toast.success(res.data.message);
-
-                }).catch((res) => {
-                    const list = Object.values(res.response.data.errors);
-                    list.forEach((v, i) => {
-                        this.$toast.error(v[0]);
-                    });
+                .then(res => {
+                    this.listMonAn = res.data.data;
                 })
         },
         addMonAn() {
@@ -246,11 +240,10 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
                 })
-                .then(response => {
+                .then(res => {
                     this.getMonAn();
                     this.addMon = {};
                     this.$toast.success(res.data.message);
-
                 }).catch((res) => {
                     const list = Object.values(res.response.data.errors);
                     list.forEach((v, i) => {
@@ -259,14 +252,13 @@ export default {
                 })
         },
         updateMonAn() {
-
             axios
                 .post('http://127.0.0.1:8000/api/quan-an/mon-an/update', this.updateMon, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
                 })
-                .then(response => {
+                .then(res => {
                     this.getMonAn();
                     this.$toast.success(res.data.message);
 
@@ -284,11 +276,12 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
                 })
-                .then(response => {
+                .then(res => {
                     this.getMonAn();
                     this.$toast.success(res.data.message);
 
-                }).catch((res) => {
+                })
+                .catch((res) => {
                     const list = Object.values(res.response.data.errors);
                     list.forEach((v, i) => {
                         this.$toast.error(v[0]);
@@ -296,15 +289,14 @@ export default {
                 })
         },
         changeMonAn(v) {
-            console.log(v);
             axios
                 .post("http://127.0.0.1:8000/api/quan-an/mon-an/change", v, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("quan_an_login"),
                     },
                 })
-                .then((response) => {
-                    if (response.data.status) {
+                .then((res) => {
+                    if (res.data.status) {
                         this.getMonAn();
                         this.$toast.success(res.data.message);
                     } else {

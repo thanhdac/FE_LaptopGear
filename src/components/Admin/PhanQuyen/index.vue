@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-6">
@@ -148,7 +148,7 @@
         </div>
 
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header">
                     Danh Sách Chức Năng
                 </div>
@@ -181,7 +181,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header">
                     Đang Phân Quyền Cho <b class="text-danger">Admin</b>
                 </div>

@@ -123,7 +123,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary text-white">
                             <th class="align-middle text-center">#</th>
                             <th class="align-middle text-center">Tên Danh Mục</th>
                             <th class="align-middle text-center">Slug</th>
@@ -143,7 +143,7 @@
                                     <img v-bind:src="item.hinh_anh" width="50">
                                 </td>
                                 <td class="align-middle text-center">
-                                    {{ item.id_danh_muc_cha === null ? "Root" : item.id_danh_muc_cha}}
+                                    {{ item.id_danh_muc_cha === null ? "Root" : item.id_danh_muc_cha }}
                                 </td>
                                 <td class="align-middle  ">
                                     <button v-if="item.tinh_trang == 1" v-on:click="changeMonAn(item)"
@@ -229,13 +229,7 @@ export default {
                 .then((response) => {
                     if (response.data.status) {
                         this.getListDanhMuc();
-                        this.addMon = {
-                            ten_danh_muc: "",
-                            slug_danh_muc: "",
-                            hinh_anh: "",
-                            id_danh_muc_cha: 0,
-                            tinh_trang: 1,
-                        }
+                        this.addMon = {}
                         this.getListDanhMucCha();
                         this.$toast.success(response.data.message);
                     } else {
@@ -259,13 +253,6 @@ export default {
                 .then((response) => {
                     if (response.data.status) {
                         this.getListDanhMuc();
-                        this.editMon = {
-                            ten_danh_muc: "",
-                            slug_danh_muc: "",
-                            hinh_anh: "",
-                            id_danh_muc_cha: 0,
-                            tinh_trang: 1,
-                        }
                         this.getListDanhMucCha();
                         this.$toast.success(response.data.message);
                     } else {
