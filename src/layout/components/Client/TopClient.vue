@@ -63,9 +63,12 @@ export default {
 				.then(response => {
 					alert('Đăng xuất thành công');
 				})
-				.catch(error => {
-					console.error('Error logging out:', error);
-				});
+				.catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                });
 		},
 	}
 }

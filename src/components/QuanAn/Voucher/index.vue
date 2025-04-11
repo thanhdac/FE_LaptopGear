@@ -228,8 +228,11 @@ export default {
                 .then(res => {
                     this.voucher = res.data.data;
                 })
-                .catch(error => {
-                    console.error("There was an error fetching the data!", error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
         },
         createvoucher() {

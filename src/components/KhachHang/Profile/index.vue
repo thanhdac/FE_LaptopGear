@@ -388,8 +388,11 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    this.$toast.error(error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
         },
         deleteDiaChi() {
@@ -408,8 +411,11 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    this.$toast.error(error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
         },
         loadTinhThanh() {

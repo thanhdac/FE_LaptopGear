@@ -55,16 +55,17 @@ const routes = [
 		component: () => import("../components/Admin/DangNhap/index.vue"),
 		meta: { layout: "blank" },
 	},
+
 	//  Khách Hàng
-	{
-		path: "/khach-hang/dang-nhap",
-		component: () => import("../components/KhachHang/DangNhap/index.vue"),
-		meta: { layout: "blank" },
-	},
 	{
 		path: "/",
 		component: () => import("../components/KhachHang/TrangChu/index.vue"),
 		meta: { layout: "client" },
+	},
+	{
+		path: "/khach-hang/dang-nhap",
+		component: () => import("../components/KhachHang/DangNhap/index.vue"),
+		meta: { layout: "blank" },
 	},
 	{
 		path: "/khach-hang/quan-an",
@@ -85,7 +86,7 @@ const routes = [
 	// Từng quán nội dung hiển thị sẽ khác nhau. Giống về cấu trúc
 	// Làm sao để ta biết là khác nhau ra sao => dựa vào id_quan_an
 	{
-		path: "/khach-hang/don-dat-hang/:id_quan_an",
+		path: "/khach-hang/don-dat-hang/:id_quan",
 		component: () => import("../components/KhachHang/DonDatHang/index.vue"),
 		meta: { layout: "client" },
 		props: true,
@@ -169,8 +170,8 @@ const routes = [
 		meta: { layout: "blank" },
 	},
 	{
-		path: "/shipper/test",
-		component: () => import("../components/Shipper/Test/index.vue"),
+		path: "/shipper/don-hang",
+		component: () => import("../components/Shipper/DonHang/index.vue"),
 		meta: { layout: "shipper" },
 	},
 	{

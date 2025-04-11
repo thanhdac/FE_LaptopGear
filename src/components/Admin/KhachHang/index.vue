@@ -259,14 +259,10 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },
@@ -292,14 +288,10 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },
@@ -318,14 +310,10 @@ export default {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },

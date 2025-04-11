@@ -85,23 +85,12 @@
             </a>
         </div>
     </div>
-    <!-- <div class="row mt-2">
-        <div class="col-lg-12">
-            <div class="alert alert-success border-0 bg-success alert-dismissible fade show">
-                <marquee behavior="" direction="">
-                    <div class="text-white">
-                        Chào mừng bạn đến với website đặt đồ ăn của FoodZone
-                    </div>
-                </marquee>
-            </div>
-        </div>
-    </div> -->
-    <div class="row mt-4">
-        <div class="col-lg-12 text-center">
+    <div class="row mt-5">
+        <div class="col-lg-12 text-center mb-2">
             <div class="d-inline-block">
-                <h4><b>ĐẶT ĐỒ ĂN DỄ DÀNG TIỆN LỢI</b></h4>
+                <h2><b>ĐẶT ĐỒ ĂN DỄ DÀNG TIỆN LỢI</b></h2>
                 <div class="text-center">
-                    <hr class="bg-primary my-2" style="width: 100%; height: 3px; border: none; border-radius: 5px" />
+                    <hr class="bg-secondary mb-3" style="width: 100%; height: 3px; border: none; border-radius: 5px" />
                 </div>
             </div>
         </div>
@@ -109,7 +98,7 @@
             <div class="row row-cols-1 row-cols-md-3 row-cols-xl-5 product-grid">
                 <!-- Card 1: Đặt món ăn nhanh -->
                 <div class="col">
-                    <div class="card radius-10">
+                    <div class="card border-info border-start border-5 border-1 radius-10">
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="widgets-icons rounded-circle mx-auto bg-light-primary mb-3">
@@ -127,7 +116,7 @@
 
                 <!-- Card 2: Giao hàng tận nơi -->
                 <div class="col">
-                    <div class="card radius-10">
+                    <div class="card border-primary border-start border-5 border-1 radius-10">
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="widgets-icons rounded-circle mx-auto bg-light-danger mb-3">
@@ -143,7 +132,7 @@
 
                 <!-- Card 3: Ẩm thực đa dạng -->
                 <div class="col">
-                    <div class="card radius-10">
+                    <div class="card border-warning border-start border-5 border-1 radius-10">
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="widgets-icons rounded-circle mx-auto bg-light-info mb-3">
@@ -160,7 +149,7 @@
 
                 <!-- Card 4: Combo tiết kiệm -->
                 <div class="col">
-                    <div class="card radius-10">
+                    <div class="card border-danger border-start border-5 border-1 radius-10">
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="widgets-icons rounded-circle mx-auto bg-light-success mb-3">
@@ -176,7 +165,7 @@
 
                 <!-- Card 5: Đồ ăn lành mạnh -->
                 <div class="col">
-                    <div class="card radius-10">
+                    <div class="card border-success border-start border-5 border-1 radius-10">
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="widgets-icons rounded-circle mx-auto bg-light-warning mb-3">
@@ -198,14 +187,14 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h5 class="mt-2">
-                                <b class="text-danger">Danh Mục Các Món Ăn <i class="fa-solid fa-bowl-food"></i></b>
+                            <h5 class="mt-2 text-danger">
+                                Danh Mục Các Món Ăn <i class="fa-solid fa-bowl-food ms-1"></i>
                             </h5>
                         </div>
                         <div class="col-lg-2">
                             <div>
                                 <select class="form-select" aria-label="Default select example">
-                                    <option value="">-- Danh Mục Đồ Ăn --</option>
+                                    <option value="">-- Danh Mục Món Ăn --</option>
                                     <template v-for="(v, k) in phanLoai" :key="k">
                                         <option :value="v.id">{{ v.ten_phan_loai }}</option>
                                     </template>
@@ -213,13 +202,13 @@
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <div class="btn-group" role="group">
+                            <div class="btn-group w-100" role="group">
                                 <button type="button" class="btn btn-white w-100">Chọn Mức Giá</button>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button"
                                         class="btn btn-white dropdown-toggle dropdown-toggle-nocaret px-1"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bx bx-slider"></i>
+                                        <i class="bx bx-slider ms-1"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="btnGroupDrop1">
                                         <li><a class="dropdown-item" href="#"
@@ -246,12 +235,13 @@
                 <div class="card-body">
                     <div class="row product-grid">
                         <template v-for="(v, k) in monAnData" :key="k">
-                            <div class="col-lg-3 d-flex" v-if="k < 8">
+                            <div class="col-lg-2 d-flex" v-if="k < 8">
                                 <div class="card flex-fill">
-                                    <img :src="v.hinh_anh" class="card-img-top" style="height: 300px" alt="..." />
+                                    <img :src="v.hinh_anh" class="card-img-top" style="height: 200px" alt="..." />
                                     <div class="card-body">
                                         <h6 class="card-title cursor-pointer">
                                             {{ v.ten_mon_an }}
+
                                         </h6>
                                         <div class="clearfix">
                                             <p class="mb-0 float-start">{{ v.ten_quan_an }}</p>
@@ -262,7 +252,7 @@
                                         </p>
                                         <div class="d-flex align-items-center mt-auto">
                                             <i class="fa-solid fa-tag text-danger me-2"></i>
-                                            <span class="text-primary"><b>Giảm hết 30%</b></span>
+                                            <span class="text-primary">-30%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +280,7 @@
             <div class="card-body">
                 <div class="row product-grid">
                     <template v-for="(v, k) in quanAn" :key="k">
-                        <div class="col-lg-6 d-flex" v-if="k < 6">
+                        <div class="col-lg-4 d-flex" v-if="k < 6">
                             <div class="card flex-fill">
                                 <div class="card-body">
                                     <div class="row g-0">
@@ -312,7 +302,7 @@
                                                 <div class="d-flex align-items-center mt-3">
                                                     <i class="fa-solid fa-tag text-danger me-2"></i> <span
                                                         class="text-primary"><b>Giảm hết {{ v.giam_gia
-                                                            }}</b></span>
+                                                        }}</b></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -333,7 +323,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mt-2"><b class="">VOUCHER HẤP DẪN KHI ĐẶT MÓN</b></h5>
+                    <h5 class="mt-3"><b class="">VOUCHER HẤP DẪN KHI ĐẶT MÓN</b></h5>
                 </div>
                 <div class="card-body">
                     <div class="row product-grid">
