@@ -142,16 +142,17 @@
                                             </template>
                                         </select>
                                     </th>
-                                    <td class="text-end align-middle">10.000 đ</td>
+                                    <td class="text-end align-middle">{{ formatVND(phi_ship) }}</td>
                                 </tr>
                                 <tr>
                                     <th colspan="4">Tổng tiền cần thanh toán:</th>
-                                    <td class="text-end align-middle text-danger"><b>{{ formatVND(tong_tien) }}</b>
+                                    <td class="text-end align-middle text-danger"><b>{{ formatVND(tong_tien + phi_ship) }}</b>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-success w-100 mt-2">Đặt Món Ăn</button>
+                        <button v-if="trang_thai == 0" disabled class="btn btn-danger w-100 mt-2">Đặt Món Ăn</button>
+                        <button v-on:click="xacNhan()" v-else class="btn btn-success w-100 mt-2">Đặt Món Ăn</button>
                     </div>
                 </div>
             </div>
@@ -170,10 +171,12 @@ export default {
             monAnData: [],
             list_gio_hang: [],
             tong_tien: 0,
+            trang_thai : 0,
             dia_chi: {
                 id_quan_an: this.$route.params.id_quan,
                 id_dia_chi_khach: 0,
             },
+            phi_ship : 0,
             list_dia_chi: [],
         }
     },
@@ -181,6 +184,30 @@ export default {
         this.loadData();
     },
     methods: {
+        xacNhan() {
+            this.trang_thai = 0;
+            axios
+                .get('http://127.0.0.1:8000/api/khach-hang/xac-nhan-dat-hang/' + this.id_quan_an + '/' + this.dia_chi.id_dia_chi_khach, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.trang_thai = 1;
+                        this.loadData();
+                    } else {
+                        this.$toast.error("Hệ thống bị lỗi, vui lòng thử lại sau!");
+                    }
+                })
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                });
+        },
         formatVND(number) {
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
         },
@@ -198,7 +225,6 @@ export default {
                         this.list_gio_hang = res.data.gio_hang;
                         this.tong_tien = res.data.tong_tien;
                         this.list_dia_chi = res.data.dia_chi_khach;
-
                     } else {
                         this.$router.push('/khach-hang/quan-an');
                     }
@@ -258,6 +284,7 @@ export default {
                 this.loadData();
         },
         tinhPhiShip() {
+            this.trang_thai = 0;
             axios
                 .post("http://127.0.0.1:8000/api/khach-hang/don-dat-hang/phi-ship", this.dia_chi, {
                     headers: {
@@ -265,7 +292,12 @@ export default {
                     },
                 })
                 .then((res) => {
-
+                    if (res.data.status) {
+                        this.phi_ship = res.data.phi_ship;
+                        this.trang_thai = 1;
+                    } else {
+                        this.$toast.error("Hệ thống bị lỗi, vui lòng thử lại sau!");
+                    }
                 })
                 .catch(res => {
                     const list = Object.values(res.response.data.errors);
