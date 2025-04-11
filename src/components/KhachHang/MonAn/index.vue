@@ -22,17 +22,18 @@
         <template v-for="(value, index) in list_mon_an" :key="index">
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="card shadow-sm">
-                    <img v-bind:src="value.hinh_anh" class="card-img-top" style="height: 150px; object-fit: cover;">
+                    <img v-bind:src="value.hinh_anh" class="card-img-top" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h6 class="card-title fw-semibold mb-2">{{ value.ten_mon_an }}</h6>
                         <p class="text-muted small mb-2">{{ value.ten_quan_an }}</p>
-                        <p class="mb-0"><del class="text-muted">{{ value.gia_ban }}</del> <strong class="ms-2">{{
-                            value.gia_khuyen_mai }}</strong></p>
+                        <span class="mb-0 d-flex">
+                            <del class="text-muted">{{ formatVND(value.gia_ban) }}</del>
+                            <h5 class="ms-2 text-danger mb-0"><b>{{ formatVND(value.gia_khuyen_mai) }}</b></h5>
+                        </span>
                     </div>
                 </div>
             </div>
         </template>
-
     </div>
 </template>
 
@@ -48,6 +49,9 @@ export default {
         this.loadMonAn()
     },
     methods: {
+        formatVND(number) {
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+        },
         loadMonAn() {
             axios
                 .get('http://127.0.0.1:8000/api/khach-hang/data-mon-an', {
@@ -58,8 +62,11 @@ export default {
                 .then((res) => {
                     this.list_mon_an = res.data.data;
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
         },
     }

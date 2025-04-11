@@ -17,13 +17,15 @@
                             <thead>
                                 <tr class="align-middle text-center text-nowrap">
                                     <th>#</th>
+                                    <th>Mã Số Thuế</th>
                                     <th>Tên Quán Ăn</th>
                                     <th>Email</th>
                                     <th>Số Điện Thoại</th>
-                                    <th>Địa Chỉ</th>
-                                    <th>Mã Số Thuế</th>
                                     <th>Giờ mở cửa</th>
                                     <th>Giờ Đóng Cửa</th>
+                                    <th>Địa Chỉ</th>
+                                    <th>Quận Huyện</th>
+                                    <th>Tỉnh Thành</th>
                                     <th>Trạng Thái</th>
                                     <th>Kích Hoạt</th>
                                     <th>Action</th>
@@ -32,13 +34,15 @@
                             <tbody>
                                 <tr class="align-middle text-nowrap" v-for="(value, index) in list_quan" :key="index">
                                     <th class="text-center">{{ index + 1 }}</th>
+                                    <td>{{ value.ma_so_thue }}</td>
                                     <td>{{ value.ten_quan_an }}</td>
                                     <td>{{ value.email }}</td>
                                     <td>{{ value.so_dien_thoai }}</td>
-                                    <td>{{ value.dia_chi }}</td>
-                                    <td>{{ value.ma_so_thue }}</td>
                                     <td class="text-center">{{ value.gio_mo_cua }}</td>
                                     <td class="text-center">{{ value.gio_dong_cua }}</td>
+                                    <td>{{ value.dia_chi }}</td>
+                                    <td>{{ value.ten_quan_huyen }}</td>
+                                    <td>{{ value.ten_tinh_thanh }}</td>
                                     <td v-on:click="changeStatus(value)" class="text-center">
                                         <button class="btn btn-success w-100" v-if="value.tinh_trang == 1">Hoạt
                                             động</button>
@@ -342,14 +346,10 @@ export default {
                     this.$toast.success(res.data.message);
                     this.layDataQuanAn();
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },
@@ -364,14 +364,10 @@ export default {
                     this.$toast.success(res.data.message);
                     this.layDataQuanAn();
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },
@@ -386,14 +382,10 @@ export default {
                     this.$toast.success(res.data.message);
                     this.layDataQuanAn();
                 })
-                .catch(error => {
-                    var obj = error.response.data.errors;
-                    var result = Object.keys(obj).map((key) => [key, obj[key]]);
-                    result.forEach((value_1, key_1) => {
-                        var xxx = value_1[1];
-                        xxx.forEach((value, key) => {
-                            this.$toast.error(value);
-                        });
+                 .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
                     });
                 });
         },

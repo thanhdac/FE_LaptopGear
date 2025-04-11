@@ -32,12 +32,12 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<router-link to="/shipper/test">
-						<a class="nav-link" href="/shipper/test">
+					<router-link to="/shipper/don-hang">
+						<a class="nav-link" href="/shipper/don-hang">
 							<div class="parent-icon">
 								<i class="fa-regular fa-rectangle-list"></i>
 							</div>
-							<div class="menu-title">Test</div>
+							<div class="menu-title">Đơn Hàng</div>
 						</a>
 					</router-link>
 				</li>

@@ -3,15 +3,15 @@
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsv21q8k90uxa6@resize_ss640x400!@crop_w640_h400_cT"
-                    style="width: 100%; height: 300px; object-fit: cover;" class="img-fluid rounded-start"
+                    style="width: 100%; height: 400px; object-fit: cover;" class="img-fluid rounded-start"
                     alt="Restaurant Image">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h4 class="card-title fw-bold">{{ tt_quan_an.ten_quan_an }}</h4>
                     <div class="text-muted">
-                        <i class="fas fa-location-dot me-2"></i>
-                        {{ tt_quan_an.id_dia_chi }}
+                        <i class="fas fa-location-dot me-2 text-danger"></i>
+                        {{ tt_quan_an.dia_chi }}
                     </div>
                     <div class="d-flex gap-3 py-3">
                         <div class="cursor-pointer">
@@ -26,7 +26,8 @@
                     </div>
                     <div class="mb-3">
                         <p>
-                            <i class="fa-regular fa-clock"></i> {{ tt_quan_an.gio_mo_cua }} - {{ tt_quan_an.gio_dong_cua }}
+                            <i class="fa-regular fa-clock"></i> {{ tt_quan_an.gio_mo_cua }} - {{ tt_quan_an.gio_dong_cua
+                            }}
                         </p>
                         <p><i class="fa-solid fa-circle-dollar-to-slot"></i> 20.000 - 100.000</p>
                     </div>
@@ -36,13 +37,13 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col-lg-5">
-                                    <label class="form-label">PHÍ DỊCH VỤ </label>
-                                    <p class="text-danger">0.0% Phí dịch Vụ</p>
+                                    <h6 class="form-label">PHÍ DỊCH VỤ </h6>
+                                    <h6 class="text-danger">0.0% Phí dịch Vụ</h6>
                                 </div>
                                 |
                                 <div class="col-lg-5">
-                                    <label class="form-label">DỊCH VỤ BỞI </label>
-                                    <p class="text-danger">FOODZONE</p>
+                                    <h6 class="form-label">DỊCH VỤ BỞI </h6>
+                                    <h6 class="text-danger">FOODZONE</h6>
                                 </div>
                             </div>
                         </div>
@@ -74,19 +75,18 @@
                                 class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                         </div>
 
-                        <h5 class="mb-3 fw-bold">Món Đang Giảm Giá</h5>
+                        <h5 class="mb-3 fw-bold">Danh Sách Món Ăn</h5>
                         <template v-for="(v, k) in monAnData" :key="k">
                             <div class="card mb-3 hover-shadow">
                                 <div class="d-flex align-items-center p-3">
-                                    <img :src="v.hinh_anh" :alt="v.ten_mon_an" class="me-3 rounded"
+                                    <img :src="v.hinh_anh" class="me-3 rounded"
                                         style="width: 120px; height: 90px; object-fit: cover;">
                                     <div class="flex-grow-1">
                                         <h5 class="mb-1 fw-bold">{{ v.ten_mon_an }}</h5>
-                                        <p class="mb-1 text-muted">{{ v.ten_quan_an }}</p>
                                         <p class="mb-0">
                                             <del class="text-muted">{{ v.gia_ban.toLocaleString() }}đ</del>
                                             <strong class="text-danger ms-2">{{ v.gia_khuyen_mai.toLocaleString()
-                                                }}đ</strong>
+                                            }}đ</strong>
                                         </p>
                                     </div>
                                     <button v-on:click="themGioHang(v.id)" class="btn btn-outline-primary">+</button>
@@ -98,16 +98,16 @@
             </div>
 
             <div class="col-md-6">
-                <div class="card shadow-sm sticky-top" style="top: 10rem;">
+                <div class="card shadow-sm">
                     <div class="card-header bg-success py-3">
                         <h5 class="mb-0 text-white">
-                            <i class="fas fa-shopping-cart me-2"></i>Đơn Hàng
+                            <i class="fas fa-shopping-cart me-2"></i>Đơn Hàng Đang Đặt
                         </h5>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-bordered table-hover">
                             <thead>
-                                <tr>
+                                <tr class="text-center table-secondary">
                                     <th class="align-middle">Tên món</th>
                                     <th class="align-middle">Số lượng</th>
                                     <th class="align-middle">Đơn giá</th>
@@ -120,22 +120,38 @@
                                     <tr class="align-middle">
                                         <td>{{ v.ten_mon_an }}</td>
                                         <td style="width: 100px;">
-                                            <input v-model="v.so_luong" type="number" class="form-control" placeholder="1">
+                                            <input v-on:blur="updateGioHang(v)" v-model="v.so_luong" type="number"
+                                                class="form-control text-center" placeholder="1">
                                         </td>
-                                        <td>{{ v.don_gia }}</td>
+                                        <td class="text-end">{{ formatVND(v.don_gia) }}</td>
                                         <td>
-                                            <input v-model="v.ghi_chu" type="text" class="form-control" placeholder="Ghi chú">
+                                            <input v-on:change="updateGioHang(v)" v-model="v.ghi_chu" type="text"
+                                                class="form-control" placeholder="Ghi chú">
                                         </td>
-                                        <td>{{ v.thanh_tien }}</td>
+                                        <td class="text-end">{{ formatVND(v.thanh_tien) }}</td>
                                     </tr>
                                 </template>
+                                <tr class="align-middle">
+                                    <th>Chọn địa chỉ nhận hàng</th>
+                                    <th colspan="3">
+                                        <select v-model="dia_chi.id_dia_chi_khach" v-on:change="tinhPhiShip()"
+                                            class="form-control">
+                                            <template v-for="(value, index) in list_dia_chi" :key="index">
+                                                <option :value="value.id">{{ value.dia_chi }} - {{ value.ten_nguoi_nhan
+                                                    }} - {{ value.so_dien_thoai }}</option>
+                                            </template>
+                                        </select>
+                                    </th>
+                                    <td class="text-end align-middle">10.000 đ</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4">Tổng tiền cần thanh toán:</th>
+                                    <td class="text-end align-middle text-danger"><b>{{ formatVND(tong_tien) }}</b>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-between">
-                            <h5>Tổng tiền:</h5>
-                            <h5>{{ tong_tien }}</h5>
-                        </div>
-                        <button class="btn btn-success w-100 mt-3">Tạo Đơn Hàng</button>
+                        <button class="btn btn-success w-100 mt-2">Đặt Món Ăn</button>
                     </div>
                 </div>
             </div>
@@ -146,20 +162,28 @@
 import axios from 'axios';
 
 export default {
-    props: ['id_quan_an'],
+    props: ['id_quan'],
     data() {
         return {
-            id_quan_an: this.$route.params.id_quan_an,
+            id_quan_an: this.$route.params.id_quan,
             tt_quan_an: {},
-            monAnData : [],
-            list_gio_hang : [],
-            tong_tien     : 0,
+            monAnData: [],
+            list_gio_hang: [],
+            tong_tien: 0,
+            dia_chi: {
+                id_quan_an: this.$route.params.id_quan,
+                id_dia_chi_khach: 0,
+            },
+            list_dia_chi: [],
         }
     },
     mounted() {
         this.loadData();
     },
     methods: {
+        formatVND(number) {
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+        },
         loadData() {
             axios
                 .get('http://127.0.0.1:8000/api/khach-hang/don-dat-hang/' + this.id_quan_an, {
@@ -168,22 +192,27 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if(res.data.status) {
-                        this.tt_quan_an     = res.data.data_1;
-                        this.monAnData      = res.data.data_2;
-                        this.list_gio_hang  = res.data.data_3;
-                        this.tong_tien      = res.data.tong_tien;   
+                    if (res.data.status) {
+                        this.tt_quan_an = res.data.quan_an;
+                        this.monAnData = res.data.mon_an;
+                        this.list_gio_hang = res.data.gio_hang;
+                        this.tong_tien = res.data.tong_tien;
+                        this.list_dia_chi = res.data.dia_chi_khach;
+
                     } else {
                         this.$router.push('/khach-hang/quan-an');
                     }
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
         },
         themGioHang(id_mon_an) {
             var payload = {
-                'id' : id_mon_an,
+                'id': id_mon_an,
             };
             axios
                 .post("http://127.0.0.1:8000/api/khach-hang/don-dat-hang/create", payload, {
@@ -192,17 +221,59 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if(res.data.status) {
+                    if (res.data.status) {
                         this.$toast.success(res.data.message);
                         this.loadData();
                     } else {
                         this.$toast.error(res.data.message);
                     }
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
                 });
-        }
+        },
+        updateGioHang(value) {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/don-dat-hang/update", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                });
+                this.loadData();
+        },
+        tinhPhiShip() {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/don-dat-hang/phi-ship", this.dia_chi, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+
+                })
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                });
+        },
     },
 }
 </script>
