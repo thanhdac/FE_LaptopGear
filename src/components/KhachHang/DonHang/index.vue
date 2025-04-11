@@ -48,7 +48,7 @@
                                                                 <td>Giá Bán</td>
                                                                 <td>10.000 đ</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr class="text-nowrap">
                                                                 <td>Thành Tiền</td>
                                                                 <td>20.000 đ</td>
                                                             </tr>
@@ -103,7 +103,7 @@
                                                                     <td>Giá Bán</td>
                                                                     <td>10.000 đ</td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr class="text-nowrap">
                                                                     <td>Thành Tiền</td>
                                                                     <td>20.000 đ</td>
                                                                 </tr>
@@ -242,7 +242,7 @@
                             </tbody>
                             <tfoot class="table-light">
                                 <tr class="align-middle">
-                                    <td  class="text-start">
+                                    <td class="text-start">
                                         <strong>Tổng Cộng:</strong>
                                     </td>
                                     <td colspan="5" class="text-end">
@@ -267,67 +267,10 @@
 
 <script>
 export default {
-    data() {
-        return {
-            searchTerm: '',
-            statusFilter: '',
-            selectedOrder: null,
-            orders: [
-                {
-                    id: 'OS-000354',
-                    customerName: 'Nguyễn Văn A',
-                    status: 'completed',
-                    totalPrice: 485000,
-                    orderDate: new Date('2024-03-10'),
-                    shippingAddress: '123 Đường ABC, Quận 1, TP.HCM',
-                    items: [
-                        { id: 1, name: 'Burger', quantity: 2, price: 50000, note: 'Không hành' },
-                        { id: 2, name: 'Pizza', quantity: 1, price: 385000, note: '' }
-                    ]
-                },
-                {
-                    id: 'OS-000355',
-                    customerName: 'Trần Thị B',
-                    status: 'pending',
-                    totalPrice: 968000,
-                    orderDate: new Date('2024-03-10'),
-                    shippingAddress: '456 Đường XYZ, Quận 2, TP.HCM',
-                    items: [
-                        { id: 1, name: 'Combo 1', quantity: 1, price: 968000, note: 'Thêm nước ngọt' }
-                    ]
-                }
-            ]
-        }
-    },
-    computed: {
-        filteredOrders() {
-            return this.orders.filter(order => {
-                const matchesSearch = !this.searchTerm ||
-                    order.id.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                    order.customerName.toLowerCase().includes(this.searchTerm.toLowerCase());
-
-                const matchesStatus = !this.statusFilter || order.status === this.statusFilter;
-
-                return matchesSearch && matchesStatus;
-            });
-        }
-    },
-    methods: {
-    }
+   
 }
 </script>
 
-<style scoped>
-.table td,
-.table th {
-    vertical-align: middle;
-}
+<style>
 
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-}
-
-.badge {
-    padding: 0.5em 1em;
-}
 </style>
