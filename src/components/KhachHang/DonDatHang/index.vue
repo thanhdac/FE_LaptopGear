@@ -105,54 +105,66 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr class="text-center table-secondary">
-                                    <th class="align-middle">Tên món</th>
-                                    <th class="align-middle">Số lượng</th>
-                                    <th class="align-middle">Đơn giá</th>
-                                    <th class="align-middle">Ghi chú</th>
-                                    <th class="align-middle">Tổng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <template v-for="(v, k) in list_gio_hang" :key="k">
-                                    <tr class="align-middle">
-                                        <td>{{ v.ten_mon_an }}</td>
-                                        <td style="width: 100px;">
-                                            <input v-on:blur="updateGioHang(v)" v-model="v.so_luong" type="number"
-                                                class="form-control text-center" placeholder="1">
-                                        </td>
-                                        <td class="text-end">{{ formatVND(v.don_gia) }}</td>
-                                        <td>
-                                            <input v-on:change="updateGioHang(v)" v-model="v.ghi_chu" type="text"
-                                                class="form-control" placeholder="Ghi chú">
-                                        </td>
-                                        <td class="text-end">{{ formatVND(v.thanh_tien) }}</td>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="text-center table-secondary">
+                                        <th class="align-middle">Tên món</th>
+                                        <th class="align-middle">Số lượng</th>
+                                        <th class="align-middle">Đơn giá</th>
+                                        <th class="align-middle">Ghi chú</th>
+                                        <th class="align-middle">Thành Tiền</th>
+                                        <th class="align-middle">Action</th>
                                     </tr>
-                                </template>
-                                <tr class="align-middle">
-                                    <th>Chọn địa chỉ nhận hàng</th>
-                                    <th colspan="3">
-                                        <select v-model="dia_chi.id_dia_chi_khach" v-on:change="tinhPhiShip()"
-                                            class="form-control">
-                                            <template v-for="(value, index) in list_dia_chi" :key="index">
-                                                <option :value="value.id">{{ value.dia_chi }} - {{ value.ten_nguoi_nhan
-                                                    }} - {{ value.so_dien_thoai }}</option>
-                                            </template>
-                                        </select>
-                                    </th>
-                                    <td class="text-end align-middle">{{ formatVND(phi_ship) }}</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="4">Tổng tiền cần thanh toán:</th>
-                                    <td class="text-end align-middle text-danger"><b>{{ formatVND(tong_tien + phi_ship) }}</b>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button v-if="trang_thai == 0" disabled class="btn btn-danger w-100 mt-2">Đặt Món Ăn</button>
-                        <button v-on:click="xacNhan()" v-else class="btn btn-success w-100 mt-2">Đặt Món Ăn</button>
+                                </thead>
+                                <tbody>
+                                    <template v-for="(v, k) in list_gio_hang" :key="k">
+                                        <tr class="align-middle">
+                                            <td>{{ v.ten_mon_an }}</td>
+                                            <td style="width: 100px;">
+                                                <input v-on:blur="updateGioHang(v)" v-model="v.so_luong" type="number"
+                                                    class="form-control text-center" placeholder="1">
+                                            </td>
+                                            <td class="text-end">{{ formatVND(v.don_gia) }}</td>
+                                            <td>
+                                                <input v-on:change="updateGioHang(v)" v-model="v.ghi_chu" type="text"
+                                                    class="form-control" placeholder="Ghi chú">
+                                            </td>
+                                            <td class="text-end">{{ formatVND(v.thanh_tien) }}</td>
+                                            <td class="align-middle text-center">
+                                                <button v-on:click="xoaGioHang(v)" class="btn btn-danger">Hủy</button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <tr class="align-middle">
+                                        <th>Chọn địa chỉ nhận hàng</th>
+                                        <th colspan="3">
+                                            <select v-model="dia_chi.id_dia_chi_khach" v-on:change="tinhPhiShip()"
+                                                class="form-control">
+                                                <template v-for="(value, index) in list_dia_chi" :key="index">
+                                                    <option :value="value.id">{{ value.dia_chi }} - {{
+                                                        value.ten_nguoi_nhan
+                                                        }} - {{ value.so_dien_thoai }}</option>
+                                                </template>
+                                            </select>
+                                        </th>
+                                        <td colspan="2"><span class="d-flex justify-content-between"><b>Phí Ship: </b>{{
+                                            formatVND(phi_ship) }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="4">Tổng tiền cần thanh toán:</th>
+                                        <td colspan="2" class="text-end align-middle text-danger"><b>{{
+                                            formatVND(tong_tien
+                                                + phi_ship)
+                                                }}</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button v-if="trang_thai == 0" disabled class="btn btn-danger w-100 mt-2">Đặt Món
+                                Ăn</button>
+                            <button v-on:click="xacNhan()" v-else class="btn btn-success w-100 mt-2">Đặt Món Ăn</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,12 +183,12 @@ export default {
             monAnData: [],
             list_gio_hang: [],
             tong_tien: 0,
-            trang_thai : 0,
+            trang_thai: 0,
             dia_chi: {
                 id_quan_an: this.$route.params.id_quan,
                 id_dia_chi_khach: 0,
             },
-            phi_ship : 0,
+            phi_ship: 0,
             list_dia_chi: [],
         }
     },
@@ -281,7 +293,29 @@ export default {
                         this.$toast.error(v[0]);
                     });
                 });
-                this.loadData();
+            this.loadData();
+        },
+        xoaGioHang(value) {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/don-dat-hang/delete", value, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.loadData();
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                })
+                .catch(res => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                });
         },
         tinhPhiShip() {
             this.trang_thai = 0;

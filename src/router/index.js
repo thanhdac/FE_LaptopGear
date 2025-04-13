@@ -123,6 +123,11 @@ const routes = [
 		meta: { layout: "blank" },
 	},
 	{
+		path: "/quan-an/don-hang",
+		component: () => import("../components/QuanAn/DongHang/index.vue"),
+		meta: { layout: "quan_an" },
+	},
+	{
 		path: "/quan-an/test",
 		component: () => import("../components/QuanAn/Test/index.vue"),
 		meta: { layout: "quan_an" },
