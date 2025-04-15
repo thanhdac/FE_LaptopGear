@@ -23,29 +23,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th class="text-center">value.ma_don_hang</th>
-                                    <td>value.ten_quan_an</td>
-                                    <td class="text-center">value.created_at</td>
-                                    <td class="text-end">value.tien_hang</td>
-                                    <td class="text-end">value.phi_ship</td>
-                                    <td class="text-end">value.tong_tien</td>
-                                    <td class="text-center">
-                                        <span class="badge rounded-pill w-100 bg-success py-2">
-                                            <span style="font-size: 15px;">Đã giao</span>
-                                        </span>
-                                    </td>
-                                    <td>value.ho_va_ten_shipper</td>
-                                    <td>
-                                        value.dia_chi - value.ten_nguoi_nhan - value.so_dien_thoai
-                                    </td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-primary btn-sm radius-30 px-4"
-                                            data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
-                                            <i class="bx bx-detail me-1"></i>Chi tiết
-                                        </button>
-                                    </td>
-                                </tr>
+                                <template v-for="(value, index) in list_don_hang" :key="index">
+                                    <tr>
+                                        <th class="text-center">{{ value.ma_don_hang }}</th>
+                                        <td>{{ value.ten_quan_an }}</td>
+                                        <td class="text-center">{{ value.created_at }}</td>
+                                        <td class="text-end">{{ formatVND(value.tien_hang) }}</td>
+                                        <td class="text-end">{{ formatVND(value.phi_ship) }}</td>
+                                        <td class="text-end">{{ formatVND(value.tong_tien) }}</td>
+                                        <td class="text-center">
+                                            <span v-if="value.tinh_trang == 0"
+                                                class="badge rounded-pill w-100 bg-primary py-1">
+                                                <span style="font-size: 13px;">Đơn đang chờ</span>
+                                            </span>
+                                            <span v-if="value.tinh_trang == 1"
+                                                class="badge rounded-pill w-100 bg-warning py-1">
+                                                <span style="font-size: 13px;">Đang giao hàng</span>
+                                            </span>
+                                            <span v-if="value.tinh_trang == 2"
+                                                class="badge rounded-pill w-100 bg-success py-1">
+                                                <span style="font-size: 13px;">Đã giao hàng</span>
+                                            </span>
+                                            <span v-if="value.tinh_trang == 3"
+                                                class="badge rounded-pill w-100 bg-danger py-1">
+                                                <span style="font-size: 13px;">Đơn đã hủy</span>
+                                            </span>
+                                        </td>
+                                        <td>{{ value.ho_va_ten_shipper }}</td>
+                                        <td>
+                                            {{ value.dia_chi }} - {{ value.ten_nguoi_nhan }} - {{ value.so_dien_thoai }}
+                                        </td>
+                                        <td class="text-center">
+                                            <button v-on:click="xemChiTiet(value); Object.assign(chi_tiet, value)"
+                                                type="button" class="btn btn-primary btn-sm radius-30 px-4"
+                                                data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                                                <i class="bx bx-detail me-1"></i>Chi tiết
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -59,7 +75,7 @@
                 <div class="modal-header text-white">
                     <h5 class="modal-title">
                         <i class="bx bx-package fa-lg"></i>
-                        CHI TIẾT ĐƠN HÀNG - <b class="text-danger">chi_tiet.ma_don_hang</b>
+                        CHI TIẾT ĐƠN HÀNG - <b class="text-danger">{{ chi_tiet.ma_don_hang }}</b>
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
@@ -77,13 +93,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="align-middle">
-                                    <td>value.ten_mon_an</td>
-                                    <td class="text-center">value.ten_so_luong</td>
-                                    <td class="text-end">value.don_gia</td>
-                                    <td class="text-end">value.ghi_chu</td>
-                                    <td class="text-end fw-bold">value.thanh_tien</td>
-                                </tr>
+                                <template v-for="(value, index) in list_chi_tiet" :key="index">
+                                    <tr class="align-middle">
+                                        <td>{{ value.ten_mon_an }}</td>
+                                        <td class="text-center">{{ value.so_luong }}</td>
+                                        <td class="text-end">{{ formatVND(value.don_gia) }}</td>
+                                        <td class="text-end">{{ value.ghi_chu ? value.ghi_chu : "-" }}</td>
+                                        <td class="text-end fw-bold">{{ formatVND(value.thanh_tien) }}</td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -99,8 +117,58 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
 
+export default {
+    data() {
+        return {
+            list_don_hang: [],
+            chi_tiet: {},
+            list_chi_tiet: [],
+        }
+    },
+    mounted() {
+        this.loadData();
+    },
+    methods: {
+        formatVND(number) {
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+        },
+        loadData() {
+            axios
+                .get("http://127.0.0.1:8000/api/khach-hang/don-hang/data", {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    this.list_don_hang = res.data.data;
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
+        xemChiTiet(payload) {
+            axios
+                .post("http://127.0.0.1:8000/api/khach-hang/don-hang/data-chi-tiet", payload, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("khach_hang_login"),
+                    },
+                })
+                .then((res) => {
+                    this.list_chi_tiet = res.data.data;
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        }
+    },
 }
 </script>
 

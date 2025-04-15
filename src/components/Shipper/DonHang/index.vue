@@ -46,8 +46,8 @@
 					</a>
 				</li>
 			</ul>
-			<div class="row mb-3">
-				<div class="col-lg-5 col-sm-6">
+			<div class="row">
+				<div class="col-lg-5 col-md-6 mb-3">
 					<select class="form-select">
 						<option selected>Khu vực</option>
 						<option>Quận 1</option>
@@ -56,7 +56,7 @@
 						<option>Quận Bình Thạnh</option>
 					</select>
 				</div>
-				<div class="col-lg-5 col-sm-6">
+				<div class="col-lg-5 col-md-6 mb-3">
 					<select class="form-select">
 						<option selected>Sắp xếp theo</option>
 						<option>Thời gian gần nhất</option>
@@ -64,7 +64,7 @@
 						<option>Giá trị cao nhất</option>
 					</select>
 				</div>
-				<div class="col-lg-2 col-sm-6">
+				<div class="col-lg-2 col-md-12 mb-3">
 					<button class="btn btn-primary w-100 ">
 						Lọc
 					</button>
@@ -73,210 +73,84 @@
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="available">
 					<div class="row d-flex">
-						<div class="col-lg-4 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5830</span>
-									<span class="text-light small"><b>10 phút trước</b></span>
-								</div>
-								<div class="card-body">
-									<div class="row mb-3">
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3" style="align-content: center;">
-													<img style="width: 80px; height: 60px; object-fit: cover;"
-														class="img-fluid"
-														src="https://cdn.brvn.vn/editor_news/2020/02/19933_Pho24_2_1582541813.jpg"
-														alt="">
+						<template v-for="(value, index) in list_don_hang_co_the_nhan" :key="index">
+							<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+								<div class="card w-100">
+									<div
+										class="card-header bg-warning d-flex justify-content-between align-items-center">
+										<span class="fw-bold text-white">#{{ value.ma_don_hang }}</span>
+										<span class="text-light small"><b>10 phút trước</b></span>
+									</div>
+									<div class="card-body">
+										<div class="row mb-3">
+											<div class="col-lg-6 col-md-12 d-flex">
+												<div class="d-flex">
+													<div class="me-3" style="align-content: center;">
+														<img style="width: 80px; height: 60px;" class="img-fluid"
+															:src="value.hinh_anh" alt="">
+													</div>
+													<div>
+														<h6>{{ value.ten_quan_an }}</h6>
+														<p class="text-muted mb-0 small">{{ value.dia_chi_quan }}, {{
+															value.ten_quan_huyen_quan }}</p>
+														<div class="small text-success">2.5km từ vị trí của bạn</div>
+													</div>
 												</div>
-												<div>
-													<h6>Nhà hàng Phở 24</h6>
-													<p class="text-muted mb-0 small">123 Nguyễn Văn Linh, Quận 7</p>
-													<div class="small text-success">2.5km từ vị trí của bạn</div>
+											</div>
+											<div class="col-lg-6 col-md-12 d-flex">
+												<div class="d-flex">
+													<div class="me-3" style="align-content: center;">
+														<img style="width: 60px; height: 60px; border-radius: 50%;"
+															class="img-fluid" :src="value.avatar">
+													</div>
+													<div>
+														<h6>{{ value.ten_nguoi_nhan }}</h6>
+														<p class="text-muted mb-0 small">{{ value.dia_chi_khach }}, {{
+															value.ten_quan_huyen_khach }}</p>
+														<div class="small text-muted">5.2km • ~15 phút</div>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3">
-													<img style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
-														class="img-fluid"
-														src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png"
-														alt="">
-												</div>
-												<div>
-													<h6>Nguyễn Thị B</h6>
-													<p class="text-muted mb-0 small">56 Nguyễn Hữu Thọ, Quận 7</p>
-													<div class="small text-muted">5.2km • ~15 phút</div>
-												</div>
+										<div class="d-flex justify-content-between border-top pt-3">
+											<div>
+												<span class="d-block">Giá trị đơn hàng:</span>
+												<span class="fw-bold text-success">{{ formatVND(value.tong_tien)
+												}}</span>
+											</div>
+											<div>
+												<span class="d-block">Phí vận chuyển:</span>
+												<span class="fw-bold text-primary">{{ formatVND(value.phi_ship)
+												}}</span>
+											</div>
+											<div>
+												<span class="d-block">Thanh toán:</span>
+												<span class="fw-bold">COD</span>
 											</div>
 										</div>
 									</div>
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">150.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">COD</span>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="row">
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-primary w-100">Chi tiết</button>
-										</div>
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-success w-100">Nhận đơn</button>
+									<div class="card-footer">
+										<div class="row">
+											<div class="col-lg-6 col-md-12">
+												<button class="btn btn-primary w-100">Chi tiết</button>
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<button v-on:click="Object.assign(don_hang, value)"
+													data-bs-toggle="modal" data-bs-target="#exampleModal"
+													class="btn btn-success w-100">Nhận
+													đơn</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5830</span>
-									<span class="text-light small"><b>10 phút trước</b></span>
-								</div>
-								<div class="card-body">
-									<div class="row mb-3">
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3" style="align-content: center;">
-													<img style="width: 80px; height: 60px; object-fit: cover;"
-														class="img-fluid"
-														src="https://statics.vincom.com.vn/xu-huong/nha-hang-sushi/Kohaku-nha-hang-sushi.jpg"
-														alt="">
-												</div>
-												<div>
-													<h6>Nhà hàng Sushi Nhật Bản</h6>
-													<p class="text-muted mb-0 small">45 Lê Thánh Tôn, Quận 1</p>
-													<div class="small text-success">2.1km từ vị trí của bạn</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3">
-													<img style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
-														class="img-fluid"
-														src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png"
-														alt="">
-												</div>
-												<div>
-													<h6>Nguyên Văn C</h6>
-													<p class="text-muted mb-0 small">112 Nguyễn Đình Chiểu, Quận 3</p>
-													<div class="small text-muted">4.4km • ~15 phút</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">150.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">Đã thanh toán</span>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="row">
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-primary w-100">Chi tiết</button>
-										</div>
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-success w-100">Nhận đơn</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5830</span>
-									<span class="text-light small"><b>10 phút trước</b></span>
-								</div>
-								<div class="card-body">
-									<div class="row mb-3">
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3" style="align-content: center;">
-													<img style="width: 80px; height: 60px; object-fit: cover;"
-														class="img-fluid"
-														src="https://welcome.deliveryk.com/wp-content/uploads/2023/12/deliveryk-thit-nuong-han-quoc-o-da-nang-5.jpg"
-														alt="">
-												</div>
-												<div>
-													<h6>Nhà hàng BBQ Hàn Quốc</h6>
-													<p class="text-muted mb-0 small">45 Lê Thánh Tôn, Quận 1</p>
-													<div class="small text-success">2.1km từ vị trí của bạn</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-12">
-											<div class="d-flex">
-												<div class="me-3">
-													<img style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
-														class="img-fluid"
-														src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png"
-														alt="">
-												</div>
-												<div>
-													<h6>Phan Văn D</h6>
-													<p class="text-muted mb-0 small">84 Phan Đình Phùng, Quận 3</p>
-													<div class="small text-muted">7.8km • ~20 phút</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">150.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">Đã thanh toán</span>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="row">
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-primary w-100">Chi tiết</button>
-										</div>
-										<div class="col-lg-6 col-md-12">
-											<button class="btn btn-success w-100">Nhận đơn</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						</template>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="accepted">
 					<div class="row g-3">
-						<div class="col-lg-4">
-							<div class="card border-warning">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card border-warning w-100">
 								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
 									<span class="fw-bold text-white">#ORD-5823</span>
 									<span class="badge bg-secondary text-white">Đang lấy hàng</span>
@@ -359,8 +233,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="card border-warning">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card border-warning w-100">
 								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
 									<span class="fw-bold text-white">#ORD-5823</span>
 									<span class="badge bg-secondary text-white">Đang lấy hàng</span>
@@ -443,8 +317,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="card border-warning">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card border-warning w-100">
 								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
 									<span class="fw-bold text-white">#ORD-5823</span>
 									<span class="badge bg-success text-white">Đang giao hàng</span>
@@ -535,10 +409,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="d-flex justify-content-between align-items-center">
-									<div>
-										<h4 class="mb-1">Lịch sử giao hàng</h4>
-										<p class="text-muted mb-0">Các đơn hàng đã hoàn thành trong ngày</p>
-									</div>
+									<h4 class="mb-1">Lịch sử giao hàng</h4>
 									<div class="d-flex gap-2">
 										<div class="input-group">
 											<input type="date" class="form-control" placeholder="Chọn ngày">
@@ -546,7 +417,7 @@
 												Lọc
 											</button>
 										</div>
-										<button class="btn btn-outline-success">
+										<button class="btn btn-outline-success text-nowrap">
 											Xuất báo cáo
 										</button>
 									</div>
@@ -555,8 +426,8 @@
 						</div>
 					</div>
 					<div class="row g-4">
-						<div class="col-lg-4">
-							<div class="card ">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card w-100">
 								<div class="card-header bg-warning border-bottom-0">
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="d-flex align-items-center gap-2">
@@ -667,8 +538,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="card ">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card w-100">
 								<div class="card-header bg-warning border-bottom-0">
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="d-flex align-items-center gap-2">
@@ -779,8 +650,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="card ">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+							<div class="card w-100">
 								<div class="card-header bg-warning border-bottom-0">
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="d-flex align-items-center gap-2">
@@ -895,11 +766,94 @@
 				</div>
 			</div>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Nhận Đơn Hàng</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-primary border-0 bg-primary alert-dismissible fade show py-2 mb-0">
+							<div class="d-flex align-items-center">
+								<div class="font-35 text-light"><i class="bx bx-info-circle"></i>
+								</div>
+								<div class="ms-3">
+									<h6 class="mb-0 text-light">Cảnh Báo</h6>
+									<div class="text-light">Bạn Có chắn chắc muốn nhận đơn hàng này không?</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+						<button v-on:click="nhanDon()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Xác
+							Nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
-export default {
+import axios from 'axios';
 
-}
+export default {
+	data() {
+		return {
+			list_don_hang_co_the_nhan: [],
+			don_hang: {},
+		}
+	},
+	mounted() {
+		this.loadData();
+	},
+	methods: {
+		formatVND(number) {
+			return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+		},
+		loadData() {
+			axios
+				.get("http://127.0.0.1:8000/api/shipper/don-hang/data", {
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem("shipper_login"),
+					},
+				})
+				.then((res) => {
+					this.list_don_hang_co_the_nhan = res.data.list_don_hang_co_the_nhan;
+				})
+				.catch((res) => {
+					const list = Object.values(res.response.data.errors);
+					list.forEach((v, i) => {
+						this.$toast.error(v[0]);
+					});
+				})
+		},
+		nhanDon() {
+			axios
+				.post("http://127.0.0.1:8000/api/shipper/don-hang/nhan-don", this.don_hang, {
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem("shipper_login"),
+					},
+				})
+				.then((res) => {
+					if (res.data.status) {
+						this.$toast.success(res.data.message);
+						this.loadData();
+					}
+					else {
+						this.$toast.error(res.data.message);
+					}
+				})
+				.catch((res) => {
+					const list = Object.values(res.response.data.errors);
+					list.forEach((v, i) => {
+						this.$toast.error(v[0]);
+					});
+				})
+		}
+	},
+}	
 </script>
 <style></style>
