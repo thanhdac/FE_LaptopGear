@@ -22,6 +22,11 @@
                                     placeholder="Nhập mật khẩu">
                             </div>
 
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Recaptcha</label>
+                                <div class="g-recaptcha" data-sitekey="6LftzRorAAAAAFqAWCXc2BGMp7XM-RgWuryT0v7d"></div>
+                            </div>
+
                             <button type="submit" class="btn btn-primary w-100 mb-3">
                                 Đăng Nhập
                             </button>
@@ -52,8 +57,22 @@ export default {
             }
         }
     },
+    mounted() {
+        const recaptchaScript = document.createElement('script')
+        recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+        recaptchaScript.onerror = () => {
+            this.$toast.error("Không thể tải Recaptcha. Vui lòng thử lại sau.")
+        }
+        document.head.appendChild(recaptchaScript)
+    },
     methods: {
         Login() {
+            var code = grecaptcha.getResponse();
+            if (code.length === 0) {
+                this.$toast.error("Vui lòng xác minh Recaptcha.");
+                return;
+            }
+            this.user.code = code;
             axios
                 .post("http://127.0.0.1:8000/api/khach-hang/dang-nhap", this.user)
                 .then((res) => {

@@ -149,259 +149,92 @@
 				</div>
 				<div class="tab-pane fade" id="accepted">
 					<div class="row g-3">
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card border-warning w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5823</span>
-									<span class="badge bg-secondary text-white">Đang lấy hàng</span>
-								</div>
-								<div class="card-body">
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/09/bun-dau-mam-tom-2-e1505460520519.jpg"
-												alt="">
-										</div>
-										<div>
-											<h6 class="mt-3">Bún Đậu Mắm Tôm A Chảnh</h6>
-											<p class="text-muted mb-0 small">94 Nguyễn Du, Quận 1</p>
-											<div class="small text-warning"><i class="bi bi-hourglass-split me-1"></i>
-												Đang lấy hàng</div>
-										</div>
+						<template v-for="(value, index) in list_don_dang_giao" :key="index">
+							<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+								<div class="card border-warning w-100">
+									<div class="card-header bg-warning d-flex justify-content-between align-items-center">
+										<span class="fw-bold text-white">#ORD-5823</span>
+										<span class="badge bg-secondary text-white">Đang lấy hàng</span>
 									</div>
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="">
+									<div class="card-body">
+										<div class="d-flex mb-3">
+											<div class="me-3">
+												<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
+													class="img-fluid"
+													src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/09/bun-dau-mam-tom-2-e1505460520519.jpg"
+													alt="">
+											</div>
+											<div>
+												<h6 class="mt-3">Bún Đậu Mắm Tôm A Chảnh</h6>
+												<p class="text-muted mb-0 small">94 Nguyễn Du, Quận 1</p>
+												<div class="small text-warning"><i class="bi bi-hourglass-split me-1"></i>
+													Đang lấy hàng</div>
+											</div>
 										</div>
-										<div>
-											<h6 class="mt-3">Trân Văn A</h6>
-											<p class="text-muted mb-0 small">35 Trần Hưng Đạo, Quận 5</p>
-											<div class="small text-muted"><i class="bi bi-clock-history me-1"></i>
-												Chờ lấy hàng</div>
+										<div class="d-flex mb-3">
+											<div class="me-3">
+												<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
+													class="img-fluid"
+													src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="">
+											</div>
+											<div>
+												<h6 class="mt-3">Trân Văn A</h6>
+												<p class="text-muted mb-0 small">35 Trần Hưng Đạo, Quận 5</p>
+												<div class="small text-muted"><i class="bi bi-clock-history me-1"></i>
+													Chờ lấy hàng</div>
+											</div>
 										</div>
-									</div>
-									<div class="progress mb-3" style="height: 8px;">
-										<div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
-											aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<div class="d-flex justify-content-between mb-3">
-										<div class="text-center">
-											<i class="bi bi-check-circle-fill text-success"></i>
-											<div class="small">Nhận đơn</div>
+										<div class="progress mb-3" style="height: 8px;">
+											<div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
+												aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
-										<div class="text-center">
-											<i class="bi bi-circle-fill text-warning"></i>
-											<div class="small">Lấy hàng</div>
+										<div class="d-flex justify-content-between mb-3">
+											<div class="text-center">
+												<i class="bi bi-check-circle-fill text-success"></i>
+												<div class="small">Nhận đơn</div>
+											</div>
+											<div class="text-center">
+												<i class="bi bi-circle-fill text-warning"></i>
+												<div class="small">Lấy hàng</div>
+											</div>
+											<div class="text-center">
+												<i class="bi bi-circle text-muted"></i>
+												<div class="small">Giao hàng</div>
+											</div>
+											<div class="text-center">
+												<i class="bi bi-circle text-muted"></i>
+												<div class="small">Hoàn thành</div>
+											</div>
 										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Giao hàng</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Hoàn thành</div>
-										</div>
-									</div>
 
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">180.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">Đã thanh toán</span>
+										<div class="d-flex justify-content-between border-top pt-3">
+											<div>
+												<span class="d-block">Giá trị đơn hàng:</span>
+												<span class="fw-bold text-success">180.000đ</span>
+											</div>
+											<div>
+												<span class="d-block">Phí vận chuyển:</span>
+												<span class="fw-bold text-primary">35.000đ</span>
+											</div>
+											<div>
+												<span class="d-block">Thanh toán:</span>
+												<span class="fw-bold">Đã thanh toán</span>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="card-footer bg-white">
-									<div class="d-flex justify-content-between">
-										<span class="text-muted small"><i class="bi bi-clock me-1"></i> Nhận đơn 20
-											phút trước</span>
-										<div>
-											<button class="btn btn-outline-warning ">Đã lấy hàng</button>
-											<button class="btn btn-outline-danger  ms-2">Gặp vấn đề</button>
+									<div class="card-footer bg-white">
+										<div class="d-flex justify-content-between">
+											<span class="text-muted small"><i class="bi bi-clock me-1"></i> Nhận đơn 20
+												phút trước</span>
+											<div>
+												<button v-on:click="daGiao(value)" class="btn btn-outline-warning ">Đã Giao Hàng</button>
+												<button class="btn btn-outline-danger ms-2">Gặp vấn đề</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card border-warning w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5823</span>
-									<span class="badge bg-secondary text-white">Đang lấy hàng</span>
-								</div>
-								<div class="card-body">
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://danviet.mediacdn.vn/upload/2-2015/images/2015-05-13/1434170342-ytlacover_1_lhzg.jpg"
-												alt="">
-										</div>
-										<div>
-											<h6 class="mt-3">Cháo Lòng Hà Còi</h6>
-											<p class="text-muted mb-0 small">94 Nguyễn Du, Quận 1</p>
-											<div class="small text-warning"><i class="bi bi-hourglass-split me-1"></i>
-												Đang lấy hàng</div>
-										</div>
-									</div>
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="">
-										</div>
-										<div>
-											<h6 class="mt-3">Định Văn C</h6>
-											<p class="text-muted mb-0 small">40 Trưng Nữ Vương, Quận 5</p>
-											<div class="small text-muted"><i class="bi bi-clock-history me-1"></i>
-												Chờ lấy hàng</div>
-										</div>
-									</div>
-									<div class="progress mb-3" style="height: 8px;">
-										<div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
-											aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<div class="d-flex justify-content-between mb-3">
-										<div class="text-center">
-											<i class="bi bi-check-circle-fill text-success"></i>
-											<div class="small">Nhận đơn</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle-fill text-warning"></i>
-											<div class="small">Lấy hàng</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Giao hàng</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Hoàn thành</div>
-										</div>
-									</div>
-
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">180.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">Đã thanh toán</span>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer bg-white">
-									<div class="d-flex justify-content-between">
-										<span class="text-muted small"><i class="bi bi-clock me-1"></i> Nhận đơn 10
-											phút trước</span>
-										<div>
-											<button class="btn btn-outline-warning ">Đã lấy hàng</button>
-											<button class="btn btn-outline-danger  ms-2">Gặp vấn đề</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card border-warning w-100">
-								<div class="card-header bg-warning d-flex justify-content-between align-items-center">
-									<span class="fw-bold text-white">#ORD-5823</span>
-									<span class="badge bg-success text-white">Đang giao hàng</span>
-								</div>
-								<div class="card-body">
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://acnoshotel.com/grand/wp-content/uploads/2024/07/Acnos-pho-hoa-01.jpg"
-												alt="">
-										</div>
-										<div>
-											<h6 class="mt-3">Phở Hoà Pasture</h6>
-											<p class="text-muted mb-0 small">94 Nguyễn Du, Quận 1</p>
-											<div class="small text-warning"><i class="bi bi-hourglass-split me-1"></i>
-												Đang lấy hàng</div>
-										</div>
-									</div>
-									<div class="d-flex mb-3">
-										<div class="me-3">
-											<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
-												class="img-fluid"
-												src="https://w7.pngwing.com/pngs/661/914/png-transparent-woman-female-avatar-business-avatar-icon.png"
-												alt="">
-										</div>
-										<div>
-											<h6 class="mt-3">Nguyễn Thị B</h6>
-											<p class="text-muted mb-0 small">26 Đống Đa, Quận 5</p>
-											<div class="small text-muted"><i class="bi bi-clock-history me-1"></i>
-												Chờ lấy hàng</div>
-										</div>
-									</div>
-									<div class="progress mb-3" style="height: 8px;">
-										<div class="progress-bar bg-success" role="progressbar" style="width: 60%;"
-											aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<div class="d-flex justify-content-between mb-3">
-										<div class="text-center">
-											<i class="bi bi-check-circle-fill text-success"></i>
-											<div class="small">Nhận đơn</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle-fill text-warning"></i>
-											<div class="small">Lấy hàng</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Giao hàng</div>
-										</div>
-										<div class="text-center">
-											<i class="bi bi-circle text-muted"></i>
-											<div class="small">Hoàn thành</div>
-										</div>
-									</div>
-
-									<div class="d-flex justify-content-between border-top pt-3">
-										<div>
-											<span class="d-block">Giá trị đơn hàng:</span>
-											<span class="fw-bold text-success">180.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Phí vận chuyển:</span>
-											<span class="fw-bold text-primary">35.000đ</span>
-										</div>
-										<div>
-											<span class="d-block">Thanh toán:</span>
-											<span class="fw-bold">Đã thanh toán</span>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer bg-white">
-									<div class="d-flex justify-content-between">
-										<span class="text-muted small"><i class="bi bi-clock me-1"></i> Nhận đơn 30
-											phút trước</span>
-										<div>
-											<button class="btn btn-outline-success ">Đang giao hàng</button>
-											<button class="btn btn-outline-danger  ms-2">Gặp vấn đề</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						</template>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="completed">
@@ -803,15 +636,34 @@ export default {
 	data() {
 		return {
 			list_don_hang_co_the_nhan: [],
+			list_don_dang_giao       : [],
 			don_hang: {},
 		}
 	},
 	mounted() {
 		this.loadData();
+		this.loadDonDangGiao();
 	},
 	methods: {
 		formatVND(number) {
 			return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number,)
+		},
+		loadDonDangGiao() {
+			axios
+				.get("http://127.0.0.1:8000/api/shipper/don-hang/data-dang-giao", {
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem("shipper_login"),
+					},
+				})
+				.then((res) => {
+					this.list_don_dang_giao = res.data.data;
+				})
+				.catch((res) => {
+					const list = Object.values(res.response.data.errors);
+					list.forEach((v, i) => {
+						this.$toast.error(v[0]);
+					});
+				})
 		},
 		loadData() {
 			axios
@@ -822,6 +674,29 @@ export default {
 				})
 				.then((res) => {
 					this.list_don_hang_co_the_nhan = res.data.list_don_hang_co_the_nhan;
+				})
+				.catch((res) => {
+					const list = Object.values(res.response.data.errors);
+					list.forEach((v, i) => {
+						this.$toast.error(v[0]);
+					});
+				})
+		},
+		daGiao(payload) {
+			axios
+				.post("http://127.0.0.1:8000/api/shipper/don-hang/hoan-thanh", payload, {
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem("shipper_login"),
+					},
+				})
+				.then((res) => {
+					if (res.data.status) {
+						this.$toast.success(res.data.message);
+						this.loadDonDangGiao();
+					}
+					else {
+						this.$toast.error(res.data.message);
+					}
 				})
 				.catch((res) => {
 					const list = Object.values(res.response.data.errors);
