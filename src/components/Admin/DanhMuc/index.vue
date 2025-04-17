@@ -119,7 +119,7 @@
                                             <img v-bind:src="value.hinh_anh" alt="" style="width: 120px;">
                                         </td>
                                         <td class="text-center">
-                                            {{ value.id_danh_muc_cha }}
+                                            {{ value.ten_danh_muc_cha ? value.ten_danh_muc_cha : "-" }}
                                         </td>
                                         <td class="text-center" v-on:click="changeStatus(value)">
                                             <button v-if="value.tinh_trang == 0" class="btn btn-warning me-1"

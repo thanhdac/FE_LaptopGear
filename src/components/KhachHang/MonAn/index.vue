@@ -22,15 +22,17 @@
         <template v-for="(value, index) in list_mon_an" :key="index">
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="card shadow-sm">
-                    <img v-bind:src="value.hinh_anh" class="card-img-top" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h6 class="card-title fw-semibold mb-2">{{ value.ten_mon_an }}</h6>
-                        <p class="text-muted small mb-2">{{ value.ten_quan_an }}</p>
-                        <span class="mb-0 d-flex">
-                            <del class="text-muted">{{ formatVND(value.gia_ban) }}</del>
-                            <h5 class="ms-2 text-danger mb-0"><b>{{ formatVND(value.gia_khuyen_mai) }}</b></h5>
-                        </span>
-                    </div>
+                    <router-link :to="'/khach-hang/don-dat-hang/' + value.id_quan_an">
+                        <img v-bind:src="value.hinh_anh" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h6 class="card-title fw-semibold mb-2">{{ value.ten_mon_an }}</h6>
+                            <p class="text-muted small mb-2">{{ value.ten_quan_an }}</p>
+                            <span class="mb-0 d-flex">
+                                <del class="text-muted">{{ formatVND(value.gia_ban) }}</del>
+                                <h5 class="ms-2 text-danger mb-0"><b>{{ formatVND(value.gia_khuyen_mai) }}</b></h5>
+                            </span>
+                        </div>
+                    </router-link>
                 </div>
             </div>
         </template>

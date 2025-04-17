@@ -18,7 +18,6 @@
                                     <th class="align-middle text-center">Số Điện Thoại</th>
                                     <th class="align-middle text-center">Email</th>
                                     <th class="align-middle text-center">CMMD</th>
-                                    <th class="align-middle text-center">Địa Chỉ Thường Trú</th>
                                     <th class="align-middle text-center">Trạng Thái</th>
                                     <th class="align-middle text-center">Tình Trạng</th>
                                     <th class="align-middle text-center">Action</th>
@@ -36,9 +35,6 @@
                                         </td>
                                         <td class="align-middle">{{ value.email }}</td>
                                         <td class="align-middle text-center">{{ value.cccd }}</td>
-                                        <td class="align-middle">
-                                            {{ value.dia_chi }}
-                                        </td>
                                         <td class="align-middle text-center" v-on:click="changeStatus(value)">
                                             <button v-if="value.is_open == 0" class="btn btn-success w-100">
                                                 Hoạt Động

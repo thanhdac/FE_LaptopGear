@@ -33,18 +33,22 @@
                                         <td class="text-end">{{ formatVND(value.tong_tien) }}</td>
                                         <td class="text-center">
                                             <span v-if="value.tinh_trang == 0"
-                                                class="badge rounded-pill w-100 bg-primary py-1">
+                                                class="badge rounded-pill w-100 bg-warning py-1">
                                                 <span style="font-size: 13px;">Đơn đang chờ</span>
                                             </span>
                                             <span v-if="value.tinh_trang == 1"
-                                                class="badge rounded-pill w-100 bg-warning py-1">
-                                                <span style="font-size: 13px;">Đang giao hàng</span>
+                                                class="badge rounded-pill w-100 bg-primary py-1">
+                                                <span style="font-size: 13px;">Shipper đã nhận đơn</span>
                                             </span>
                                             <span v-if="value.tinh_trang == 2"
+                                                class="badge rounded-pill w-100 bg-info py-1">
+                                                <span style="font-size: 13px;">Đang giao hàng</span>
+                                            </span>
+                                            <span v-if="value.tinh_trang == 3"
                                                 class="badge rounded-pill w-100 bg-success py-1">
                                                 <span style="font-size: 13px;">Đã giao hàng</span>
                                             </span>
-                                            <span v-if="value.tinh_trang == 3"
+                                            <span v-if="value.tinh_trang == 4"
                                                 class="badge rounded-pill w-100 bg-danger py-1">
                                                 <span style="font-size: 13px;">Đơn đã hủy</span>
                                             </span>

@@ -235,26 +235,28 @@
                 <div class="card-body">
                     <div class="row product-grid">
                         <template v-for="(v, k) in monAnData" :key="k">
-                            <div class="col-lg-2 d-flex" v-if="k < 8">
+                            <div class="col-lg-2 d-flex">
                                 <div class="card flex-fill">
-                                    <img :src="v.hinh_anh" class="card-img-top" style="height: 200px" alt="..." />
-                                    <div class="card-body">
-                                        <h6 class="card-title cursor-pointer">
-                                            {{ v.ten_mon_an }}
-
-                                        </h6>
-                                        <div class="clearfix">
-                                            <p class="mb-0 float-start">{{ v.ten_quan_an }}</p>
+                                    <router-link :to="'/khach-hang/don-dat-hang/' + v.id_quan_an">
+                                        <img :src="v.hinh_anh" class="card-img-top"
+                                            style="height: 200px; width: 100%;" />
+                                        <div class="card-body">
+                                            <h6 class="card-title cursor-pointer">
+                                                {{ v.ten_mon_an }}
+                                            </h6>
+                                            <div class="clearfix">
+                                                <p class="mb-0 float-start">{{ v.ten_quan_an }}</p>
+                                            </div>
+                                            <p class="mt-2">
+                                                <del>{{ v.gia_ban }}đ</del>
+                                                <strong class="ms-2">{{ v.gia_khuyen_mai }}đ</strong>
+                                            </p>
+                                            <div class="d-flex align-items-center mt-auto">
+                                                <i class="fa-solid fa-tag text-danger me-2"></i>
+                                                <span class="text-primary">-30%</span>
+                                            </div>
                                         </div>
-                                        <p class="mt-2">
-                                            <del>{{ v.gia_ban }}đ</del>
-                                            <strong class="ms-2">{{ v.gia_khuyen_mai }}đ</strong>
-                                        </p>
-                                        <div class="d-flex align-items-center mt-auto">
-                                            <i class="fa-solid fa-tag text-danger me-2"></i>
-                                            <span class="text-primary">-30%</span>
-                                        </div>
-                                    </div>
+                                    </router-link>
                                 </div>
                             </div>
                         </template>
@@ -282,7 +284,8 @@
                     <template v-for="(v, k) in quanAn" :key="k">
                         <div class="col-lg-4 d-flex" v-if="k < 6">
                             <div class="card flex-fill">
-                                <div class="card-body">
+                                <router-link :to="'/khach-hang/don-dat-hang/' + v.id">
+                                    <div class="card-body">
                                     <div class="row g-0">
                                         <div class="col-md-4">
                                             <img :src="v.hinh_anh" class="img-fluid rounded-start" alt="..."
@@ -291,8 +294,8 @@
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title"><b>
-                                                        {{ v.ten_quan }}</b></h5>
-                                                <p>{{ v.dia_chi_quan }}
+                                                        {{ v.ten_quan_an }}</b></h5>
+                                                <p>{{ v.dia_chi }}
                                                 </p>
                                                 <p><i class="fa-solid fa-tags me-1"></i> Tối thiểu {{
                                                     v.toi_thieu }} <i
@@ -302,12 +305,13 @@
                                                 <div class="d-flex align-items-center mt-3">
                                                     <i class="fa-solid fa-tag text-danger me-2"></i> <span
                                                         class="text-primary"><b>Giảm hết {{ v.giam_gia
-                                                        }}</b></span>
+                                                            }}</b></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                </router-link>
                             </div>
                         </div>
                     </template>
@@ -351,446 +355,37 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            phanLoai: [
-                { ten_phan_loai: "Đồ ăn" },
-                { ten_phan_loai: "Đồ uống" },
-                { ten_phan_loai: "Đồ chay" },
-                { ten_phan_loai: "Bánh kem" },
-                { ten_phan_loai: "Tráng miệng" },
-                { ten_phan_loai: "Pizza/Burger" },
-                { ten_phan_loai: "Món lẩu" },
-                { ten_phan_loai: "Sushi" },
-                { ten_phan_loai: "Mì phở" },
-                { ten_phan_loai: "Cơm hộp" },
-            ],
-
-            quanAn: [
-                {
-                    ten_quan: "Bún Bò Huế Ngon",
-                    dia_chi_quan: "123 Đường Lê Lợi, Quận 1, TP.HCM",
-                    hinh_anh:
-                        "https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsv4kujdxehl63@resize_ss280x175!@crop_w280_h175_cT",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Phở Thìn Hà Nội",
-                    dia_chi_quan: "456 Đường Nguyễn Văn Trỗi, Quận 3, TP.HCM",
-                    hinh_anh:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiRd5rlVktjl029OJYgVUqNBKHiKWPJH0ZeA&s",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Bánh Mì Thịt Nướng",
-                    dia_chi_quan: "789 Đường Trần Hưng Đạo, Quận 5, TP.HCM",
-                    hinh_anh:
-                        "https://blog.onelife.vn/wp-content/uploads/2021/11/cach-lam-banh-mi-thit-nuong-mon-an-sang-227560043900.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Hủ Tiếu Nam Vang",
-                    dia_chi_quan: "1010 Đường Lý Thường Kiệt, Quận 10, TP.HCM",
-                    hinh_anh:
-                        "https://i-giadinh.vnecdn.net/2023/05/15/Buoc-8-Thanh-pham-1-8-8366-1684125654.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Cơm Tấm Sài Gòn",
-                    dia_chi_quan: "1111 Đường Nguyễn Tri Phương, Quận 10, TP.HCM",
-                    hinh_anh: "https://sakos.vn/wp-content/uploads/2024/09/bia.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Bún Riêu Cua",
-                    dia_chi_quan: "1212 Đường Bạch Đằng, Bình Thạnh, TP.HCM",
-                    hinh_anh:
-                        "https://static.vinwonders.com/production/bun-rieu-cua-da-nang-16_optimized.jpeg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Gỏi Cuốn Tôm Thịt",
-                    dia_chi_quan: "1313 Đường Phan Văn Trị, Gò Vấp, TP.HCM",
-                    hinh_anh: "https://heyyofoods.com/wp-content/uploads/2024/03/4-4.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Lẩu Thái Tom Yum",
-                    dia_chi_quan: "1414 Đường Nguyễn Đình Chiểu, Quận 3, TP.HCM",
-                    hinh_anh:
-                        "https://file.hstatic.net/1000115147/article/tom-yum12_0e693e4c58e34765bd1386b10a0ffdb2.png",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Cháo Sườn Hàng Xanh",
-                    dia_chi_quan: "1515 Đường Xô Viết Nghệ Tĩnh, Bình Thạnh, TP.HCM",
-                    hinh_anh:
-                        "https://cdn.tgdd.vn/2021/05/CookProduct/axresdefault(1)-1200x676.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-                {
-                    ten_quan: "Bánh Xèo Miền Trung",
-                    dia_chi_quan: "1616 Đường Điện Biên Phủ, Quận 3, TP.HCM",
-                    hinh_anh:
-                        "https://bizweb.dktcdn.net/100/514/078/products/banh-xeo-3-mien-day-nghe-rosa-bien-hoa-dong-nai-2.jpg?v=1716438613080",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%",
-                },
-
-                {
-                    ten_quan: "Phúc Long Coffee & Tea Express",
-                    dia_chi_quan: "Địa điểm không xác định",
-                    hinh_anh:
-                        "https://dtex.vn/Image/Picture/New/Quan-Cafe/logo-Phuc-Long.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ uống
-                },
-                {
-                    ten_quan: "Burger House - Cơm Mì Mã Lai",
-                    dia_chi_quan: "Địa điểm không xác định",
-                    hinh_anh:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdPoIfe0PzE7z4o-98U7Yyy_xPJQJFFyeGcw&s",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Cơm hộp
-                },
-                {
-                    ten_quan: "FA - Bánh Tráng Trứng Muối Mỡ Hành",
-                    dia_chi_quan: "55 Nguyễn Phúc Chu, Tân Bình, TP. HCM",
-                    hinh_anh: "https://i.ytimg.com/vi/ETbQbKEwglo/maxresdefault.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ ăn
-                },
-                {
-                    ten_quan: "KOI Thé - Việt Nam",
-                    dia_chi_quan: "Địa điểm không xác định",
-                    hinh_anh:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbaZ1PIi2BBS9RIboyhMHQxjmtp8i9egoHag&s",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ uống
-                },
-                {
-                    ten_quan: "Khoai Bistro - Bánh Mì Chảo, Beefsteak & Mì Ý",
-                    dia_chi_quan: "405/9 Thống Nhất, P. 11, Gò Vấp, TP. HCM",
-                    hinh_anh:
-                        "https://media.be.com.vn/bizops/image/018b9ad7-47d2-11ef-a271-b60dedd57ab8/resized_thumbnail_w480_h480",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ ăn
-                },
-                {
-                    ten_quan: "Gà Cơ Bắp - Chuyên Các Món Gà",
-                    dia_chi_quan: "Địa điểm không xác định",
-                    hinh_anh:
-                        "https://gacobap.com/wp-content/uploads/2018/01/ga-co-bap.png",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ ăn
-                },
-                {
-                    ten_quan: "Khoai Lang Lắc Xí Muội - Nguyễn Thượng Hiền",
-                    dia_chi_quan: "7 Nguyễn Thượng Hiền, Quận 3, TP. HCM",
-                    hinh_anh: "https://i.ytimg.com/vi/9aXdX2uvd9s/maxresdefault.jpg",
-                    toi_thieu: "30k",
-                    gia: "50k",
-                    giam_gia: "30%", // Đồ ăn
-                },
-            ],
-
+            phanLoai: [],
+            quanAn: [],
             monAnData: [],
-
-            originalMonAnData: [
-                {
-                    ten_mon_an: "Phở Bò",
-                    id_quan_an: 1,
-                    ten_quan_an: "Quán Phở Gia Truyền",
-                    gia_ban: 50000,
-                    gia_khuyen_mai: 45000,
-                    hinh_anh:
-                        "https://hongphatfood.com/wp-content/uploads/2020/05/vifon-beef-pho-6.jpg",
-                },
-                {
-                    ten_mon_an: "Bún Chả",
-                    id_quan_an: 1,
-                    ten_quan_an: "Quán Phở Gia Truyền",
-                    gia_ban: 40000,
-                    gia_khuyen_mai: 35000,
-                    hinh_anh:
-                        "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:quality(100)/2024_1_12_638406880045931692_cach-lam-bun-cha-ha-noi-0.jpg",
-                },
-                {
-                    ten_mon_an: "Bánh Canh",
-                    id_quan_an: 1,
-                    ten_quan_an: "Quán Phở Gia Truyền",
-                    gia_ban: 30000,
-                    gia_khuyen_mai: 25000,
-                    hinh_anh:
-                        "https://cdn.tgdd.vn/2020/11/CookRecipe/GalleryStep/thanh-pham-622.jpg",
-                },
-                {
-                    ten_mon_an: "Chả Cá",
-                    id_quan_an: 1,
-                    ten_quan_an: "Quán Phở Gia Truyền",
-                    gia_ban: 60000,
-                    gia_khuyen_mai: 55000,
-                    hinh_anh:
-                        "https://i.ytimg.com/vi/ZLwCwyIDJJ4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC28T49o72JuvhoihtNNUQvmAyCWA",
-                },
-
-                {
-                    ten_mon_an: "Bánh Mì Thịt",
-                    id_quan_an: 2,
-                    ten_quan_an: "Tiệm Bánh Mì Ngon",
-                    gia_ban: 20000,
-                    gia_khuyen_mai: 18000,
-                    hinh_anh:
-                        "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:quality(100)/2024_1_11_638406025402324906_banh-mi-thit_.jpg",
-                },
-                {
-                    ten_mon_an: "Gỏi Cuốn",
-                    id_quan_an: 2,
-                    ten_quan_an: "Tiệm Bánh Mì Ngon",
-                    gia_ban: 15000,
-                    gia_khuyen_mai: 12000,
-                    hinh_anh: "https://heyyofoods.com/wp-content/uploads/2024/03/3-4.jpg",
-                },
-                {
-                    ten_mon_an: "Mì Quảng",
-                    id_quan_an: 2,
-                    ten_quan_an: "Tiệm Bánh Mì Ngon",
-                    gia_ban: 35000,
-                    gia_khuyen_mai: 30000,
-                    hinh_anh:
-                        "https://duonggiahotel.vn/wp-content/uploads/2023/09/mi-quang-da-nang-AB.jpg",
-                },
-                {
-                    ten_mon_an: "Bánh Bèo",
-                    id_quan_an: 2,
-                    ten_quan_an: "Tiệm Bánh Mì Ngon",
-                    gia_ban: 15000,
-                    gia_khuyen_mai: 13000,
-                    hinh_anh:
-                        "https://vietfood.org.vn/wp-content/uploads/2021/05/BanhBeo2.jpg",
-                },
-
-                {
-                    ten_mon_an: "Cơm Gà",
-                    id_quan_an: 3,
-                    ten_quan_an: "Cơm Gà Hải Nam",
-                    gia_ban: 35000,
-                    gia_khuyen_mai: 30000,
-                    hinh_anh:
-                        "https://danangfantasticity.com/wp-content/uploads/2024/10/com-ga-da-nang-com-ga-xoi-mo-09.jpg",
-                },
-                {
-                    ten_mon_an: "Bánh Xèo",
-                    id_quan_an: 3,
-                    ten_quan_an: "Cơm Gà Hải Nam",
-                    gia_ban: 45000,
-                    gia_khuyen_mai: 40000,
-                    hinh_anh:
-                        "https://daotaobeptruong.vn/wp-content/uploads/2020/01/cach-do-banh-xeo-ngon-gion-lau.jpg",
-                },
-                {
-                    ten_mon_an: "Cơm Tấm",
-                    id_quan_an: 3,
-                    ten_quan_an: "Cơm Gà Hải Nam",
-                    gia_ban: 40000,
-                    gia_khuyen_mai: 37000,
-                    hinh_anh:
-                        "https://i-giadinh.vnecdn.net/2024/03/07/7-Hoan-thien-thanh-pham-1-6244-1709800134.jpg",
-                },
-                {
-                    ten_mon_an: "Gà Rán",
-                    id_quan_an: 3,
-                    ten_quan_an: "Cơm Gà Hải Nam",
-                    gia_ban: 70000,
-                    gia_khuyen_mai: 65000,
-                    hinh_anh:
-                        "https://cokhiviendong.com/wp-content/uploads/2019/01/kinnh-nghi%E1%BB%87m-m%E1%BB%9F-qu%C3%A1n-g%C3%A0-r%C3%A1n-7.jpg",
-                },
-                {
-                    ten_mon_an: "Hủ Tiếu",
-                    id_quan_an: 4,
-                    ten_quan_an: "Hủ Tiếu Mỹ Tho",
-                    gia_ban: 30000,
-                    gia_khuyen_mai: 25000,
-                    hinh_anh:
-                        "https://i-giadinh.vnecdn.net/2023/05/15/Bc8Thnhphm18-1684125639-9811-1684125654.jpg",
-                },
-                {
-                    ten_mon_an: "Lẩu Thái",
-                    id_quan_an: 4,
-                    ten_quan_an: "Hủ Tiếu Mỹ Tho",
-                    gia_ban: 120000,
-                    gia_khuyen_mai: 100000,
-                    hinh_anh:
-                        "https://i-giadinh.vnecdn.net/2022/12/17/Thanh-pham-1-1-5372-1671269525.jpg",
-                },
-                {
-                    ten_mon_an: "Bún Mắm",
-                    id_quan_an: 4,
-                    ten_quan_an: "Hủ Tiếu Mỹ Tho",
-                    gia_ban: 50000,
-                    gia_khuyen_mai: 45000,
-                    hinh_anh:
-                        "https://www.cet.edu.vn/wp-content/uploads/2018/04/bun-mam-nem-da-nang.jpg",
-                },
-                {
-                    ten_mon_an: "Súp Cua",
-                    id_quan_an: 4,
-                    ten_quan_an: "Hủ Tiếu Mỹ Tho",
-                    gia_ban: 40000,
-                    gia_khuyen_mai: 35000,
-                    hinh_anh:
-                        "https://mevacon.giaoduc.edu.vn/wp-content/uploads/2023/02/cach-nau-sup-cua-1.jpeg",
-                },
-
-                {
-                    ten_mon_an: "Cháo Lòng",
-                    id_quan_an: 5,
-                    ten_quan_an: "Quán Cháo Lòng Ngon",
-                    gia_ban: 25000,
-                    gia_khuyen_mai: 22000,
-                    hinh_anh:
-                        "https://static.vinwonders.com/production/chao-long-da-nang-4-1.jpg",
-                },
-                {
-                    ten_mon_an: "Nem Nướng",
-                    id_quan_an: 5,
-                    ten_quan_an: "Quán Cháo Lòng Ngon",
-                    gia_ban: 40000,
-                    gia_khuyen_mai: 35000,
-                    hinh_anh:
-                        "https://cdn.tgdd.vn/2021/09/CookDish/cach-lam-nem-nuong-nha-trang-bang-noi-chien-khong-dau-thom-avt-1200x676.jpg",
-                },
-                {
-                    ten_mon_an: "Bánh Đúc",
-                    id_quan_an: 5,
-                    ten_quan_an: "Quán Cháo Lòng Ngon",
-                    gia_ban: 20000,
-                    gia_khuyen_mai: 18000,
-                    hinh_anh:
-                        "https://i-giadinh.vnecdn.net/2021/05/17/1-1621220538-7560-1621220858.jpg",
-                },
-                {
-                    ten_mon_an: "Bánh Cuốn",
-                    id_quan_an: 5,
-                    ten_quan_an: "Quán Cháo Lòng Ngon",
-                    gia_ban: 30000,
-                    gia_khuyen_mai: 27000,
-                    hinh_anh:
-                        "https://img-global.cpcdn.com/recipes/b235f5db0142062d/400x400cq70/photo.jpg",
-                },
-                {
-                    ten_mon_an: "Combo Gà Rán và Khoai Tây",
-                    id_quan_an: 6,
-                    ten_quan_an: "Chicken House",
-                    gia_ban: 150000,
-                    gia_khuyen_mai: 130000,
-                    hinh_anh:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ujAHUkTeiROINht5b1qDd__UGoc9Mnbx5w&s",
-                },
-                {
-                    ten_mon_an: "Combo Bò Lúc Lắc và Salad",
-                    id_quan_an: 7,
-                    ten_quan_an: "Steak Corner",
-                    gia_ban: 180000,
-                    gia_khuyen_mai: 160000,
-                    hinh_anh:
-                        "https://blog.nhahanggiobien.com/wp-content/uploads/2021/12/BO-LUC-LAC-KHOAI-TAY.jpg",
-                },
-                {
-                    ten_mon_an: "Combo Lẩu Thái và Hải Sản",
-                    id_quan_an: 8,
-                    ten_quan_an: "Lẩu Thái Tomyum",
-                    gia_ban: 250000,
-                    gia_khuyen_mai: 220000,
-                    hinh_anh:
-                        "https://bizweb.dktcdn.net/100/090/383/files/01-combo-haisan-1.jpg?v=1586015019703",
-                },
-                {
-                    ten_mon_an: "Combo Sushi Đặc Biệt",
-                    id_quan_an: 9,
-                    ten_quan_an: "Sushi World",
-                    gia_ban: 280000,
-                    gia_khuyen_mai: 260000,
-                    hinh_anh:
-                        "https://ichibanmarket.com.vn/wp-content/uploads/2023/08/131-3.jpg",
-                },
-                {
-                    ten_mon_an: "Combo Lẩu Nướng và Thịt Tổng Hợp",
-                    id_quan_an: 10,
-                    ten_quan_an: "BBQ Paradise",
-                    gia_ban: 350000,
-                    gia_khuyen_mai: 320000,
-                    hinh_anh:
-                        "https://channel.mediacdn.vn/prupload/879/2017/09/img20170917232722780.jpg",
-                },
-                {
-                    ten_mon_an: "Combo Tiệc 5 Món Cao Cấp",
-                    id_quan_an: 11,
-                    ten_quan_an: "Fine Dining Restaurant",
-                    gia_ban: 500000,
-                    gia_khuyen_mai: 450000,
-                    hinh_anh:
-                        "https://thietbidungcubuffet.com/images/tin-tuc/mon-ngon-dai-tiec-cuoi.jpg",
-                },
-            ],
-
-            list_voucher: [
-                {
-                    anh: "https://mms.img.susercontent.com/vn-11134512-7ras8-m4rbu9mg5dcfd2@resize_ss320x320!@crop_w320_h320_cT",
-                    ten_voucher: "Giảm giá 50%",
-                    dia_diem: 150,
-                },
-                {
-                    anh: "https://mms.img.susercontent.com/vn-11134512-7ras8-m3bl1govb4q0cc@resize_ss320x320!@crop_w320_h320_cT",
-                    ten_voucher: "Giảm giá 75k",
-                    dia_diem: 200,
-                },
-                {
-                    anh: "https://mms.img.susercontent.com/vn-11134512-7ras8-m3zwp0918z340c@resize_ss320x320!@crop_w320_h320_cT",
-                    ten_voucher: "Giảm tới 55k",
-                    dia_diem: 250,
-                },
-                {
-                    anh: "https://mms.img.susercontent.com/vn-11134512-7ras8-m3n07r3kqsos22@resize_ss320x320!@crop_w320_h320_cT",
-                    ten_voucher: "Giảm giá 100k ",
-                    dia_diem: 100,
-                },
-                {
-                    anh: "https://mms.img.susercontent.com/vn-11134512-7ras8-m4eh4krctfbj4e@resize_ss320x320!@crop_w320_h320_cT",
-                    ten_voucher: "Giảm giá 0 đồng",
-                    dia_diem: 134,
-                },
-            ],
+            originalMonAnData: [],
+            list_voucher: [],
         };
     },
+    created() {
+        this.loadData();
+    },
     methods: {
+        loadData() {
+            axios
+                .get('http://127.0.0.1:8000/api/khach-hang/trang-chu/data')
+                .then((res) => {
+                    this.monAnData      = res.data.mon_an;
+                    this.quanAn         = res.data.quan_an_yeu_thich;
+                    this.list_voucher   = res.data.voucher;
+                })
+                .catch((res) => {
+                    const list = Object.values(res.response.data.errors);
+                    list.forEach((v, i) => {
+                        this.$toast.error(v[0]);
+                    });
+                })
+        },
         filterByPrice(range) {
             switch (range) {
                 case "under50":
@@ -824,10 +419,7 @@ export default {
             }
         }
     },
-    created() {
-        // Hiển thị tất cả dữ liệu ban đầu
-        this.monAnData = this.originalMonAnData;
-    },
+
 };
 </script>
 <style></style>

@@ -152,7 +152,8 @@
 						<template v-for="(value, index) in list_don_dang_giao" :key="index">
 							<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
 								<div class="card border-warning w-100">
-									<div class="card-header bg-warning d-flex justify-content-between align-items-center">
+									<div
+										class="card-header bg-warning d-flex justify-content-between align-items-center">
 										<span class="fw-bold text-white">#ORD-5823</span>
 										<span class="badge bg-secondary text-white">Đang lấy hàng</span>
 									</div>
@@ -167,7 +168,8 @@
 											<div>
 												<h6 class="mt-3">Bún Đậu Mắm Tôm A Chảnh</h6>
 												<p class="text-muted mb-0 small">94 Nguyễn Du, Quận 1</p>
-												<div class="small text-warning"><i class="bi bi-hourglass-split me-1"></i>
+												<div class="small text-warning"><i
+														class="bi bi-hourglass-split me-1"></i>
 													Đang lấy hàng</div>
 											</div>
 										</div>
@@ -175,7 +177,8 @@
 											<div class="me-3">
 												<img style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"
 													class="img-fluid"
-													src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="">
+													src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png"
+													alt="">
 											</div>
 											<div>
 												<h6 class="mt-3">Trân Văn A</h6>
@@ -227,7 +230,10 @@
 											<span class="text-muted small"><i class="bi bi-clock me-1"></i> Nhận đơn 20
 												phút trước</span>
 											<div>
-												<button v-on:click="daGiao(value)" class="btn btn-outline-warning ">Đã Giao Hàng</button>
+												<button v-if="value.tinh_trang == 1" disabled
+													class="btn btn-outline-warning ">Quán đang chế biến</button>
+												<button v-else v-on:click="daGiao(value)"
+													class="btn btn-outline-success ">Giao Hàng</button>
 												<button class="btn btn-outline-danger ms-2">Gặp vấn đề</button>
 											</div>
 										</div>
@@ -259,342 +265,121 @@
 						</div>
 					</div>
 					<div class="row g-4">
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning border-bottom-0">
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="d-flex align-items-center gap-2">
-											<i class="bi bi-check-circle-fill text-success fs-5"></i>
-											<span class="fw-bold text-white">#ORD-5810</span>
-										</div>
+						<template v-for="(value, index) in list_don_da_giao" :key="index">
+							<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
+								<div class="card w-100">
+									<div class="card-header bg-warning border-bottom-0">
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center gap-2">
+												<i class="bi bi-check-circle-fill text-success fs-5"></i>
+												<span class="fw-bold text-white">#{{ value.ma_don_hang }}</span>
+											</div>
 
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="restaurant-info d-flex align-items-center mb-4">
-										<div class="restaurant-image me-3">
-											<img src="https://st.nhipcaudautu.vn/staticFile/Subject/2024/06/24/processed-30cb0c56-9519-4d0e-8ea3-e0fe86135b4a_58erc59t_11022882.jpeg"
-												class="rounded-3 shadow-sm"
-												style="width: 100px; height: 100px; object-fit: cover;" alt="">
-										</div>
-										<div class="restaurant-details">
-											<h5 class="mb-2">Cơm Tấm Phúc Lộc Thọ</h5>
-											<p class="text-muted mb-1">
-												<i class="bi bi-geo-alt me-1"></i>
-												189 Cống Quỳnh, Quận 1
-											</p>
-											<div class="d-flex align-items-center gap-3">
-												<span class="text-muted small">
-													<i class="bi bi-clock-history me-1"></i>
-													2 giờ trước
-												</span>
-											</div>
 										</div>
 									</div>
-									<div class="delivery-info bg-light rounded-4 p-3 mb-4">
-										<div class="d-flex align-items-center">
-											<div class="customer-avatar me-3">
-												<img src="https://png.pngtree.com/png-vector/20220630/ourmid/pngtree-woman-with-glasses-user-vector-png-image_5322589.png"
-													class="rounded-circle shadow-sm"
-													style="width: 50px; height: 50px; object-fit: cover;" alt="">
+									<div class="card-body">
+										<div class="restaurant-info d-flex align-items-center mb-4">
+											<div class="restaurant-image me-3">
+												<img :src="value.hinh_anh"
+													class="rounded-3 shadow-sm"
+													style="width: 100px; height: 100px; object-fit: cover;" alt="">
 											</div>
-											<div class="customer-info">
-												<h6 class="mb-1">Nguyễn Thị Lan</h6>
-												<p class="text-muted mb-0 small">
+											<div class="restaurant-details">
+												<h5 class="mb-2">{{ value.ten_quan_an }}</h5>
+												<p class="text-muted mb-1">
 													<i class="bi bi-geo-alt me-1"></i>
-													45 Bùi Viện, Quận 1
+													{{ value.dia_chi_quan }}
 												</p>
+												<div class="d-flex align-items-center gap-3">
+													<span class="text-muted small">
+														<i class="bi bi-clock-history me-1"></i>
+														2 giờ trước
+													</span>
+												</div>
 											</div>
 										</div>
-									</div>
+										<div class="delivery-info bg-light rounded-4 p-3 mb-4">
+											<div class="d-flex align-items-center">
+												<div class="customer-avatar me-3">
+													<img :src="value.avatar"
+														class="rounded-circle shadow-sm"
+														style="width: 50px; height: 50px; object-fit: cover;" alt="">
+												</div>
+												<div class="customer-info">
+													<h6 class="mb-1">{{ value.ten_nguoi_nhan }}</h6>
+													<p class="text-muted mb-0 small">
+														<i class="bi bi-geo-alt me-1"></i>
+														{{ value.dia_chi_khach }}
+													</p>
+												</div>
+											</div>
+										</div>
 
-									<div class="delivery-timeline mb-4">
-										<div class="progress" style="height: 3px;">
-											<div class="progress-bar bg-success" role="progressbar" style="width: 100%">
+										<div class="delivery-timeline mb-4">
+											<div class="progress" style="height: 3px;">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%">
+												</div>
+											</div>
+											<div class="d-flex justify-content-between mt-3">
+												<div class="timeline-point completed">
+													<div class="point-icon">
+														<i class="bi bi-check-circle-fill"></i>
+													</div>
+													<div class="point-label">Nhận đơn</div>
+												</div>
+												<div class="timeline-point completed">
+													<div class="point-icon">
+														<i class="bi bi-check-circle-fill"></i>
+													</div>
+													<div class="point-label">Lấy hàng</div>
+												</div>
+												<div class="timeline-point completed">
+													<div class="point-icon">
+														<i class="bi bi-check-circle-fill"></i>
+													</div>
+													<div class="point-label">Giao hàng</div>
+												</div>
+												<div class="timeline-point completed">
+													<div class="point-icon">
+														<i class="bi bi-check-circle-fill"></i>
+													</div>
+													<div class="point-label">Hoàn thành</div>
+												</div>
 											</div>
 										</div>
-										<div class="d-flex justify-content-between mt-3">
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
+										<div class="order-summary bg-light rounded-4 p-3">
+											<div class="row g-3">
+												<div class="col-4">
+													<div class="text-center">
+														<div class="text-muted small mb-1">Giá trị đơn hàng</div>
+														<div class="fw-bold text-success">85.000đ</div>
+													</div>
 												</div>
-												<div class="point-label">Nhận đơn</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
+												<div class="col-4">
+													<div class="text-center">
+														<div class="text-muted small mb-1">Phí ship</div>
+														<div class="fw-bold text-primary">25.000đ</div>
+													</div>
 												</div>
-												<div class="point-label">Lấy hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
+												<div class="col-4">
+													<div class="text-center">
+														<div class="text-muted small mb-1">Thanh toán</div>
+														<div class="fw-bold">Đã thanh toán</div>
+													</div>
 												</div>
-												<div class="point-label">Giao hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Hoàn thành</div>
 											</div>
 										</div>
 									</div>
-									<div class="order-summary bg-light rounded-4 p-3">
-										<div class="row g-3">
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Giá trị đơn hàng</div>
-													<div class="fw-bold text-success">85.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Phí ship</div>
-													<div class="fw-bold text-primary">25.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Thanh toán</div>
-													<div class="fw-bold">Đã thanh toán</div>
-												</div>
-											</div>
-										</div>
+									<div class="card-footer bg-white border-top-0 p-3">
+										<button class="btn btn-outline-primary w-100">
+											<i class="bi bi-eye me-2"></i>
+											Xem chi tiết đơn hàng
+										</button>
 									</div>
-								</div>
-								<div class="card-footer bg-white border-top-0 p-3">
-									<button class="btn btn-outline-primary w-100">
-										<i class="bi bi-eye me-2"></i>
-										Xem chi tiết đơn hàng
-									</button>
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning border-bottom-0">
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="d-flex align-items-center gap-2">
-											<i class="bi bi-check-circle-fill text-success fs-5"></i>
-											<span class="fw-bold text-white">#ORD-5815</span>
-										</div>
-
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="restaurant-info d-flex align-items-center mb-4">
-										<div class="restaurant-image me-3">
-											<img src="https://i.ytimg.com/vi/PSlxC2yJm-U/maxresdefault.jpg"
-												class="rounded-3 shadow-sm"
-												style="width: 100px; height: 100px; object-fit: cover;" alt="">
-										</div>
-										<div class="restaurant-details">
-											<h5 class="mb-2">Bún Bò Huế O Xuân</h5>
-											<p class="text-muted mb-1">
-												<i class="bi bi-geo-alt me-1"></i>
-												72 Huỳnh Mẫn Đạt, Quận 5
-											</p>
-											<div class="d-flex align-items-center gap-3">
-												<span class="text-muted small">
-													<i class="bi bi-clock-history me-1"></i>
-													3 giờ trước
-												</span>
-											</div>
-										</div>
-									</div>
-									<div class="delivery-info bg-light rounded-4 p-3 mb-4">
-										<div class="d-flex align-items-center">
-											<div class="customer-avatar me-3">
-												<img src="https://png.pngtree.com/png-vector/20220630/ourmid/pngtree-woman-with-glasses-user-vector-png-image_5322589.png"
-													class="rounded-circle shadow-sm"
-													style="width: 50px; height: 50px; object-fit: cover;" alt="">
-											</div>
-											<div class="customer-info">
-												<h6 class="mb-1">Lê Thị Hương</h6>
-												<p class="text-muted mb-0 small">
-													<i class="bi bi-geo-alt me-1"></i>
-													42 Nguyễn Biểu, Quận 5
-												</p>
-											</div>
-										</div>
-									</div>
-									<div class="delivery-timeline mb-4">
-										<div class="progress" style="height: 3px;">
-											<div class="progress-bar bg-success" role="progressbar" style="width: 100%">
-											</div>
-										</div>
-										<div class="d-flex justify-content-between mt-3">
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Nhận đơn</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Lấy hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Giao hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Hoàn thành</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="order-summary bg-light rounded-4 p-3">
-										<div class="row g-3">
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Giá trị đơn hàng</div>
-													<div class="fw-bold text-success">150.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Phí ship</div>
-													<div class="fw-bold text-primary">35.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Thanh toán</div>
-													<div class="fw-bold">COD</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer bg-white border-top-0 p-3">
-									<button class="btn btn-outline-primary w-100">
-										<i class="bi bi-eye me-2"></i>
-										Xem chi tiết đơn hàng
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
-							<div class="card w-100">
-								<div class="card-header bg-warning border-bottom-0">
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="d-flex align-items-center gap-2">
-											<i class="bi bi-check-circle-fill text-success fs-5"></i>
-											<span class="fw-bold text-white">#ORD-5876</span>
-										</div>
-
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="restaurant-info d-flex align-items-center mb-4">
-										<div class="restaurant-image me-3">
-											<img src="https://daivietourist.vn/wp-content/uploads/2024/10/banh-trang-cuon-thit-heo-4.jpg"
-												class="rounded-3 shadow-sm"
-												style="width: 100px; height: 100px; object-fit: cover;" alt="">
-										</div>
-										<div class="restaurant-details">
-											<h5 class="mb-2">Bánh Tráng Cuốn Thịt Heo - Dì Hằng</h5>
-											<p class="text-muted mb-1">
-												<i class="bi bi-geo-alt me-1"></i>
-												72 Huỳnh Mẫn Đạt, Quận 5
-											</p>
-											<div class="d-flex align-items-center gap-3">
-												<span class="text-muted small">
-													<i class="bi bi-clock-history me-1"></i>
-													3 giờ trước
-												</span>
-											</div>
-										</div>
-									</div>
-									<div class="delivery-info bg-light rounded-4 p-3 mb-4">
-										<div class="d-flex align-items-center">
-											<div class="customer-avatar me-3">
-												<img src="https://png.pngtree.com/png-vector/20220630/ourmid/pngtree-woman-with-glasses-user-vector-png-image_5322589.png"
-													class="rounded-circle shadow-sm"
-													style="width: 50px; height: 50px; object-fit: cover;" alt="">
-											</div>
-											<div class="customer-info">
-												<h6 class="mb-1">Hồ Xuân Huyền</h6>
-												<p class="text-muted mb-0 small">
-													<i class="bi bi-geo-alt me-1"></i>
-													50 Nguyễn Hiền, Quận 5
-												</p>
-											</div>
-										</div>
-									</div>
-									<div class="delivery-timeline mb-4">
-										<div class="progress" style="height: 3px;">
-											<div class="progress-bar bg-success" role="progressbar" style="width: 100%">
-											</div>
-										</div>
-										<div class="d-flex justify-content-between mt-3">
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Nhận đơn</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Lấy hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Giao hàng</div>
-											</div>
-											<div class="timeline-point completed">
-												<div class="point-icon">
-													<i class="bi bi-check-circle-fill"></i>
-												</div>
-												<div class="point-label">Hoàn thành</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="order-summary bg-light rounded-4 p-3">
-										<div class="row g-3">
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Giá trị đơn hàng</div>
-													<div class="fw-bold text-success">750.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Phí ship</div>
-													<div class="fw-bold text-primary">35.000đ</div>
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="text-center">
-													<div class="text-muted small mb-1">Thanh toán</div>
-													<div class="fw-bold">COD</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer bg-white border-top-0 p-3">
-									<button class="btn btn-outline-primary w-100">
-										<i class="bi bi-eye me-2"></i>
-										Xem chi tiết đơn hàng
-									</button>
-								</div>
-							</div>
-						</div>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -636,7 +421,8 @@ export default {
 	data() {
 		return {
 			list_don_hang_co_the_nhan: [],
-			list_don_dang_giao       : [],
+			list_don_dang_giao: [],
+			list_don_da_giao: [],
 			don_hang: {},
 		}
 	},
@@ -657,6 +443,7 @@ export default {
 				})
 				.then((res) => {
 					this.list_don_dang_giao = res.data.data;
+					this.list_don_da_giao = res.data.list_don_hang_hoan_thanh;
 				})
 				.catch((res) => {
 					const list = Object.values(res.response.data.errors);
@@ -716,6 +503,7 @@ export default {
 					if (res.data.status) {
 						this.$toast.success(res.data.message);
 						this.loadData();
+						this.loadDonDangGiao();
 					}
 					else {
 						this.$toast.error(res.data.message);
