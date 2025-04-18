@@ -51,6 +51,16 @@ const routes = [
 		beforeEnter: checkNhanVienLogin,
 	},
 	{
+		path: "/admin/thong-ke-khach-hang",
+		component: () => import("../components/Admin/ThongKe/KhachHang/index.vue"),
+		beforeEnter: checkNhanVienLogin,
+	},
+	{
+		path: "/admin/thong-ke-quan-an",
+		component: () => import("../components/Admin/ThongKe/QuanAn/index.vue"),
+		beforeEnter: checkNhanVienLogin,
+	},
+	{
 		path: "/admin/dang-nhap",
 		component: () => import("../components/Admin/DangNhap/index.vue"),
 		meta: { layout: "blank" },
@@ -158,7 +168,19 @@ const routes = [
 		beforeEnter: checkQuanAn,
 	},
 	{
-		path: "/quan-an/thong-ke",
+		path: "/quan-an/thong-ke-mon-an",
+		component: () => import("../components/QuanAn/ThongKe/MonAn/index.vue"),
+		meta: { layout: "quan_an" },
+		beforeEnter: checkQuanAn,
+	},
+	{
+		path: "/quan-an/thong-ke-khach-hang",
+		component: () => import("../components/QuanAn/ThongKe/KhachHang/index.vue"),
+		meta: { layout: "quan_an" },
+		beforeEnter: checkQuanAn,
+	},
+	{
+		path: "/quan-an/thong-ke-doanh-thu",
 		component: () => import("../components/QuanAn/ThongKe/DoanhThu/index.vue"),
 		meta: { layout: "quan_an" },
 		beforeEnter: checkQuanAn,

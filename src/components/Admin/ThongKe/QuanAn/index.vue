@@ -30,7 +30,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mt-2">THỐNG KÊ DOANH THU QUÁN</h5>
+                    <h5 class="mt-2">THỐNG KÊ QUÁN ĂN MỚI</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -38,19 +38,19 @@
                             <thead>
                                 <tr class="table-danger text-center">
                                     <th>#</th>
-                                    <th>Ngày</th>
-                                    <th>Số Tiền Bán</th>
-                                    <th>Số Tiền Giảm</th>
-                                    <th>Tổng</th>
+                                    <th>Tên Quán Ăn</th>
+                                    <th>Số Đơn Hàng</th>
+                                    <th>Số Lượng Khách Hàng</th>
+                                    <th>Doanh Thu</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <th class="text-center">1</th>
-                                    <td class="">value.ngay</td>
-                                    <td class="text-center">value.tong_ban</td>
-                                    <td class="text-center">value.tong_giam</td>
-                                    <td class="text-end">value.tong_tien</td>
+                                    <td class="">value.ten_quan_an</td>
+                                    <td class="text-center">value.so_luong_don_hang</td>
+                                    <td class="text-center">value.so_luong_khach_hang</td>
+                                    <td class="text-center">value.tong_tien</td>
                                 </tr>
                             </tbody>
                         </table>

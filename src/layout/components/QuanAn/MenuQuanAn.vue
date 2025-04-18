@@ -48,6 +48,32 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item dropdown">
+					<a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
+						data-bs-toggle="dropdown">
+						<div class="parent-icon"><i class="fa-solid fa-chart-simple"></i>
+						</div>
+						<div class="menu-title">Thống Kê</div>
+					</a>
+					<ul class="dropdown-menu">
+						<router-link to="/quan-an/thong-ke-khach-hang">
+							<li>
+								<a class="dropdown-item" href=""><i class="fa-solid fa-users"></i>Khách Hàng</a>
+							</li>
+						</router-link>
+						<router-link to="/quan-an/thong-ke-mon-an">
+							<li>
+								<a class="dropdown-item" href=""><i class="fa-solid fa-utensils"></i>Món Ăn</a>
+							</li>
+						</router-link>
+						<router-link to="/quan-an/thong-ke-doanh-thu">
+							<li>
+								<a class="dropdown-item" href=""><i class="fa-solid fa-money-bill-trend-up"></i>Doanh
+									Thu</a>
+							</li>
+						</router-link>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 	</div>
