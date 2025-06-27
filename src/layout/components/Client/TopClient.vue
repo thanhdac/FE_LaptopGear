@@ -4,10 +4,9 @@
 		<nav class="navbar navbar-expand">
 			<div class="topbar-logo-header">
 				<div class="">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Qs5Fh70n2MpVMZYjJy5R3DuZusdWCzAckA&s" class="logo-icon" alt="logo icon">
+					<img src="../../../../img/logo.png" style="height: 55px;" alt="logo icon">
 				</div>
 				<div class="">
-					<h4 class="logo-text text-danger">FoodZone</h4>
 				</div>
 			</div>
 			<div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>

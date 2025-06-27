@@ -19,10 +19,4 @@ export default function (to, from, next) {
         next("/khach-hang/dang-nhap");
       }
     });
-  // var check = localStorage.getItem('nhan_vien_login');
-  // if(check == 1) {
-  //     next();
-  // } else {
-  //     next('/admin/dang-nhap');
-  // }
 }
