@@ -3,9 +3,9 @@
         <div class="col-lg-6">
             <div class="">
                 <div class="ratio ratio-16x9 shadow-lg overflow-hidden" style="height: 450px;">
-                    <img src="https://storage.pixteller.com/designs/designs-images/2020-12-21/05/laptop-new-arrival-sales-banner-1-5fe0c47813869.png"
-                        alt="">
-                    <!-- <iframe :src="chi_tiet_phim.trailer" title="YouTube video player" allowfullscreen></iframe> -->
+                    <!-- <img src="https://storage.pixteller.com/designs/designs-images/2020-12-21/05/laptop-new-arrival-sales-banner-1-5fe0c47813869.png"
+                        alt=""> -->
+                    <iframe :src="tt_san_pham.hinh" title="YouTube video player" allowfullscreen></iframe>
                 </div>
             </div>
             <hr>
@@ -36,15 +36,15 @@
                                     <div class="card-body bg-light">
                                         <div class="mb-3 pb-3 border-bottom">
                                             <span class="fw-bold text-dark pe-2">Tên sản phẩm: </span>
-                                            <!-- <span>{{ chi_tiet_phim.dao_dien }}</span> -->
+                                            <b>{{ tt_san_pham.ten_sp }}</b>
                                         </div>
                                         <div class="mb-3 pb-3 border-bottom">
                                             <span class="fw-bold text-dark pe-2">Giá máy:</span>
-                                            <!-- <span>{{ chi_tiet_phim.quoc_gia }}</span> -->
+                                            {{ tt_san_pham.don_gia }} vnd
                                         </div>
                                         <div>
                                             <span class="fw-bold text-dark pe-2">Mô tả:</span>
-                                            <!-- <span>{{ chi_tiet_phim.thoi_luong }} phút</span> -->
+                                            {{ tt_san_pham.mo_ta }}
                                         </div>
                                     </div>
                                 </div>
@@ -64,23 +64,23 @@
                                     style="width: 60px; height: 4px; position: absolute; bottom: -2px; left: 0;"></div>
                             </h4>
                             <div class="d-grid gap-3 mb-4">
-                                    <button class="btn btn-danger py-3 fw-bold" data-bs-toggle="modal"
-                                        data-bs-target="#buyTicketModal">
-                                        <i class="fa-brands fa-youtube"></i> Xem ngay
-                                    </button>
-                                </div>
+                                <button class="btn btn-danger py-3 fw-bold" data-bs-toggle="modal"
+                                    data-bs-target="#buyTicketModal">
+                                    <i class="fa-brands fa-youtube"></i> Xem ngay
+                                </button>
+                            </div>
                             <div class="card">
                                 <div class="card-body">
                                     <p class="fs-6 lh-base text-dark text-justify">
                                         <!-- {{ chi_tiet_phim.noi_dung }} -->
-                                          
+
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="row">
@@ -98,29 +98,31 @@
                         </div>
                     </div>
                     <div>
-                        <div class="d-flex mb-4 pb-4 border-bottom">
-                            <div class="me-3">
-                                <img src="https://i.pravatar.cc/48?img=12" alt="User Avatar" class="rounded-circle"
-                                    width="48" height="48">
-                            </div>
-                            <div>
-                                <div class="mb-2">
-                                    <span class="fw-semibold me-2">Nguyễn Văn A</span>
-                                    <span class="small text-secondary">07/05/2025</span>
+                        <template v-for="(value, index) in tt_danh_gia" :key="index">
+                            <div class="d-flex mb-4 pb-4 border-bottom">
+                                <div class="me-3">
+                                    <img src="https://i.pravatar.cc/48?img=12" alt="User Avatar" class="rounded-circle"
+                                        width="48" height="48">
                                 </div>
-                                <div class="text-secondary">
-                                    Ưu đãi quá tuyệt vời! Đã lên lịch đi xem phim với bạn gái cuối tuần này. Cảm ơn DZ!
+                                <div>
+                                    <div class="mb-2">
+                                        <span class="fw-semibold me-2">{{ value.ten_dang_nhap }}</span>
+                                        <span class="small text-secondary">{{ value.ngay_danh_gia }}</span>
+                                    </div>
+                                    <div class="text-secondary">
+                                        {{ value.noi_dung }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex">
+                        </template>
+                        <!-- <div class="d-flex">
                             <div class="me-3">
                                 <img src="https://i.pravatar.cc/48?img=32" alt="User Avatar" class="rounded-circle"
                                     width="48" height="48">
                             </div>
                             <div>
                                 <div class="mb-2">
-                                    <span class="fw-semibold me-2">Trần Thị B</span>
+                                    <span class="fw-semibold me-2">{{ tt_danh_gia.ten_dang_nhap }}</span>
                                     <span class="small text-secondary">06/05/2025</span>
                                 </div>
                                 <div class="text-secondary">
@@ -129,7 +131,7 @@
                                     ưu đãi như vậy.
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -254,28 +256,51 @@
 <script>
 import axios from 'axios';
 export default {
+    props: ['id_san_pham'],
     data() {
-    return {
-      list_sanpham: [],
-    };
-  },
-  mounted() {
-    this.getLaptop();
-  },
-  methods: {
-    getLaptop() {
-      axios
-        .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
-        .then((res) => {
-          if (res.data.data) {
-            this.list_laptop = res.data.data;
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        return {
+            list_sanpham: [],
+            id_san_pham: this.$route.params.id_san_pham,
+            tt_san_pham: {},
+            tt_danh_gia: {},
+        };
     },
-  },
+    mounted() {
+        // this.getLaptop();
+        console.log(this.id_san_pham);
+        this.loadData();
+
+
+    },
+    methods: {
+        // getLaptop() {
+        //     axios
+        //         .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
+        //         .then((res) => {
+        //             if (res.data.data) {
+        //                 this.list_laptop = res.data.data;
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
+        loadData() {
+            axios
+                .get("http://127.0.0.1:8000/api/client/Laptop/san-pham/" + this.id_san_pham)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.tt_san_pham = res.data.data_1;
+                        this.tt_danh_gia = res.data.data_2;
+                    } else {
+                        this.$router.push('/trang-chu')
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
 }
 </script>
 <style></style>
