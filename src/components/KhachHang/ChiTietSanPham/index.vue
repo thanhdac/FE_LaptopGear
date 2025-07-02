@@ -5,7 +5,8 @@
                 <div class="ratio ratio-16x9 shadow-lg overflow-hidden" style="height: 450px;">
                     <!-- <img src="https://storage.pixteller.com/designs/designs-images/2020-12-21/05/laptop-new-arrival-sales-banner-1-5fe0c47813869.png"
                         alt=""> -->
-                    <iframe :src="tt_san_pham.hinh" title="YouTube video player" allowfullscreen></iframe>
+                    <!-- <iframe :src="tt_san_pham.hinh" title="YouTube video player" allowfullscreen></iframe> -->
+                    <img :src="tt_san_pham.hinh" alt="">
                 </div>
             </div>
             <hr>
@@ -138,78 +139,27 @@
                 <div class="bg-white rounded shadow-sm p-3 p-md-4 mt-3">
                     <h4>Các phim đang chiếu khác</h4>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/4/14/duoi-day-ho-500_1744615807716.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
+                        <template v-for="(value, index) in list_sanpham" :key="index">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="card-img-top">
+                                        <img :src="value.hinh"
+                                            class="img-fluid" alt="">
+                                    </div>
+                                    <div class="card-img-overlay text-center" style="margin-top: 200px;">
+                                        <div class="col">
+                                            <button class="btn btn-warning p-2 " style="width: 170px;"><i
+                                                    class="fa-solid fa-ticket"></i>Mua
+                                                vé</button>
+                                            <br>
+                                            <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
+                                                    class="fa-solid fa-circle-play"></i>Trailer</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2024/11/22/elio-500_1732249578811.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/3/18/toi-do-500_1742267857122.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/5/6/ballerine-500_1746502453050.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </template>
+
                     </div>
                 </div>
             </div>
@@ -266,25 +216,26 @@ export default {
         };
     },
     mounted() {
-        // this.getLaptop();
+        this.getLaptop();
         console.log(this.id_san_pham);
         this.loadData();
+        // this.getDataKhac();
 
 
     },
     methods: {
-        // getLaptop() {
-        //     axios
-        //         .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
-        //         .then((res) => {
-        //             if (res.data.data) {
-        //                 this.list_laptop = res.data.data;
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             console.log(error);
-        //         });
-        // },
+        getLaptop() {
+            axios
+                .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
+                .then((res) => {
+                    if (res.data.data) {
+                        this.list_sanpham = res.data.data;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         loadData() {
             axios
                 .get("http://127.0.0.1:8000/api/client/Laptop/san-pham/" + this.id_san_pham)
@@ -300,6 +251,18 @@ export default {
                     console.log(error);
                 });
         },
+        // getDataKhac() {
+        //     axios
+        //         .get("http://127.0.0.1:8000/client/Laptop/san-pham-khac/get-data")
+        //         .then((res) => {
+        //             if (res.data.data) {
+        //                 this.list_sanphamKhac = res.data.data;
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
     },
 }
 </script>
