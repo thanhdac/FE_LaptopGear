@@ -1,11 +1,12 @@
 <template>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 mt-4">
             <div class="">
-                <div class="ratio ratio-16x9 shadow-lg overflow-hidden" style="height: 450px;">
+                <div class="ratio ratio-16x9 shadow-lg overflow-hidden" style="height: 450;">
                     <!-- <img src="https://storage.pixteller.com/designs/designs-images/2020-12-21/05/laptop-new-arrival-sales-banner-1-5fe0c47813869.png"
                         alt=""> -->
-                    <iframe :src="tt_san_pham.hinh" title="YouTube video player" allowfullscreen></iframe>
+                    <!-- <iframe :src="tt_san_pham.hinh" title="YouTube video player" allowfullscreen></iframe> -->
+                    <img :src="tt_san_pham.hinh" style="width: 100%;" alt="">
                 </div>
             </div>
             <hr>
@@ -40,7 +41,7 @@
                                         </div>
                                         <div class="mb-3 pb-3 border-bottom">
                                             <span class="fw-bold text-dark pe-2">Giá máy:</span>
-                                            {{ tt_san_pham.don_gia }} vnd
+                                            <b class="text-danger">{{ formatVND(tt_san_pham.don_gia) }} </b>
                                         </div>
                                         <div>
                                             <span class="fw-bold text-dark pe-2">Mô tả:</span>
@@ -48,11 +49,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-grid gap-3 mb-4">
-                                    <button class="btn btn-warning py-3 fw-bold" data-bs-toggle="modal"
-                                        data-bs-target="#buyTicketModal">
-                                        <i class="fa-solid fa-cart-shopping"></i> Đặt hàng
-                                    </button>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="d-grid gap-3 mb-4">
+                                            <button class="btn btn-outline-warning py-3 fw-bold" data-bs-toggle="modal" v-on:click="Thongbao()"
+                                                data-bs-target="#">
+                                                <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="d-grid gap-3 mb-4">
+                                            <router-link to="/khach-hang/dat-hang">
+                                                <button class="btn btn-warning py-3 fw-bold" style="width: 100%;" data-bs-toggle="modal"
+                                                    data-bs-target="#">
+                                                    <i class="fa-solid fa-cart-shopping"></i> Đặt hàng
+                                                </button>
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -64,10 +80,11 @@
                                     style="width: 60px; height: 4px; position: absolute; bottom: -2px; left: 0;"></div>
                             </h4>
                             <div class="d-grid gap-3 mb-4">
-                                <button class="btn btn-danger py-3 fw-bold" data-bs-toggle="modal"
-                                    data-bs-target="#buyTicketModal">
+                                <button class="btn btn-outline-primary py-3 fw-bold" data-bs-toggle="modal"
+                                    data-bs-target="#Trailer">
                                     <i class="fa-brands fa-youtube"></i> Xem ngay
                                 </button>
+
                             </div>
                             <div class="card">
                                 <div class="card-body">
@@ -136,80 +153,29 @@
                 </div>
 
                 <div class="bg-white rounded shadow-sm p-3 p-md-4 mt-3">
-                    <h4>Các phim đang chiếu khác</h4>
+                    <h4>Các dòng máy đang bán chạy khác</h4>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/4/14/duoi-day-ho-500_1744615807716.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
+                        <template v-for="(value, index) in tt_san_pham_khac" :key="index">
+                            <div class="col-lg-3">
+                                <router-link :to="'/khach-hang/chi-tiet-san-pham/' + value.id">
+                                    <div class="card">
+                                        <div class="card-img-top">
+                                            <img :src="value.hinh" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="card-img-overlay text-center" style="margin-top: 200px;">
+                                            <div class="col">
+                                                <br>
+                                                <button class="btn btn-info p-2 mt-3" style="width: 170px;"> <i
+                                                        class="fa-solid fa-cart-shopping"></i> Xem máy</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </router-link>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2024/11/22/elio-500_1732249578811.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/3/18/toi-do-500_1742267857122.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="https://cdn.galaxycine.vn/media/2025/5/6/ballerine-500_1746502453050.jpg"
-                                        class="img-fluid" alt="">
-                                </div>
-                                <div class="card-img-overlay text-center" style="margin-top: 200px;">
-                                    <div class="col">
-                                        <button class="btn btn-warning p-2 " style="width: 170px;"><i
-                                                class="fa-solid fa-ticket"></i>Mua
-                                            vé</button>
-                                        <br>
-                                        <button class="btn btn-outline-light p-2 mt-2" style="width: 170px;"><i
-                                                class="fa-solid fa-circle-play"></i>Trailer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        </template>
+
+
                     </div>
                 </div>
             </div>
@@ -218,7 +184,7 @@
 
 
     <!-- Modal Ticket-->
-    <div class="modal fade" id="buyTicketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="DatHang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -250,6 +216,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="Trailer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-3" id="exampleModalLabel">Review sản phẩm</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <VDatePicker v-model='selectedDate' />
+                        </div>
+                        <div class="col-lg-12">
+                            Đang cập nhật...
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </template>
 
@@ -263,35 +252,40 @@ export default {
             id_san_pham: this.$route.params.id_san_pham,
             tt_san_pham: {},
             tt_danh_gia: {},
+            tt_san_pham_khac: {},
         };
     },
     mounted() {
         // this.getLaptop();
         console.log(this.id_san_pham);
         this.loadData();
+        this.getLaptop();
 
 
     },
+
     methods: {
-        // getLaptop() {
-        //     axios
-        //         .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
-        //         .then((res) => {
-        //             if (res.data.data) {
-        //                 this.list_laptop = res.data.data;
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             console.log(error);
-        //         });
-        // },
+        getLaptop() {
+            axios
+                .get("http://127.0.0.1:8000/api/client/Laptop/get-data")
+                .then((res) => {
+                    if (res.data.data) {
+                        this.tt_san_pham_khac = res.data.data;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         loadData() {
             axios
+                // .get("http://127.0.0.1:8000/api/client/Laptop/san-pham/" + this.id_san_pham)
                 .get("http://127.0.0.1:8000/api/client/Laptop/san-pham/" + this.id_san_pham)
                 .then((res) => {
                     if (res.data.status) {
                         this.tt_san_pham = res.data.data_1;
                         this.tt_danh_gia = res.data.data_2;
+                        // this.tt_san_pham_khac = res.data.data_3;
                     } else {
                         this.$router.push('/trang-chu')
                     }
@@ -300,6 +294,12 @@ export default {
                     console.log(error);
                 });
         },
+        formatVND(number) {
+            return new Intl.NumberFormat("vi-VI", { style: "currency", currency: "VND" }).format(number,);
+        },
+        Thongbao(){
+            this.$toast.success("Đã thêm vào giỏ hàng thành công");
+        }
     },
 }
 </script>

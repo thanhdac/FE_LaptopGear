@@ -2,29 +2,18 @@ import { createRouter, createWebHistory } from "vue-router"; // cài vue-router:
 // import checkNhanVienLogin from "./checkNhanVienLogin";
 // import checkKhachHang from "./checkKhachHang";
 const routes = [
-	// Admin
-	// {
-	// 	path: "/admin/khach-hang",
-	// 	component: () => import("../components/Admin/KhachHang/index.vue"),
-	// 	beforeEnter: checkNhanVienLogin,
-	// },
-	// {
-	// 	path: "/admin/profile",
-	// 	component: () => import("../components/Admin/Profile/index.vue"),
-	// 	beforeEnter: checkNhanVienLogin,
-	// },
-	// {
-	// 	path: "/admin/dang-nhap",
-	// 	component: () => import("../components/Admin/DangNhap/index.vue"),
-	// 	meta: { layout: "blank" },
-	// },
+	
+	{
+		path: "/admin/quan-ly-danh-muc",
+		component: () => import("../components/Admin/QuanLyDanhMuc/index.vue"),
+
+	},
 
 	//  Khách Hàng
 	{
 		path: "/trang-chu",
 		component: () => import("../components/KhachHang/TrangChu/index.vue"),
 		meta: { layout: "client" },
-		props: true,
 	},
 	// {
 	// 	path: "/khach-hang/dang-nhap",
@@ -39,6 +28,21 @@ const routes = [
 	{
 		path: "/khach-hang/chi-tiet-san-pham/:id_san_pham",
 		component: () => import("../components/KhachHang/ChiTietSanPham/index.vue"),
+		meta: { layout: "client" },
+	},
+	{
+		path: "/khach-hang/san-pham",
+		component: () => import("../components/KhachHang/SanPham/index.vue"),
+		meta: { layout: "client" },
+	},
+	{
+		path: "/khach-hang/dat-hang",
+		component: () => import("../components/KhachHang/DatHang/index.vue"),
+		meta: { layout: "client" },
+	},
+	{
+		path: "/khach-hang/gio-hang",
+		component: () => import("../components/KhachHang/GioHang/index.vue"),
 		meta: { layout: "client" },
 	},
 	// {

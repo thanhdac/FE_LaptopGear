@@ -14,7 +14,7 @@
 			<ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
 				<li class="nav-item">
 					<router-link to="/trang-chu">
-						<a class="nav-link" href="/">
+						<a class="nav-link" href="/trang-chu">
 							<div class="parent-icon"><i class="fa-solid fa-home"></i>
 							</div>
 							<div class="menu-title">Trang Chủ</div>
@@ -22,16 +22,16 @@
 					</router-link>
 				</li>
 				<li class="nav-item">
-					<router-link to="/khach-hang/mon-an">
-						<a class="nav-link" href="/khach-hang/mon-an">
+					<router-link to="/khach-hang/san-pham">
+						<a class="nav-link" href="/khach-hang/san-pham">
 							<div class="parent-icon"><i class="fa-solid fa-laptop"></i>
 							</div>
 							<div class="menu-title">Sản Phẩm</div>
 						</a>
 					</router-link>
 				</li>
-				<li class="nav-item">
-					<router-link to="/khach-hang/quan-an">
+				<!-- <li class="nav-item">
+					<router-link to="/khach-hang/san-pham">
 						<a class="nav-link" href="/khach-hang/quan-an">
 							<div class="parent-icon"><i class="fa-solid fa-shop"></i>
 							</div>
@@ -56,7 +56,7 @@
 							<div class="menu-title">Đơn Hàng</div>
 						</a>
 					</router-link>
-				</li>
+				</li> -->
 				
 			</ul>
 		</nav>

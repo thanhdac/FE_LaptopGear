@@ -19,7 +19,11 @@
 							class='bx bx-x'></i></span>
 				</div>
 			</div>
-			
+			<router-link to="/khach-hang/gio-hang">
+				<button class="btn">
+					<i class="fa-solid fa-cart-shopping fa-2xl" style="color: #FFD43B;"></i>
+				</button>
+			</router-link>
 			<div class="user-box dropdown">
 				<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,15 +36,16 @@
 				<ul class="dropdown-menu dropdown-menu-end">
 					<li>
 						<router-link to="/khach-hang/profile">
-							<a class="dropdown-item" href="/khach-hang/profile"><i class="bx bx-user"></i><span>Profile</span></a>
+							<a class="dropdown-item" href="/khach-hang/profile"><i
+									class="bx bx-user"></i><span>Profile</span></a>
 						</router-link>
 					</li>
 					<li>
 						<router-link to="/khach-hang/dang-nhap">
 							<a class="dropdown-item" href="javascript:;"><i
-								class='bx bx-log-out-circle'></i><span>Logout</span></a>
+									class='bx bx-log-out-circle'></i><span>Logout</span></a>
 						</router-link>
-						
+
 					</li>
 				</ul>
 			</div>
@@ -58,16 +63,16 @@ export default {
 	},
 	methods: {
 		logout() {
-				axios.post('http://127.0.0.1:8000/api/khach-hang/dang-xuat')
+			axios.post('http://127.0.0.1:8000/api/khach-hang/dang-xuat')
 				.then(response => {
 					alert('Đăng xuất thành công');
 				})
 				.catch(res => {
-                    const list = Object.values(res.response.data.errors);
-                    list.forEach((v, i) => {
-                        this.$toast.error(v[0]);
-                    });
-                });
+					const list = Object.values(res.response.data.errors);
+					list.forEach((v, i) => {
+						this.$toast.error(v[0]);
+					});
+				});
 		},
 	}
 }
