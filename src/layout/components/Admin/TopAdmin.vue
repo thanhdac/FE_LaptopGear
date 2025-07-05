@@ -3,11 +3,8 @@
 		<nav class="navbar navbar-expand">
 			<div class="topbar-logo-header">
 				<div class="">
-					<img src="https://i.pinimg.com/736x/78/4d/19/784d19602be7f1d070b6a13001b7fc5c.jpg" class="logo-icon mb-1"
+					<img src="../../../../img/Admin.png" style="width: 150px;" class="logo-icon mb-1"
 						alt="logo icon">
-				</div>
-				<div class="">
-					<h4 class="logo-text" style="color: red;">ADMIN</h4>
 				</div>
 			</div>
 			<div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
@@ -23,7 +20,7 @@
 			<div class="user-box dropdown">
 				<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="https://i.pinimg.com/736x/78/4d/19/784d19602be7f1d070b6a13001b7fc5c.jpg" class="user-img"
+					<img src="../../../../img/logo1.png" class="user-img"
 						alt="user avatar">
 					<div class="user-info ps-3">
 						<p class="user-name mb-0">{{ ho_ten }}</p>

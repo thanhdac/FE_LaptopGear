@@ -291,10 +291,11 @@
                                             <div class="clearfix">
                                                 <!-- <p class="mb-0 float-start">{{ v.ten_quan_an }}</p> -->
                                             </div>
-                                            <p class="mt-2 text-end">
+                                            <b class="mt-2 text-end">
                                             <h5 class="text-danger"><b>{{ formatVND(value.don_gia) }} </b></h5>
+                                         
                                             <!-- <strong class="ms-2">{{ v.gia_khuyen_mai }}đ</strong> -->
-                                            </p>
+                                        </b>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-0">
                                                     <span class="text-primary"><button

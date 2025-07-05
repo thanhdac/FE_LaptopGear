@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 mb-0">
-                                        <span class="text-primary"><button class="btn btn-outline-primary btn-sm">{{ value.danh_muc_may }}</button></span>
+                                        <!-- <span class="text-primary"><button class="btn btn-outline-primary btn-sm">{{ value.danh_muc_may }}</button></span> -->
 
                                     </div>
                                     <div class="col-lg-6">
